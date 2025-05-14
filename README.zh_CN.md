@@ -2,13 +2,13 @@
 
 <p align="center">
     <a href="./README.md">English</a> •
-    <a href="https://arxiv.org/abs/2505.07473">Paper</a> •
-    <a href="https://huggingface.co/datasets/bytedance-research/Web-Bench">Datasets</a> •
-    <a href="https://huggingface.co/spaces/bytedance-research/Web-Bench-Leaderboard">LeaderBoard</a> •
-    <a href="#-citation">Citation</a>
+    <a href="https://arxiv.org/abs/2505.07473">论文</a> •
+    <a href="https://huggingface.co/datasets/bytedance-research/Web-Bench">数据集</a> •
+    <a href="https://huggingface.co/spaces/bytedance-research/Web-Bench-Leaderboard">排行榜</a> •
+    <a href="#-citation">引文</a>
 </p>
 
-## **📖** Overview
+## **📖** 概要
 
 **Web-Bench** 是一个用于评估 LLM 在真实 Web 项目上表现的基准。Web-Bench 包含 50 个项目，每个项目包含 20 个有时序依赖关系的任务，逼真模拟了人类开发项目的过程。Web-Bench 在设计时考虑了如何覆盖 Web 应用开发所依赖的基础：Web Standards 和 Web Frameworks。由于它们的庞大规模和复杂度，以及设计项目的工程师具备 5-10 年开发经验，最终设计出来的项目对于人类资深工程师而言都具有一定的复杂度（单项目平均 4-8 小时完成）。并且我们给定的基准 Agent 上，SOTA（Claude 3.7 Sonnet）Pass@1 仅有 25.1%。
 
@@ -18,11 +18,11 @@
 HumanEval 和 MBPP 已趋于饱和，APPS 和 EvalPlus 也正在接近饱和状态。Web-Bench 的 SOTA 为 25.1%，低于 (低更好) SWE-bench Full 和 Verified。
 ![SOTAs](./docs/assets/sotas.png)
 
-## 🚀 Set Up
+## 🚀 安装
 
 Web-Bench 使用 Docker 进行评测. 可以根据 https://docs.docker.com/engine/install/ 安装 Docker 环境，并根据以下步骤：
 
-### Init
+### 初始化
 
 ```Bash
 git clone https://github.com/bytedance/Web-Bench.git
@@ -30,7 +30,7 @@ git clone https://github.com/bytedance/Web-Bench.git
 cd Web-Bench
 ```
 
-### Config
+### 配置
 
 确认根据使用的 agent 配置确认使用方式：
 
@@ -94,13 +94,13 @@ cd Web-Bench
 | logLevel      | "info" \| "warn" \| "debug" \| "error" | "info"  |                                                              |
 | httpLimit     | number                                 | 10      | 当 agent 模式为 http 时，http 最大并发数                     |
 
-### Build
+### 构建
 
 ```Bash
 docker build -f ./start.dockerfile -t web-bench .
 ```
 
-## 📘 Usage
+## 📘 使用
 
 ```JSON
 docker run web-bench
@@ -108,7 +108,7 @@ docker run web-bench
 
 评测结果输出在 Docker Container：`app/apps/eval/report`
 
-## **📌** Q & A
+## **📌** 常见问题
 
 ### Web-Agent 和 HTTP-Agent 的区别
 
@@ -196,8 +196,12 @@ export interface AgentResponse {
 }
 ```
 
+## **🛠️** 贡献
 
-## **📚** Citation
+* [项目贡献指南](https://github.com/bytedance/web-bench/wiki/Project-Contribution)
+
+
+## **📚** 引文
 
 ```bibtex
 @misc{xu2025webbench,
@@ -212,6 +216,6 @@ export interface AgentResponse {
 ```
 
 
-## **📄** License
+## **📄** 许可证
 
 [Apache 2.0](./LICENSE.md)
