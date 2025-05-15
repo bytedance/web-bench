@@ -205,14 +205,11 @@ export interface AgentResponse {
 ## **📚** Citation
 
 ```bibtex
-@misc{xu2025webbench,
-      title={Web-Bench: A LLM Code Benchmark Based on Web Standards and Frameworks}, 
-      author={Kai Xu and YiWei Mao and XinYi Guan and ZiLong Feng},
-      year={2025},
-      eprint={2505.07473},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2505.07473}, 
+@article{xu2025webbench,
+  title={Web-Bench: A LLM Code Benchmark Based on Web Standards and Frameworks},
+  author={Xu, Kai and Mao, YiWei and Guan, XinYi and Feng, ZiLong},
+  journal={arXiv preprint arXiv:2505.07473},
+  year={2025}
 }
 ```
 
