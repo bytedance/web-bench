@@ -17,11 +17,11 @@
 
 The distribution of the experimental data aligns well with the current code generation capabilities of mainstream LLMs.
 
-<img width="400" alt="pass@1" src="./docs/assets/pass-1.png" />
+<img width="500" alt="pass@1" src="./docs/assets/pass-1.png" />
 
 HumanEval and MBPP have approached saturation. APPS and EvalPlus are approaching saturation. The SOTA for Web-Bench is 25.1\%, which is lower (better) than that of the SWE-bench Full and Verified sets.
 
-<img width="400" alt="SOTAs" src="./docs/assets/sotas.png" />
+<img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
 ## 🚀 Set Up
 

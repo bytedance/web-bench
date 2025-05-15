@@ -14,11 +14,11 @@
 
 实验数据的分布和当前主流 LLM 代码生成能力也较匹配。
 
-<img width="400" alt="pass@1" src="./docs/assets/pass-1.png" />
+<img width="500" alt="pass@1" src="./docs/assets/pass-1.png" />
 
 HumanEval 和 MBPP 已趋于饱和，APPS 和 EvalPlus 也正在接近饱和状态。Web-Bench 的 SOTA 为 25.1%，低于 (低更好) SWE-bench Full 和 Verified。
 
-<img width="400" alt="SOTAs" src="./docs/assets/sotas.png" />
+<img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
 ## 🚀 安装
 
