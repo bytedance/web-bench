@@ -16,10 +16,12 @@
 **Web-Bench** is a benchmark designed to evaluate the performance of LLMs in actual Web development. Web-Bench contains 50 projects, each consisting of 20 tasks with sequential dependencies. The tasks implement project features in sequence, simulating real-world human development workflows. When designing Web-Bench, we aim to cover the foundational elements of Web development: Web Standards and Web Frameworks. Given the scale and complexity of these projects, which were designed by engineers with 5-10 years of experience, each presents a significant challenge. On average, a single project takes 4–8 hours for a senior engineer to complete. On our given benchmark agent (Web-Agent), SOTA (Claude 3.7 Sonnet) achieves only 25.1\% Pass@1.
 
 The distribution of the experimental data aligns well with the current code generation capabilities of mainstream LLMs.
-![pass@1](./docs/assets/pass-1.png)
+
+<img width="400" alt="pass@1" src="./docs/assets/pass-1.png" />
 
 HumanEval and MBPP have approached saturation. APPS and EvalPlus are approaching saturation. The SOTA for Web-Bench is 25.1\%, which is lower (better) than that of the SWE-bench Full and Verified sets.
-![SOTAs](./docs/assets/sotas.png)
+
+<img width="400" alt="SOTAs" src="./docs/assets/sotas.png" />
 
 ## 🚀 Set Up
 
