@@ -13,10 +13,12 @@
 **Web-Bench** 是一个用于评估 LLM 在真实 Web 项目上表现的基准。Web-Bench 包含 50 个项目，每个项目包含 20 个有时序依赖关系的任务，逼真模拟了人类开发项目的过程。Web-Bench 在设计时考虑了如何覆盖 Web 应用开发所依赖的基础：Web Standards 和 Web Frameworks。由于它们的庞大规模和复杂度，以及设计项目的工程师具备 5-10 年开发经验，最终设计出来的项目对于人类资深工程师而言都具有一定的复杂度（单项目平均 4-8 小时完成）。并且我们给定的基准 Agent 上，SOTA（Claude 3.7 Sonnet）Pass@1 仅有 25.1%。
 
 实验数据的分布和当前主流 LLM 代码生成能力也较匹配。
-![pass@1](./docs/assets/pass-1.png)
+
+<img width="500" alt="pass@1" src="./docs/assets/pass-1.png" />
 
 HumanEval 和 MBPP 已趋于饱和，APPS 和 EvalPlus 也正在接近饱和状态。Web-Bench 的 SOTA 为 25.1%，低于 (低更好) SWE-bench Full 和 Verified。
-![SOTAs](./docs/assets/sotas.png)
+
+<img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
 ## 🚀 安装
 
