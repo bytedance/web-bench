@@ -14,7 +14,7 @@
 
 import { EventEmitter } from 'events'
 
-export type ModelProvider = 'anthropic' | 'openrouter' | 'openai' | 'doubao' | 'deepseek' | 'aliyun'
+export type ModelProvider = 'anthropic' | 'openrouter' | 'openai' | 'doubao' | 'deepseek' | 'aliyun' | 'ollama'
 
 export interface Model {
   model: string
@@ -23,6 +23,7 @@ export interface Model {
   title: string
   apiBase?: string
   stream?: boolean
+  extendThinking?: boolean
   useLegacyCompletionsEndpoint?: boolean
 }
 

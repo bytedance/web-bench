@@ -90,9 +90,6 @@ export class BenchAgent implements IAgent {
     if (!model) {
       throw new Error(`Model ${this.config.model} not found, please check config.json`)
     }
-    if (!model.apiKey) {
-      throw new Error(`API key for model ${this.config.model} is missing, please check config.json`)
-    }
 
     const llm = LLMFactory.createLLM(model)
 

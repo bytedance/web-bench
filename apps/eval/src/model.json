@@ -209,6 +209,11 @@
       "provider": "aliyun",
       "model": "qwen-max-latest",
       "apiKey": "{{ALIYUN_API_KEY}}"
+    },
+    {
+      "title": "ollama/mistral-small",
+      "provider": "ollama",
+      "model": "mistral-small"
     }
   ]
 }
