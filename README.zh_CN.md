@@ -105,7 +105,7 @@ docker build -f ./start.dockerfile -t web-bench .
 ## 📘 使用
 
 ```JSON
-docker run web-bench
+docker run -v $(pwd)/apps/eval/src/config.json5:/app/apps/eval/src/config.json5 web-bench
 ```
 
 评测结果输出在 Docker Container：`app/apps/eval/report`
