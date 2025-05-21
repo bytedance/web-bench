@@ -23,8 +23,6 @@ ENV RUSH_PNPM_STORE_PATH=/tmp/rush-pnpm-store
 RUN mkdir -p ${RUSH_PNPM_STORE_PATH} && \
     chmod -R 777 /tmp
 
-COPY package*.json ./
-
 COPY . .
 
 # 安装指定版本工具
