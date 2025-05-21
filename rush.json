@@ -408,6 +408,10 @@
       "projectFolder": "projects/color"
     },
     {
+      "packageName": "@web-bench/demo",
+      "projectFolder": "projects/demo"
+    },
+    {
       "packageName": "@web-bench/selector",
       "projectFolder": "projects/selector"
     },

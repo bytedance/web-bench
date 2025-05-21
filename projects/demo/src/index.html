@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SWE101-Bench Project</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="root">
+        <button class="hello">Hello</button>
+        <button class="input">Input</button>
+    </div>
+    <script>
+        document.querySelector('.hello').addEventListener('click', () => {
+            alert('hello world');
+        });
+        document.querySelector('.input').addEventListener('click', () => {
+            const info = prompt('Input "hello":')
+            alert(info)
+        });
+    </script>
+  </body>
+</html>

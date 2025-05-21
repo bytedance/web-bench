@@ -1,0 +1,2 @@
+{"id":"task-1","date":"2025-5-21","level":"easy","description":"Add a button 'Hello'(class 'hello') in page. Click button hello to alert message 'hello world'."}
+{"id":"task-2","date":"2025-5-21","level":"easy","description":"Add a button 'Input'(class 'input') in page. Click button input to collect info with prompt dialog."}
