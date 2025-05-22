@@ -35,7 +35,7 @@ rush build
 
 如果想使用 Docker 环境，参考 [Docker 指南](https://github.com/bytedance/web-bench/wiki/Docker).
 
-# **📘** 使用
+## **📘** 使用
 
 完成[配置](https://github.com/bytedance/web-bench/wiki/Config)后执行： 
 

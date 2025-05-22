@@ -24,7 +24,7 @@ HumanEval and MBPP have approached saturation. APPS and EvalPlus are approaching
 <img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
 
-# 🚀 Installation
+## 🚀 Installation
 
 1. [Install Node.js 22+](https://nodejs.org/en/download)
 2. Init
@@ -38,7 +38,7 @@ rush build
 
 If you wish to use Docker, refer to [Docker Guide](https://github.com/bytedance/web-bench/wiki/Docker).
 
-# **📘** Usage
+## **📘** Usage
 
 Complete [Configuration](https://github.com/bytedance/web-bench/wiki/Config) and run:
 
