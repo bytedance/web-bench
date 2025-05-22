@@ -23,6 +23,28 @@ HumanEval and MBPP have approached saturation. APPS and EvalPlus are approaching
 
 <img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
+
+# Installation
+
+1. [Install Node.js](https://nodejs.org/en/download)
+2. Init
+```bash
+git clone https://github.com/bytedance/Web-Bench.git
+cd Web-Bench
+npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0
+rush update
+rush build
+```
+
+# Usage
+
+TODO: Config first
+
+```bash
+rush eval
+```
+
+
 ## 🚀 Set Up
 
 Web-Bench uses Docker for reproducible evaluations. Refer to the [Docker setup guide](https://docs.docker.com/engine/install/) for instructions on installing Docker on your machine. To run Web-Bench from source, follow these steps:
