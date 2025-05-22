@@ -72,6 +72,11 @@ interface BaseConfig {
    * default: true
    */
   production?: boolean
+  /**
+   * file diff log
+   * default: false
+   */
+  fileDiffLog?: boolean
 }
 /**
  * 对外暴露的用户可配置的 config
