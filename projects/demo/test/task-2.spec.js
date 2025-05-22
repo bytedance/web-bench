@@ -1,5 +1,4 @@
 const { test, expect } = require('@playwright/test')
-const exp = require('constants')
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
