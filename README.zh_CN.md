@@ -26,10 +26,7 @@ HumanEval 和 MBPP 已趋于饱和，APPS 和 EvalPlus 也正在接近饱和状�
 
 1. [安装 Node.js 22+](https://nodejs.org/en/download)
 2. 初始化
-```bash
 
-1. [安装 Node.js 22+](https://nodejs.org/en/download)
-2. 初始化
 ```bash
 git clone https://github.com/bytedance/Web-Bench.git
 cd Web-Bench
