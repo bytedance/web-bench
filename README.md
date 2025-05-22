@@ -111,7 +111,7 @@ docker build -f ./start.dockerfile -t web-bench .
 ## 📘 Usage
 
 ```bash
-docker run -v $(pwd)/apps/eval/src/config.json5:/app/apps/eval/src/config.json5 web-bench
+docker run -v $(pwd)/apps/eval/src/config.json5:/app/apps/eval/src/config.json5 -t web-bench
 ```
 
 The eval results will be saved in `app/apps/eval/report` in Docker Container.
