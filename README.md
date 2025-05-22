@@ -36,11 +36,11 @@ rush update
 rush build
 ```
 
-3. If you wish to use Docker for execution, refer to the [Docker](https://github.com/bytedance/web-bench/wiki/Docker) for guidance.
+If you wish to use Docker, refer to [Docker Guide](https://github.com/bytedance/web-bench/wiki/Docker).
 
 # **📘** Usage
 
-Complete the configuration by [Config](https://github.com/bytedance/web-bench/wiki/Config) and 
+Complete [Configuration](https://github.com/bytedance/web-bench/wiki/Config) and run:
 
 ```bash
 rush eval

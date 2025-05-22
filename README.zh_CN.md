@@ -33,11 +33,11 @@ rush update
 rush build
 ```
 
-3. 如果想使用 Docker 环境，参考 [Docker](https://github.com/bytedance/web-bench/wiki/Docker) for guidance.
+如果想使用 Docker 环境，参考 [Docker 指南](https://github.com/bytedance/web-bench/wiki/Docker).
 
 # **📘** 使用
 
-根据 [Config](https://github.com/bytedance/web-bench/wiki/Config) 完成配置后执行： 
+完成[配置](https://github.com/bytedance/web-bench/wiki/Config)后执行： 
 
 ```bash
 rush eval
