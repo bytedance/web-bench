@@ -5,20 +5,12 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })
 
-test('.input', async ({ page }) => {
-  await expect(page.locator('.input')).toBeVisible()
-})
+test('click #reset', async ({ page }) => {
+  await page.locator('#user').fill('abc')
+  await page.locator('#password').fill('123')
 
-test('click button input', async ({ page }) => {
-  page.on('dialog', async (dialog) => {
-    if (dialog.type() === 'prompt') {
-      await dialog.accept('hello')
-    }
-    else if (dialog.type() === 'alert') {
-      await expect(dialog.message().toLowerCase()).toContain('hello')
-      await dialog.accept()
-    }
-  })
+  await page.locator('#reset').click()
 
-  await page.locator('.input').click()
+  await expect(page.locator('#user')).toHaveValue('')
+  await expect(page.locator('#password')).toHaveValue('')
 })

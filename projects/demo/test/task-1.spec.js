@@ -5,15 +5,18 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })
 
-test('.hello', async ({ page }) => {
-  await expect(page.locator('.hello')).toBeVisible()
+test('#user', async ({ page }) => {
+  await expect(page.locator('#user')).toBeVisible()
 })
 
-test('click button hello', async ({ page }) => {
-  page.on('dialog', async (dialog) => {
-    await expect(dialog.message().toLowerCase()).toContain('hello world')
-    await dialog.accept();
-  })
+test('#password', async ({ page }) => {
+  await expect(page.locator('#password')).toBeVisible()
+})
 
-  await page.locator('.hello').click()
+test('#login', async ({ page }) => {
+  await expect(page.locator('#login')).toBeVisible()
+})
+
+test('#reset', async ({ page }) => {
+  await expect(page.locator('#reset')).toBeVisible()
 })

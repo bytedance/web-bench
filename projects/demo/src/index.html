@@ -3,26 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SWE101-Bench Project</title>
+    <title>Web-Bench Project Demo</title>
     <style>
-      body {
-        margin: 0;
+      input {
+        margin-bottom: 5px;
       }
     </style>
   </head>
   <body>
-    <div class="root">
-        <button class="hello">Hello</button>
-        <button class="input">Input</button>
-    </div>
+    <input id="user" type="text" placeholder="User" /> <br />
+    <input id="password" type="password" placeholder="Password" /> <br />
+    <button id="login">Login</button>
+    <button id="reset">Reset</button>
     <script>
-        document.querySelector('.hello').addEventListener('click', () => {
-            alert('hello world');
-        });
-        document.querySelector('.input').addEventListener('click', () => {
-            const info = prompt('Input "hello":')
-            alert(info)
-        });
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('#user').value = ''
+        document.querySelector('#password').value = ''
+      })
+
+      document.querySelector('#login').addEventListener('click', () => {
+        const user = document.querySelector('#user').value
+        const password = document.querySelector('#password').value
+        if (!user) {
+          alert('Invalid user')
+        } else if (!password) {
+          alert('Invalid password')
+        } else {
+          alert('Login successfully')
+        }
+      })
     </script>
   </body>
 </html>
