@@ -99,6 +99,20 @@
       "apiKey": "{{OPENAI_API_KEY}}"
     },
     {
+      "title": "gpt-4.1-2025-04-14",
+      "provider": "openai",
+      "model": "gpt-4.1-2025-04-14",
+      "apiBase": "https://api.openai.com/v1/",
+      "apiKey": "{{OPENAI_API_KEY}}"
+    },
+    {
+      "title": "o1-2024-12-17",
+      "provider": "openai",
+      "model": "o1-2024-12-17",
+      "apiBase": "https://api.openai.com/v1/",
+      "apiKey": "{{OPENAI_API_KEY}}"
+    },
+    {
       "title": "aliyun/qwq-plus",
       "provider": "aliyun",
       "model": "qwq-plus",
