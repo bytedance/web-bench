@@ -47,6 +47,7 @@ export class BenchProjectSettingGetter implements ProjectSettingGetter {
       startTask,
       endTask,
       production = true,
+      fileDiffLog = false,
       taskMode = 'sequential',
     } = project
 
@@ -178,7 +179,6 @@ export class BenchProjectSettingGetter implements ProjectSettingGetter {
     return {
       name,
       taskMode,
-
       evalRootDir: evalPath,
       agentDir: agentDir || '',
       repositoryDir,
@@ -206,6 +206,7 @@ export class BenchProjectSettingGetter implements ProjectSettingGetter {
       initDir: initDir,
       srcDir: srcDir,
       initFiles,
+      fileDiffLog,
       files: [],
       assetsDir,
     }

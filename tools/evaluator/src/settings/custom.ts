@@ -39,7 +39,7 @@ export class CustomProjectSettingGetter implements ProjectSettingGetter {
   }
 
   public async getInitProjectSetting(project: ProjectConfig): Promise<ProjectSetting> {
-    const { logLevel, production, taskMode = 'sequential' } = project
+    const { logLevel, production, taskMode = 'sequential', fileDiffLog = false } = project
 
     const projectRoot = process.cwd()
 
@@ -96,6 +96,7 @@ export class CustomProjectSettingGetter implements ProjectSettingGetter {
       retry: project.retry || 2,
       tester: 'playwright',
       testUtilDir: '',
+      evalRootDir: '',
       needBuild: !!packageJson.scripts?.build,
       taskMode,
       needInit: !!packageJson.scripts?.init,
@@ -110,6 +111,7 @@ export class CustomProjectSettingGetter implements ProjectSettingGetter {
       projectDir: projectRoot,
       fileValidate: {},
       testDir: '',
+      fileDiffLog,
       model: project.model,
       initDir: '',
       srcDir: '',

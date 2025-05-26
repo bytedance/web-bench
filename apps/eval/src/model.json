@@ -193,6 +193,12 @@
       "apiKey": "{{DOUBAO_API_KEY}}"
     },
     {
+      "title": "doubao-pro-1.5-32k-thinking",
+      "provider": "doubao",
+      "model": "{{DOUBAO_1_5_THINKING_ENDPOINT}}",
+      "apiKey": "{{DOUBAO_API_KEY}}"
+    },
+    {
       "title": "doubao-pro-256k",
       "provider": "doubao",
       "model": "{{DOUBAO_256K_ENDPOINT}}",
