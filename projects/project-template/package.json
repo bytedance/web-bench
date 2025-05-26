@@ -2,7 +2,7 @@
   "name": "@web-bench/project-template",
   "version": "0.0.1",
   "scripts": {
-    "start": "vite src --config vite.config.js",
+    "start": "vite --config vite.config.js",
     "build": "VITE_CJS_IGNORE_WARNING=true vite build",
     "test": "npx @web-bench/test-util"
   },

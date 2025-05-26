@@ -92,6 +92,13 @@
       "apiKey": "{{OPENROUTER_API_KEY}}"
     },
     {
+      "title": "gpt-4.1",
+      "provider": "openai",
+      "model": "gpt-4.1-2025-04-14",
+      "apiBase": "https://api.openai.com/v1/",
+      "apiKey": "{{OPENAI_API_KEY}}"
+    },
+    {
       "title": "gpt-4o",
       "provider": "openai",
       "model": "gpt-4o",
