@@ -30,7 +30,8 @@ HumanEval 和 MBPP 已趋于饱和，APPS 和 EvalPlus 也正在接近饱和状�
 ```bash
 git clone https://github.com/bytedance/Web-Bench.git
 cd Web-Bench
-npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0
+npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0 playwright@1.49.1
+cd projects/angular &&  npx playwright install
 rush update
 rush build
 ```

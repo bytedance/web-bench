@@ -32,7 +32,8 @@ HumanEval and MBPP have approached saturation. APPS and EvalPlus are approaching
 ```bash
 git clone https://github.com/bytedance/Web-Bench.git
 cd Web-Bench
-npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0
+npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0 playwright@1.49.1
+cd projects/angular &&  npx playwright install
 rush update
 rush build
 ```
