@@ -11,10 +11,12 @@
     </style>
   </head>
   <body>
-    <input id="user" type="text" placeholder="User" /> <br />
-    <input id="password" type="password" placeholder="Password" /> <br />
-    <button id="login">Login</button>
-    <button id="reset">Reset</button>
+    <div class="root">
+      <input id="user" type="text" placeholder="User" /> <br />
+      <input id="password" type="password" placeholder="Password" /> <br />
+      <button id="login">Login</button>
+      <button id="reset">Reset</button>
+    </div>
     <script>
       document.querySelector('#reset').addEventListener('click', () => {
         document.querySelector('#user').value = ''
