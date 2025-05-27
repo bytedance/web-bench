@@ -412,6 +412,10 @@
       "projectFolder": "projects/demo"
     },
     {
+      "packageName": "@web-bench/tasks2project",
+      "projectFolder": "projects/tasks2project"
+    },
+    {
       "packageName": "@web-bench/selector",
       "projectFolder": "projects/selector"
     },
