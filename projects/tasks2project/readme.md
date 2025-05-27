@@ -1,11 +1,8 @@
 # tasks2project
 
-## [Evaluate](../readme.md)
+## [Demo Project](../demo/readme.md)
 
-## Project Design
+## [Prompt](./prompt.md)
 
-See [Project Tutorial - Project Design](https://github.com/bytedance/web-bench/wiki/Project-Tutorial-CN#2-%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE).
-
-## Experiment
-
-### Generate Prompt
+## Results
+https://claude.ai/share/ab4d363e-93e6-49dd-8917-9e5333b29608
