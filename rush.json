@@ -412,6 +412,10 @@
       "projectFolder": "projects/grid2"
     },
     {
+      "packageName": "@web-bench/grid3",
+      "projectFolder": "projects/grid3"
+    },
+    {
       "packageName": "@web-bench/color",
       "projectFolder": "projects/color"
     },
