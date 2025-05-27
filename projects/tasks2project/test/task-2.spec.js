@@ -1,15 +1,28 @@
-const { test, expect } = require('@playwright/test')
+const { test, expect } = require('@playwright/test');
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/index.html')
-})
+test.describe('Task 2: Reset Button Functionality', () => {
+    test.beforeEach(async ({ page }) => {
+        await page.goto('file://' + __dirname + '/../src/index.html');
+    });
 
-test('click #reset', async ({ page }) => {
-  await page.locator('#user').fill('abc')
-  await page.locator('#password').fill('123')
+    test('should clear user and password inputs when reset button is clicked', async ({ page }) => {
+        const userInput = page.locator('#user');
+        const passwordInput = page.locator('#password');
+        const resetButton = page.locator('#reset');
 
-  await page.locator('#reset').click()
+        // Fill inputs with test data
+        await userInput.fill('testuser');
+        await passwordInput.fill('testpassword');
 
-  await expect(page.locator('#user')).toHaveValue('')
-  await expect(page.locator('#password')).toHaveValue('')
-})
+        // Verify inputs have values
+        await expect(userInput).toHaveValue('testuser');
+        await expect(passwordInput).toHaveValue('testpassword');
+
+        // Click reset button
+        await resetButton.click();
+
+        // Verify inputs are cleared
+        await expect(userInput).toHaveValue('');
+        await expect(passwordInput).toHaveValue('');
+    });
+});
