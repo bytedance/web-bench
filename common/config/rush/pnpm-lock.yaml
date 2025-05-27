@@ -598,6 +598,21 @@ importers:
         specifier: ^14.2.4
         version: 14.2.4
 
+  ../../projects/grid3:
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.49.1
+        version: 1.49.1
+      '@types/node':
+        specifier: ^22.7.9
+        version: 22.10.2
+      '@web-bench/test-util':
+        specifier: workspace:*
+        version: link:../../libraries/test-util
+      serve:
+        specifier: ^14.2.4
+        version: 14.2.4
+
   ../../projects/jotai:
     dependencies:
       '@types/node':
