@@ -1,52 +1,4 @@
-# Rules
-When generating new code:
-
-1. Always produce a single code block.
-1. Never separate the code into multiple code blocks.
-1. Only include the code that is being added.
-1. No explanation, no issue, only code.
-1. Never omit any code.
-1. If the user submits a code block that contains a filename in the language specifier, always include the filename in any code block you generate based on that file. The filename should be on the next line as the language specifier in your code block.
-1. Don't repeat filename in code block
-
-Always follow these guidelines when generating code responses.
-
-# Example
-Here is an example of response:
-
-<example>
-```html
-file_a.html
-<div>file_a</div>
-```
-
-```typescript
-sub_dir/file_b.ts
-console.log("file_b")
-```
-</example>
-
-Here are some error examples of response:
-
-1. repeated filenames
-<example>
-```javascript
-index.js
-index.js
-window.addEventListener('DOMContentLoaded', () => {
-    console.log('Dark mode page loaded');
-});
-```
-</example>
-
-2. without filename
-<example>
-```javascript
-window.addEventListener('DOMContentLoaded', () => {
-    console.log('Dark mode page loaded');
-});
-```
-</example>
+# [System Prompt](./system.md)
 
 # Generate Project codes from Tasks 
 Generate the project source code (javascript, css and html) files in `src/` directory. The Project described by the following tasks:
@@ -71,8 +23,3 @@ Generate the project source code (javascript, css and html) files in `src/` dire
 18. add left-drag and right-drag with absolute positions at the left and right sides of the content; left-drag and right-drag are not visible by default and become visible when mouse hovers over content.
 19. gen js, drag right-drag and left-drag to adjust content width.
 20. when page width is less than 400px, move right-drag to the bottom of content and drag right-drag to adjust content height.
-
-# Generate Test codes from Tasks 
-1. Generate Playwright test code in `test/task-n.spec.js` for each task.
-2. Provide 3–5 test cases for each task.
-3. Avoid overly strict test cases. Minimize direct assertions on CSS or HTML attributes. Instead, focus on validating the behavior of page elements—such as their size (e.g., width/height) and interactions (e.g., click, drag and drop).
