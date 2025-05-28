@@ -48,6 +48,13 @@ window.addEventListener('DOMContentLoaded', () => {
 ```
 </example>
 
+# MCP Rules
+
+1. Use mcp to save each code block to local directory `demo1/`
+2. relative file path is the first line of the code block
+3. If file exists, cover it directly
+3. If directory exists, do not cover it
+
 # Generate Project codes from Tasks 
 Generate the project source code (javascript, css and html) files in `src/` directory. The Project described by the following tasks:
 

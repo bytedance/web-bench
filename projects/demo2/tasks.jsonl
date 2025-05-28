@@ -1,3 +1,0 @@
-{"id":"task-1","date":"2025-5-21","level":"easy","description":"Add a user text input (id 'user') and a password input (id 'password') in page body. Add a login button (id 'login') and a reset button (id 'reset') in page body."}
-{"id":"task-2","date":"2025-5-21","level":"easy","description":"Click button reset to clear the content of user and password input."}
-{"id":"task-3","date":"2025-5-21","level":"easy","description":"Click button login to validate the content of user and password input. When user content is empty, show message 'Invalid user' in alert dialog. When password content is empty, show message 'Invalid password' in alert dialog. Otherwise, show message 'Login successfully' in alert dialog."}
