@@ -18,6 +18,7 @@ body {
         "footer footer footer";
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
 
 .header {
@@ -27,7 +28,7 @@ body {
     grid-template-columns: auto 1fr auto;
     grid-template-areas: "logo . menu";
     align-items: center;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .logo {
@@ -56,9 +57,9 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(20, 1fr);
-    gap: 2px;
-    padding: 10px;
-    overflow-y: auto;
+    /* gap: 2px; */
+    /* padding: 10px; */
+    overflow-y: hidden;
 }
 
 .leftbar-item {
@@ -67,6 +68,7 @@ body {
     border: 1px solid #ddd;
     word-wrap: break-word;
     font-size: 12px;
+    overflow: hidden;
 }
 
 .content {
@@ -74,15 +76,15 @@ body {
     background-color: #ffffff;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
+    /* gap: 20px; */
+    /* padding: 20px; */
     overflow-y: auto;
     position: relative;
 }
 
 .card {
     background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     display: grid;
     grid-template-rows: 1fr auto auto;
     min-height: 100px;
@@ -113,15 +115,12 @@ body {
     background-color: #f8f8f8;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(10, 1fr);
-    gap: 2px;
-    padding: 10px;
-    overflow-y: auto;
+    grid-template-rows: repeat(20, 1fr);
+    overflow: hidden;
 }
 
 .rightbar-item {
     background-color: #fff;
-    padding: 5px;
     border: 1px solid #ddd;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -223,7 +222,7 @@ body {
     
     .menu {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, auto);
+        /* grid-template-rows: repeat(3, auto); */
         gap: 0;
     }
     
