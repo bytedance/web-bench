@@ -428,10 +428,6 @@
       "projectFolder": "projects/demo1"
     },
     {
-      "packageName": "@web-bench/demo2",
-      "projectFolder": "projects/demo2"
-    },
-    {
       "packageName": "@web-bench/selector",
       "projectFolder": "projects/selector"
     },
@@ -450,6 +446,10 @@
     {
       "packageName": "@web-bench/svg-solar",
       "projectFolder": "projects/svg-solar"
+    },
+    {
+      "packageName": "@web-bench/draw1",
+      "projectFolder": "projects/draw1"
     },
     {
       "packageName": "@web-bench/svg-chart",
