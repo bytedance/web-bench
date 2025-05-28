@@ -1,0 +1,4 @@
+src/assets
+src-init/assets
+src-*/
+!src-init
