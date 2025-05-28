@@ -20,6 +20,7 @@ Here is an example of response:
 file_a.html
 <div>file_a</div>
 ```
+
 ```typescript
 sub_dir/file_b.ts
 console.log("file_b")
