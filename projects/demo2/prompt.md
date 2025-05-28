@@ -50,8 +50,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 # MCP Rules
 
-1. Use mcp to save each code block to local file system
-1. filename is the first line of the code block
+1. Use mcp to save each code block to local file system, filename is the first line of the code block
+2. If file exists, cover it directly
 
 # Generate Project codes from Tasks 
 Generate the project source code (javascript, css and html) files in `src/` directory. The Project described by the following tasks:
