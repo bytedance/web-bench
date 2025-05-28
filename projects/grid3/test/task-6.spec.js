@@ -15,7 +15,7 @@ test.describe('Task 6: Responsive menu behavior at 399px and below', () => {
     const firstItemBox = await menuItems.nth(0).boundingBox();
     const lastItemBox = await menuItems.nth(2).boundingBox();
     
-    expect(firstItemBox.width).toBeCloseTo(headerBox.width / 3, 20);
+    expect(firstItemBox.width).toBeCloseTo(headerBox.width, 20);
     expect(lastItemBox.x + lastItemBox.width).toBeCloseTo(headerBox.x + headerBox.width, 20);
   });
 
