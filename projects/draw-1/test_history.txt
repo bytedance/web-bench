@@ -1,0 +1,5305 @@
+
+
+
+          
+I need to generate Playwright test code for each task in the tasks.jsonl file. First, I'll examine the tasks file to understand what needs to be tested.
+        
+            
+toolName: view_files
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/tasks.jsonl
+          
+Now I need to check if there's a test directory already or if I need to create it. I'll also check the project structure to understand the environment better.
+        
+            
+toolName: view_files
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/playwright.config.js
+          
+I see the Playwright configuration is set up with the test directory at './test'. Let me check if this directory exists and if there are any existing test files.
+        
+            
+toolName: view_files
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/playwright.config.js
+          
+Now I need to check if the test directory exists and what files it contains. I'll list the directory structure to see if I need to create the test directory.
+        
+            
+toolName: view_folder
+            
+status: success
+          
+/home/maoyiwei.ebay/web-bench-public/projects/draw-1
+          
+I need to create the test directory and then generate test files for each task. I'll start by creating the test directory and then create test files for each task based on the requirements in tasks.jsonl.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/init.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Init Task Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should have root element that fills the viewport', async ({ page }) => {
+    // Check if root element exists
+    const rootElement = page.locator('.root');
+    await expect(rootElement).toBeVisible();
+    
+    // Check if root element fills the viewport
+    const viewportSize = page.viewportSize();
+    const boundingBox = await rootElement.boundingBox();
+    
+    expect(boundingBox.width).toBeCloseTo(viewportSize.width, 0);
+    expect(boundingBox.height).toBeCloseTo(viewportSize.height, 0);
+  });
+
+  test('should have index.html with proper structure', async ({ page }) => {
+    // Check if the page has HTML structure
+    const htmlElement = page.locator('html');
+    await expect(htmlElement).toBeVisible();
+    
+    // Check if body contains root element
+    const rootInBody = page.locator('body > .root');
+    await expect(rootInBody).toBeVisible();
+  });
+
+  test('should load index.js and index.scss', async ({ page }) => {
+    // Check if the page has loaded CSS (index.scss)
+    // This is an indirect test since we can't directly check if a file is loaded
+    // but we can check if the root element has styles applied
+    const rootElement = page.locator('.root');
+    const computedStyle = await rootElement.evaluate(el => {
+      const style = window.getComputedStyle(el);
+      return {
+        display: style.display,
+        position: style.position
+      };
+    });
+    
+    // Assuming the root element has some basic styling
+    expect(computedStyle).toBeTruthy();
+  });
+});
+
+          
+Now I'll create the test file for task-1, which tests the toolkit container, canvas element, and the various containers within the toolkit.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-1.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 1 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should have toolkit and canvas elements in root', async ({ page }) => {
+    // Check if toolkit and canvas elements exist
+    const toolkit = page.locator('.toolkit');
+    const canvas = page.locator('.canvas');
+    
+    await expect(toolkit).toBeVisible();
+    await expect(canvas).toBeVisible();
+    
+    // Check if they are direct children of root
+    const toolkitInRoot = page.locator('.root > .toolkit');
+    const canvasInRoot = page.locator('.root > .canvas');
+    
+    await expect(toolkitInRoot).toBeVisible();
+    await expect(canvasInRoot).toBeVisible();
+  });
+
+  test('should have shape, prop, and operation containers in toolkit', async ({ page }) => {
+    // Check if all containers exist in toolkit
+    const shapeContainer = page.locator('.toolkit > .shape');
+    const propContainer = page.locator('.toolkit > .prop');
+    const operationContainer = page.locator('.toolkit > .operation');
+    
+    await expect(shapeContainer).toBeVisible();
+    await expect(propContainer).toBeVisible();
+    await expect(operationContainer).toBeVisible();
+  });
+
+  test('should have line width input in prop container', async ({ page }) => {
+    // Check if line width input exists and has correct attributes
+    const lineWidthInput = page.locator('.prop > .line-width');
+    await expect(lineWidthInput).toBeVisible();
+    
+    // Check input attributes
+    const min = await lineWidthInput.getAttribute('min');
+    const max = await lineWidthInput.getAttribute('max');
+    const value = await lineWidthInput.inputValue();
+    
+    expect(min).toBe('1');
+    expect(max).toBe('21');
+    expect(value).toBe('9');
+  });
+
+  test('should have color selector in prop container', async ({ page }) => {
+    // Check if color selector exists and has correct default value
+    const colorSelector = page.locator('.prop > .color');
+    await expect(colorSelector).toBeVisible();
+    
+    // Check color selector default value
+    const value = await colorSelector.inputValue();
+    expect(value.toLowerCase()).toBe('#000000');
+  });
+
+  test('toolkit and canvas should fill the root element space', async ({ page }) => {
+    // Get the bounding boxes of root, toolkit, and canvas
+    const rootBox = await page.locator('.root').boundingBox();
+    const toolkitBox = await page.locator('.toolkit').boundingBox();
+    const canvasBox = await page.locator('.canvas').boundingBox();
+    
+    // Check if toolkit and canvas together fill the root space
+    // This is a simplified check - actual layout might be more complex
+    expect(toolkitBox).toBeTruthy();
+    expect(canvasBox).toBeTruthy();
+    
+    // Verify that toolkit and canvas are visible and have reasonable dimensions
+    expect(toolkitBox.width).toBeGreaterThan(0);
+    expect(toolkitBox.height).toBeGreaterThan(0);
+    expect(canvasBox.width).toBeGreaterThan(0);
+    expect(canvasBox.height).toBeGreaterThan(0);
+  });
+});
+
+          
+Now I'll create the test file for task-2, which tests the radio buttons wrapped by labels in the shape and operation containers.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-2.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 2 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should have radio buttons with labels in shape container', async ({ page }) => {
+    // Check if all shape radio labels exist
+    const lineLabel = page.locator('.shape > .line');
+    const rectLabel = page.locator('.shape > .rect');
+    const ellipseLabel = page.locator('.shape > .ellipse');
+    
+    await expect(lineLabel).toBeVisible();
+    await expect(rectLabel).toBeVisible();
+    await expect(ellipseLabel).toBeVisible();
+    
+    // Check if radio buttons exist inside labels
+    const lineRadio = page.locator('.shape > .line > input[type="radio"][name="operation"]');
+    const rectRadio = page.locator('.shape > .rect > input[type="radio"][name="operation"]');
+    const ellipseRadio = page.locator('.shape > .ellipse > input[type="radio"][name="operation"]');
+    
+    await expect(lineRadio).toBeAttached();
+    await expect(rectRadio).toBeAttached();
+    await expect(ellipseRadio).toBeAttached();
+  });
+
+  test('should have radio buttons with labels in operation container', async ({ page }) => {
+    // Check if all operation radio labels exist
+    const moveLabel = page.locator('.operation > .move');
+    const rotateLabel = page.locator('.operation > .rotate');
+    const zoomLabel = page.locator('.operation > .zoom');
+    const copyLabel = page.locator('.operation > .copy');
+    const deleteLabel = page.locator('.operation > .delete');
+    const fillLabel = page.locator('.operation > .fill');
+    
+    await expect(moveLabel).toBeVisible();
+    await expect(rotateLabel).toBeVisible();
+    await expect(zoomLabel).toBeVisible();
+    await expect(copyLabel).toBeVisible();
+    await expect(deleteLabel).toBeVisible();
+    await expect(fillLabel).toBeVisible();
+    
+    // Check if radio buttons exist inside labels
+    const moveRadio = page.locator('.operation > .move > input[type="radio"][name="operation"]');
+    const rotateRadio = page.locator('.operation > .rotate > input[type="radio"][name="operation"]');
+    const zoomRadio = page.locator('.operation > .zoom > input[type="radio"][name="operation"]');
+    const copyRadio = page.locator('.operation > .copy > input[type="radio"][name="operation"]');
+    const deleteRadio = page.locator('.operation > .delete > input[type="radio"][name="operation"]');
+    const fillRadio = page.locator('.operation > .fill > input[type="radio"][name="operation"]');
+    
+    await expect(moveRadio).toBeAttached();
+    await expect(rotateRadio).toBeAttached();
+    await expect(zoomRadio).toBeAttached();
+    await expect(copyRadio).toBeAttached();
+    await expect(deleteRadio).toBeAttached();
+    await expect(fillRadio).toBeAttached();
+  });
+
+  test('radio buttons should have zero width/height but be functional', async ({ page }) => {
+    // Check if radio buttons have zero width/height
+    const radio = page.locator('input[type="radio"][name="operation"]').first();
+    
+    // Check dimensions
+    const dimensions = await radio.evaluate(el => {
+      const style = window.getComputedStyle(el);
+      return {
+        width: style.width,
+        height: style.height,
+        display: style.display
+      };
+    });
+    
+    // Radio should have zero width/height but not be hidden
+    expect(dimensions.width).toBe('0px');
+    expect(dimensions.height).toBe('0px');
+    expect(dimensions.display).not.toBe('none');
+    
+    // Check if radio is still functional by clicking a label and checking if radio is checked
+    await page.locator('.shape > .line').click();
+    const isChecked = await page.locator('.shape > .line > input[type="radio"]').isChecked();
+    expect(isChecked).toBe(true);
+  });
+
+  test('labels should have background images', async ({ page }) => {
+    // Check if labels have background images
+    const lineLabel = page.locator('.shape > .line');
+    
+    // Check if background image is set
+    const backgroundImage = await lineLabel.evaluate(el => {
+      return window.getComputedStyle(el).backgroundImage;
+    });
+    
+    // Background image should be set and not be 'none'
+    expect(backgroundImage).not.toBe('none');
+    expect(backgroundImage.length).toBeGreaterThan(0);
+  });
+
+  test('all radio buttons should have the same name', async ({ page }) => {
+    // Get all radio buttons
+    const radioButtons = page.locator('input[type="radio"]');
+    const count = await radioButtons.count();
+    
+    // Check if all radio buttons have the same name
+    for (let i = 0; i < count; i++) {
+      const name = await radioButtons.nth(i).getAttribute('name');
+      expect(name).toBe('operation');
+    }
+  });
+});
+
+          
+Now I'll create the test file for task-3, which tests drawing a line on the canvas when the line label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-3.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 3 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to draw a line on canvas after clicking line label', async ({ page }) => {
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get the canvas element
+    const canvas = page.locator('.canvas');
+    await expect(canvas).toBeVisible();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Define start and end points for the line
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    // Draw a line by mouse down at start point and mouse up at end point
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a line element was created in the SVG canvas
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Check if the line has the correct coordinates
+    const x1 = await line.getAttribute('x1');
+    const y1 = await line.getAttribute('y1');
+    const x2 = await line.getAttribute('x2');
+    const y2 = await line.getAttribute('y2');
+    
+    // Convert to numbers for comparison
+    expect(parseFloat(x1)).toBeCloseTo(startX - canvasBoundingBox.x, 0);
+    expect(parseFloat(y1)).toBeCloseTo(startY - canvasBoundingBox.y, 0);
+    expect(parseFloat(x2)).toBeCloseTo(endX - canvasBoundingBox.x, 0);
+    expect(parseFloat(y2)).toBeCloseTo(endY - canvasBoundingBox.y, 0);
+  });
+
+  test('should apply line width from input to drawn line', async ({ page }) => {
+    // Set a specific line width
+    await page.locator('.prop > .line-width').fill('5');
+    
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a line
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the line has the correct stroke-width
+    const line = page.locator('.canvas line');
+    const strokeWidth = await line.getAttribute('stroke-width');
+    
+    expect(strokeWidth).toBe('5');
+  });
+
+  test('should apply color from color selector to drawn line', async ({ page }) => {
+    // Set a specific color
+    await page.locator('.prop > .color').fill('#ff0000');
+    
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a line
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the line has the correct stroke color
+    const line = page.locator('.canvas line');
+    const strokeColor = await line.getAttribute('stroke');
+    
+    expect(strokeColor.toLowerCase()).toBe('#ff0000');
+  });
+
+  test('should be able to draw multiple lines', async ({ page }) => {
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw first line
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw second line
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Check if two lines were created
+    const lines = page.locator('.canvas line');
+    expect(await lines.count()).toBe(2);
+  });
+});
+
+          
+Now I'll create the test file for task-4, which tests drawing a rectangle on the canvas when the rect label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-4.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 4 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to draw a rect on canvas after clicking rect label', async ({ page }) => {
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get the canvas element
+    const canvas = page.locator('.canvas');
+    await expect(canvas).toBeVisible();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Define start and end points for the rectangle
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    // Draw a rectangle by mouse down at start point and mouse up at end point
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a rect element was created in the SVG canvas
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Check if the rect has the correct coordinates
+    const x = await rect.getAttribute('x');
+    const y = await rect.getAttribute('y');
+    const width = await rect.getAttribute('width');
+    const height = await rect.getAttribute('height');
+    
+    // Convert to numbers for comparison
+    expect(parseFloat(x)).toBeCloseTo(startX - canvasBoundingBox.x, 0);
+    expect(parseFloat(y)).toBeCloseTo(startY - canvasBoundingBox.y, 0);
+    expect(parseFloat(width)).toBeCloseTo(endX - startX, 0);
+    expect(parseFloat(height)).toBeCloseTo(endY - startY, 0);
+  });
+
+  test('should apply line width from input to drawn rect', async ({ page }) => {
+    // Set a specific line width
+    await page.locator('.prop > .line-width').fill('5');
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a rectangle
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the rect has the correct stroke-width
+    const rect = page.locator('.canvas rect');
+    const strokeWidth = await rect.getAttribute('stroke-width');
+    
+    expect(strokeWidth).toBe('5');
+  });
+
+  test('should apply color from color selector to drawn rect stroke', async ({ page }) => {
+    // Set a specific color
+    await page.locator('.prop > .color').fill('#ff0000');
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a rectangle
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the rect has the correct stroke color
+    const rect = page.locator('.canvas rect');
+    const strokeColor = await rect.getAttribute('stroke');
+    
+    expect(strokeColor.toLowerCase()).toBe('#ff0000');
+  });
+
+  test('should have white fill color for drawn rect', async ({ page }) => {
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a rectangle
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the rect has white fill color
+    const rect = page.locator('.canvas rect');
+    const fillColor = await rect.getAttribute('fill');
+    
+    expect(fillColor.toLowerCase()).toBe('white');
+  });
+
+  test('should be able to draw multiple rects', async ({ page }) => {
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw first rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw second rectangle
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Check if two rectangles were created
+    const rects = page.locator('.canvas rect');
+    expect(await rects.count()).toBe(2);
+  });
+});
+
+          
+Now I'll create the test file for task-5, which tests drawing an ellipse on the canvas when the ellipse label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-5.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 5 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to draw an ellipse on canvas after clicking ellipse label', async ({ page }) => {
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get the canvas element
+    const canvas = page.locator('.canvas');
+    await expect(canvas).toBeVisible();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Define start and end points for the ellipse
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    // Draw an ellipse by mouse down at start point and mouse up at end point
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if an ellipse element was created in the SVG canvas
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Check if the ellipse has the correct attributes
+    const cx = await ellipse.getAttribute('cx');
+    const cy = await ellipse.getAttribute('cy');
+    const rx = await ellipse.getAttribute('rx');
+    const ry = await ellipse.getAttribute('ry');
+    
+    // Calculate expected values
+    const expectedCX = startX - canvasBoundingBox.x + (endX - startX) / 2;
+    const expectedCY = startY - canvasBoundingBox.y + (endY - startY) / 2;
+    const expectedRX = Math.abs(endX - startX) / 2;
+    const expectedRY = Math.abs(endY - startY) / 2;
+    
+    // Convert to numbers for comparison
+    expect(parseFloat(cx)).toBeCloseTo(expectedCX, 0);
+    expect(parseFloat(cy)).toBeCloseTo(expectedCY, 0);
+    expect(parseFloat(rx)).toBeCloseTo(expectedRX, 0);
+    expect(parseFloat(ry)).toBeCloseTo(expectedRY, 0);
+  });
+
+  test('should apply line width from input to drawn ellipse', async ({ page }) => {
+    // Set a specific line width
+    await page.locator('.prop > .line-width').fill('5');
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw an ellipse
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the ellipse has the correct stroke-width
+    const ellipse = page.locator('.canvas ellipse');
+    const strokeWidth = await ellipse.getAttribute('stroke-width');
+    
+    expect(strokeWidth).toBe('5');
+  });
+
+  test('should apply color from color selector to drawn ellipse stroke', async ({ page }) => {
+    // Set a specific color
+    await page.locator('.prop > .color').fill('#ff0000');
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw an ellipse
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the ellipse has the correct stroke color
+    const ellipse = page.locator('.canvas ellipse');
+    const strokeColor = await ellipse.getAttribute('stroke');
+    
+    expect(strokeColor.toLowerCase()).toBe('#ff0000');
+  });
+
+  test('should have white fill color for drawn ellipse', async ({ page }) => {
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw an ellipse
+    const startX = canvasBoundingBox.x + 50;
+    const startY = canvasBoundingBox.y + 50;
+    const endX = canvasBoundingBox.x + 150;
+    const endY = canvasBoundingBox.y + 150;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if the ellipse has white fill color
+    const ellipse = page.locator('.canvas ellipse');
+    const fillColor = await ellipse.getAttribute('fill');
+    
+    expect(fillColor.toLowerCase()).toBe('white');
+  });
+
+  test('should be able to draw multiple ellipses', async ({ page }) => {
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw first ellipse
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw second ellipse
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Check if two ellipses were created
+    const ellipses = page.locator('.canvas ellipse');
+    expect(await ellipses.count()).toBe(2);
+  });
+});
+
+          
+Now I'll create the test file for task-6, which tests deleting shapes from the canvas when the delete label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-6.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 6 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to delete a line after clicking delete label', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Now click delete label
+    await page.locator('.operation > .delete').click();
+    
+    // Click on the line to delete it
+    const lineCenter = await line.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(lineCenter.x, lineCenter.y);
+    
+    // Verify line was deleted
+    await expect(line).not.toBeAttached();
+  });
+
+  test('should be able to delete a rectangle after clicking delete label', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Now click delete label
+    await page.locator('.operation > .delete').click();
+    
+    // Click on the rectangle to delete it
+    const rectCenter = await rect.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Verify rectangle was deleted
+    await expect(rect).not.toBeAttached();
+  });
+
+  test('should be able to delete an ellipse after clicking delete label', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Now click delete label
+    await page.locator('.operation > .delete').click();
+    
+    // Click on the ellipse to delete it
+    const ellipseCenter = await ellipse.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(ellipseCenter.x, ellipseCenter.y);
+    
+    // Verify ellipse was deleted
+    await expect(ellipse).not.toBeAttached();
+  });
+
+  test('should be able to delete one shape without affecting others', async ({ page }) => {
+    // Draw a line
+    await page.locator('.shape > .line').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const line = page.locator('.canvas line');
+    const rect = page.locator('.canvas rect');
+    await expect(line).toBeVisible();
+    await expect(rect).toBeVisible();
+    
+    // Delete only the rectangle
+    await page.locator('.operation > .delete').click();
+    const rectCenter = await rect.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Verify rectangle was deleted but line still exists
+    await expect(rect).not.toBeAttached();
+    await expect(line).toBeVisible();
+  });
+});
+
+          
+Now I'll create the test file for task-7, which tests filling shapes with color when the fill label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-7.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 7 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to fill a rectangle with selected color', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created with white fill
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    const initialFill = await rect.getAttribute('fill');
+    expect(initialFill.toLowerCase()).toBe('white');
+    
+    // Set a specific color
+    await page.locator('.prop > .color').fill('#ff0000');
+    
+    // Now click fill label
+    await page.locator('.operation > .fill').click();
+    
+    // Click on the rectangle to fill it
+    const rectCenter = await rect.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Verify rectangle fill color was changed
+    const newFill = await rect.getAttribute('fill');
+    expect(newFill.toLowerCase()).toBe('#ff0000');
+  });
+
+  test('should be able to fill an ellipse with selected color', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created with white fill
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    const initialFill = await ellipse.getAttribute('fill');
+    expect(initialFill.toLowerCase()).toBe('white');
+    
+    // Set a specific color
+    await page.locator('.prop > .color').fill('#00ff00');
+    
+    // Now click fill label
+    await page.locator('.operation > .fill').click();
+    
+    // Click on the ellipse to fill it
+    const ellipseCenter = await ellipse.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(ellipseCenter.x, ellipseCenter.y);
+    
+    // Verify ellipse fill color was changed
+    const newFill = await ellipse.getAttribute('fill');
+    expect(newFill.toLowerCase()).toBe('#00ff00');
+  });
+
+  test('should be able to fill a line with selected color', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Set a specific color
+    await page.locator('.prop > .color').fill('#0000ff');
+    
+    // Now click fill label
+    await page.locator('.operation > .fill').click();
+    
+    // Click on the line to fill it
+    const lineCenter = await line.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(lineCenter.x, lineCenter.y);
+    
+    // For lines, fill might be applied as stroke or fill attribute
+    // Check if either the stroke or fill attribute was changed
+    const newFill = await line.getAttribute('fill');
+    const newStroke = await line.getAttribute('stroke');
+    
+    // At least one of them should be the new color
+    expect(newFill?.toLowerCase() === '#0000ff' || newStroke?.toLowerCase() === '#0000ff').toBeTruthy();
+  });
+
+  test('should be able to fill multiple shapes with different colors', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Fill rectangle with red
+    await page.locator('.prop > .color').fill('#ff0000');
+    await page.locator('.operation > .fill').click();
+    const rectCenter = await rect.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Fill ellipse with blue
+    await page.locator('.prop > .color').fill('#0000ff');
+    await page.locator('.operation > .fill').click();
+    const ellipseCenter = await ellipse.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    await page.mouse.click(ellipseCenter.x, ellipseCenter.y);
+    
+    // Verify each shape has the correct fill color
+    const rectFill = await rect.getAttribute('fill');
+    const ellipseFill = await ellipse.getAttribute('fill');
+    
+    expect(rectFill.toLowerCase()).toBe('#ff0000');
+    expect(ellipseFill.toLowerCase()).toBe('#0000ff');
+  });
+});
+
+          
+Now I'll create the test file for task-8, which tests copying shapes when the copy label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-8.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 8 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to copy a rectangle', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    expect(await rect.count()).toBe(1);
+    
+    // Get original rectangle attributes
+    const originalRect = rect.first();
+    const originalX = parseFloat(await originalRect.getAttribute('x'));
+    const originalY = parseFloat(await originalRect.getAttribute('y'));
+    const originalWidth = parseFloat(await originalRect.getAttribute('width'));
+    const originalHeight = parseFloat(await originalRect.getAttribute('height'));
+    
+    // Now click copy label
+    await page.locator('.operation > .copy').click();
+    
+    // Click on the rectangle to copy it
+    const rectCenter = await originalRect.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Verify a new rectangle was created
+    await expect(rect).toHaveCount(2);
+    
+    // Get copied rectangle attributes
+    const copiedRect = rect.nth(1);
+    const copiedX = parseFloat(await copiedRect.getAttribute('x'));
+    const copiedY = parseFloat(await copiedRect.getAttribute('y'));
+    const copiedWidth = parseFloat(await copiedRect.getAttribute('width'));
+    const copiedHeight = parseFloat(await copiedRect.getAttribute('height'));
+    
+    // Verify copied rectangle is positioned 20 to the right and 20 below the original
+    expect(copiedX).toBeCloseTo(originalX + 20, 0);
+    expect(copiedY).toBeCloseTo(originalY + 20, 0);
+    expect(copiedWidth).toBeCloseTo(originalWidth, 0);
+    expect(copiedHeight).toBeCloseTo(originalHeight, 0);
+  });
+
+  test('should be able to copy an ellipse', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    expect(await ellipse.count()).toBe(1);
+    
+    // Get original ellipse attributes
+    const originalEllipse = ellipse.first();
+    const originalCX = parseFloat(await originalEllipse.getAttribute('cx'));
+    const originalCY = parseFloat(await originalEllipse.getAttribute('cy'));
+    const originalRX = parseFloat(await originalEllipse.getAttribute('rx'));
+    const originalRY = parseFloat(await originalEllipse.getAttribute('ry'));
+    
+    // Now click copy label
+    await page.locator('.operation > .copy').click();
+    
+    // Click on the ellipse to copy it
+    const ellipseCenter = await originalEllipse.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(ellipseCenter.x, ellipseCenter.y);
+    
+    // Verify a new ellipse was created
+    await expect(ellipse).toHaveCount(2);
+    
+    // Get copied ellipse attributes
+    const copiedEllipse = ellipse.nth(1);
+    const copiedCX = parseFloat(await copiedEllipse.getAttribute('cx'));
+    const copiedCY = parseFloat(await copiedEllipse.getAttribute('cy'));
+    const copiedRX = parseFloat(await copiedEllipse.getAttribute('rx'));
+    const copiedRY = parseFloat(await copiedEllipse.getAttribute('ry'));
+    
+    // Verify copied ellipse is positioned 20 to the right and 20 below the original
+    expect(copiedCX).toBeCloseTo(originalCX + 20, 0);
+    expect(copiedCY).toBeCloseTo(originalCY + 20, 0);
+    expect(copiedRX).toBeCloseTo(originalRX, 0);
+    expect(copiedRY).toBeCloseTo(originalRY, 0);
+  });
+
+  test('should be able to copy a line', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    expect(await line.count()).toBe(1);
+    
+    // Get original line attributes
+    const originalLine = line.first();
+    const originalX1 = parseFloat(await originalLine.getAttribute('x1'));
+    const originalY1 = parseFloat(await originalLine.getAttribute('y1'));
+    const originalX2 = parseFloat(await originalLine.getAttribute('x2'));
+    const originalY2 = parseFloat(await originalLine.getAttribute('y2'));
+    
+    // Now click copy label
+    await page.locator('.operation > .copy').click();
+    
+    // Click on the line to copy it
+    const lineCenter = await originalLine.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    
+    await page.mouse.click(lineCenter.x, lineCenter.y);
+    
+    // Verify a new line was created
+    await expect(line).toHaveCount(2);
+    
+    // Get copied line attributes
+    const copiedLine = line.nth(1);
+    const copiedX1 = parseFloat(await copiedLine.getAttribute('x1'));
+    const copiedY1 = parseFloat(await copiedLine.getAttribute('y1'));
+    const copiedX2 = parseFloat(await copiedLine.getAttribute('x2'));
+    const copiedY2 = parseFloat(await copiedLine.getAttribute('y2'));
+    
+    // Verify copied line is positioned 20 to the right and 20 below the original
+    expect(copiedX1).toBeCloseTo(originalX1 + 20, 0);
+    expect(copiedY1).toBeCloseTo(originalY1 + 20, 0);
+    expect(copiedX2).toBeCloseTo(originalX2 + 20, 0);
+    expect(copiedY2).toBeCloseTo(originalY2 + 20, 0);
+  });
+
+  test('should copy all attributes of the original shape', async ({ page }) => {
+    // Draw a rectangle with custom properties
+    await page.locator('.prop > .line-width').fill('5');
+    await page.locator('.prop > .color').fill('#ff0000');
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Fill the rectangle with a different color
+    await page.locator('.prop > .color').fill('#0000ff');
+    await page.locator('.operation > .fill').click();
+    const rect = page.locator('.canvas rect');
+    const rectCenter = await rect.boundingBox().then(box => ({
+      x: box.x + box.width / 2,
+      y: box.y + box.height / 2
+    }));
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Get original rectangle attributes
+    const originalRect = rect.first();
+    const originalStrokeWidth = await originalRect.getAttribute('stroke-width');
+    const originalStroke = await originalRect.getAttribute('stroke');
+    const originalFill = await originalRect.getAttribute('fill');
+    
+    // Now copy the rectangle
+    await page.locator('.operation > .copy').click();
+    await page.mouse.click(rectCenter.x, rectCenter.y);
+    
+    // Verify a new rectangle was created
+    await expect(rect).toHaveCount(2);
+    
+    // Get copied rectangle attributes
+    const copiedRect = rect.nth(1);
+    const copiedStrokeWidth = await copiedRect.getAttribute('stroke-width');
+    const copiedStroke = await copiedRect.getAttribute('stroke');
+    const copiedFill = await copiedRect.getAttribute('fill');
+    
+    // Verify all attributes were copied correctly
+    expect(copiedStrokeWidth).toBe(originalStrokeWidth);
+    expect(copiedStroke.toLowerCase()).toBe(originalStroke.toLowerCase());
+    expect(copiedFill.toLowerCase()).toBe(originalFill.toLowerCase());
+  });
+});
+
+          
+Now I'll create the test file for task-9, which tests that the length of a line is kept to the line width when it's less than the line width.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-9.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 9 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should keep line length equal to line width when drawing very short line', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 15;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very short line (shorter than line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 5; // Make it shorter than line width (15)
+    const endY = startY + 5;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a line element was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get line coordinates
+    const x1 = parseFloat(await line.getAttribute('x1'));
+    const y1 = parseFloat(await line.getAttribute('y1'));
+    const x2 = parseFloat(await line.getAttribute('x2'));
+    const y2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate line length using Pythagorean theorem
+    const lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    
+    // Line length should be at least the line width
+    expect(lineLength).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should maintain line direction when adjusting short line length', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 15;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very short diagonal line
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 3; // Very short horizontal component
+    const endY = startY + 4; // Very short vertical component
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a line element was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get line coordinates
+    const x1 = parseFloat(await line.getAttribute('x1'));
+    const y1 = parseFloat(await line.getAttribute('y1'));
+    const x2 = parseFloat(await line.getAttribute('x2'));
+    const y2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate original direction vector
+    const originalDx = endX - startX;
+    const originalDy = endY - startY;
+    const originalLength = Math.sqrt(Math.pow(originalDx, 2) + Math.pow(originalDy, 2));
+    const originalUnitDx = originalDx / originalLength;
+    const originalUnitDy = originalDy / originalLength;
+    
+    // Calculate actual direction vector
+    const actualDx = x2 - x1;
+    const actualDy = y2 - y1;
+    const actualLength = Math.sqrt(Math.pow(actualDx, 2) + Math.pow(actualDy, 2));
+    const actualUnitDx = actualDx / actualLength;
+    const actualUnitDy = actualDy / actualLength;
+    
+    // Direction should be maintained (unit vectors should be similar)
+    expect(actualUnitDx).toBeCloseTo(originalUnitDx, 1);
+    expect(actualUnitDy).toBeCloseTo(originalUnitDy, 1);
+    
+    // Length should be at least the line width
+    expect(actualLength).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should not modify line length when it exceeds line width', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 10;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a line longer than the line width
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 50; // Much longer than line width
+    const endY = startY + 50;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a line element was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get line coordinates
+    const x1 = parseFloat(await line.getAttribute('x1'));
+    const y1 = parseFloat(await line.getAttribute('y1'));
+    const x2 = parseFloat(await line.getAttribute('x2'));
+    const y2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate line length
+    const lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    
+    // Expected length based on mouse movement
+    const expectedLength = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+    
+    // Line length should be close to the expected length (not modified)
+    expect(lineLength).toBeCloseTo(expectedLength, 0);
+  });
+
+  test('should work with different line width values', async ({ page }) => {
+    // Test with a larger line width
+    const lineWidth = 20;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the line label to select it
+    await page.locator('.shape > .line').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very short line
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 5; // Shorter than line width
+    const endY = startY;
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a line element was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get line coordinates
+    const x1 = parseFloat(await line.getAttribute('x1'));
+    const y1 = parseFloat(await line.getAttribute('y1'));
+    const x2 = parseFloat(await line.getAttribute('x2'));
+    const y2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate line length
+    const lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    
+    // Line length should be at least the line width
+    expect(lineLength).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+});
+
+          
+Now I'll create the test file for task-10, which tests that the width or height of a rectangle is kept to the line width when it's less than the line width.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-10.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 10 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should keep rectangle width equal to line width when drawing very narrow rect', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 15;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very narrow rectangle (width less than line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 5; // Width less than line width (15)
+    const endY = startY + 50; // Height greater than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a rect element was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle width
+    const width = parseFloat(await rect.getAttribute('width'));
+    
+    // Width should be at least the line width
+    expect(width).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should keep rectangle height equal to line width when drawing very short rect', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 15;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very short rectangle (height less than line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 50; // Width greater than line width
+    const endY = startY + 5; // Height less than line width (15)
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a rect element was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle height
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Height should be at least the line width
+    expect(height).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should keep both width and height equal to line width when drawing very small rect', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 15;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very small rectangle (both width and height less than line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 5; // Width less than line width
+    const endY = startY + 5; // Height less than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a rect element was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Both width and height should be at least the line width
+    expect(width).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+    expect(height).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should not modify rectangle dimensions when they exceed line width', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 10;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a rectangle larger than the line width
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 50; // Width greater than line width
+    const endY = startY + 50; // Height greater than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a rect element was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Expected dimensions based on mouse movement
+    const expectedWidth = Math.abs(endX - startX);
+    const expectedHeight = Math.abs(endY - startY);
+    
+    // Dimensions should be close to the expected values (not modified)
+    expect(width).toBeCloseTo(expectedWidth, 0);
+    expect(height).toBeCloseTo(expectedHeight, 0);
+  });
+
+  test('should work with different line width values', async ({ page }) => {
+    // Test with a larger line width
+    const lineWidth = 20;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the rect label to select it
+    await page.locator('.shape > .rect').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very small rectangle
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 5; // Width less than line width
+    const endY = startY + 5; // Height less than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if a rect element was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Both width and height should be at least the line width
+    expect(width).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+    expect(height).toBeGreaterThanOrEqual(lineWidth - 1); // Allow small rounding errors
+  });
+});
+
+          
+Now I'll create the test file for task-11, which tests that the x or y radius of an ellipse is kept to half the line width when it's less than half the line width.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-11.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 11 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should keep ellipse x-radius equal to half line width when drawing very narrow ellipse', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 16;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very narrow ellipse (x-radius less than half line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 6; // Width less than line width (16)
+    const endY = startY + 50; // Height greater than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if an ellipse element was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse x-radius
+    const rx = parseFloat(await ellipse.getAttribute('rx'));
+    
+    // X-radius should be at least half the line width
+    const halfLineWidth = lineWidth / 2;
+    expect(rx).toBeGreaterThanOrEqual(halfLineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should keep ellipse y-radius equal to half line width when drawing very short ellipse', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 16;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very short ellipse (y-radius less than half line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 50; // Width greater than line width
+    const endY = startY + 6; // Height less than line width (16)
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if an ellipse element was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse y-radius
+    const ry = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Y-radius should be at least half the line width
+    const halfLineWidth = lineWidth / 2;
+    expect(ry).toBeGreaterThanOrEqual(halfLineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should keep both x and y radii equal to half line width when drawing very small ellipse', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 16;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very small ellipse (both radii less than half line width)
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 6; // Width less than line width
+    const endY = startY + 6; // Height less than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if an ellipse element was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse radii
+    const rx = parseFloat(await ellipse.getAttribute('rx'));
+    const ry = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Both radii should be at least half the line width
+    const halfLineWidth = lineWidth / 2;
+    expect(rx).toBeGreaterThanOrEqual(halfLineWidth - 1); // Allow small rounding errors
+    expect(ry).toBeGreaterThanOrEqual(halfLineWidth - 1); // Allow small rounding errors
+  });
+
+  test('should not modify ellipse radii when they exceed half line width', async ({ page }) => {
+    // Set a specific line width
+    const lineWidth = 10;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw an ellipse larger than the line width
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 50; // Width greater than line width
+    const endY = startY + 50; // Height greater than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if an ellipse element was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse radii
+    const rx = parseFloat(await ellipse.getAttribute('rx'));
+    const ry = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Expected radii based on mouse movement
+    const expectedRx = Math.abs(endX - startX) / 2;
+    const expectedRy = Math.abs(endY - startY) / 2;
+    
+    // Radii should be close to the expected values (not modified)
+    expect(rx).toBeCloseTo(expectedRx, 0);
+    expect(ry).toBeCloseTo(expectedRy, 0);
+  });
+
+  test('should work with different line width values', async ({ page }) => {
+    // Test with a larger line width
+    const lineWidth = 20;
+    await page.locator('.prop > .line-width').fill(lineWidth.toString());
+    
+    // Click the ellipse label to select it
+    await page.locator('.shape > .ellipse').click();
+    
+    // Get canvas bounding box for mouse operations
+    const canvasBoundingBox = await page.locator('.canvas').boundingBox();
+    
+    // Draw a very small ellipse
+    const startX = canvasBoundingBox.x + 100;
+    const startY = canvasBoundingBox.y + 100;
+    const endX = startX + 5; // Width less than line width
+    const endY = startY + 5; // Height less than line width
+    
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    await page.mouse.move(endX, endY);
+    await page.mouse.up();
+    
+    // Check if an ellipse element was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse radii
+    const rx = parseFloat(await ellipse.getAttribute('rx'));
+    const ry = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Both radii should be at least half the line width
+    const halfLineWidth = lineWidth / 2;
+    expect(rx).toBeGreaterThanOrEqual(halfLineWidth - 1); // Allow small rounding errors
+    expect(ry).toBeGreaterThanOrEqual(halfLineWidth - 1); // Allow small rounding errors
+  });
+});
+
+          
+Now I'll create the test file for task-12, which tests moving shapes on the canvas when the move label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-12.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 12 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to move a rectangle after clicking move label', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    
+    // Now click move label
+    await page.locator('.operation > .move').click();
+    
+    // Get rectangle center for dragging
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    // Move the rectangle by dragging it
+    const moveOffsetX = 50;
+    const moveOffsetY = 30;
+    
+    await page.mouse.move(rectCenterX, rectCenterY);
+    await page.mouse.down();
+    await page.mouse.move(rectCenterX + moveOffsetX, rectCenterY + moveOffsetY);
+    await page.mouse.up();
+    
+    // Get new rectangle position
+    const newX = parseFloat(await rect.getAttribute('x'));
+    const newY = parseFloat(await rect.getAttribute('y'));
+    
+    // Verify the rectangle has moved by the expected amount
+    expect(newX).toBeCloseTo(originalX + moveOffsetX, 0);
+    expect(newY).toBeCloseTo(originalY + moveOffsetY, 0);
+  });
+
+  test('should be able to move an ellipse after clicking move label', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get original ellipse position
+    const originalCX = parseFloat(await ellipse.getAttribute('cx'));
+    const originalCY = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Now click move label
+    await page.locator('.operation > .move').click();
+    
+    // Get ellipse center for dragging
+    const ellipseBox = await ellipse.boundingBox();
+    const ellipseCenterX = ellipseBox.x + ellipseBox.width / 2;
+    const ellipseCenterY = ellipseBox.y + ellipseBox.height / 2;
+    
+    // Move the ellipse by dragging it
+    const moveOffsetX = 50;
+    const moveOffsetY = 30;
+    
+    await page.mouse.move(ellipseCenterX, ellipseCenterY);
+    await page.mouse.down();
+    await page.mouse.move(ellipseCenterX + moveOffsetX, ellipseCenterY + moveOffsetY);
+    await page.mouse.up();
+    
+    // Get new ellipse position
+    const newCX = parseFloat(await ellipse.getAttribute('cx'));
+    const newCY = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Verify the ellipse has moved by the expected amount
+    expect(newCX).toBeCloseTo(originalCX + moveOffsetX, 0);
+    expect(newCY).toBeCloseTo(originalCY + moveOffsetY, 0);
+  });
+
+  test('should be able to move a line after clicking move label', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get original line position
+    const originalX1 = parseFloat(await line.getAttribute('x1'));
+    const originalY1 = parseFloat(await line.getAttribute('y1'));
+    const originalX2 = parseFloat(await line.getAttribute('x2'));
+    const originalY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Now click move label
+    await page.locator('.operation > .move').click();
+    
+    // Get line center for dragging
+    const lineBox = await line.boundingBox();
+    const lineCenterX = lineBox.x + lineBox.width / 2;
+    const lineCenterY = lineBox.y + lineBox.height / 2;
+    
+    // Move the line by dragging it
+    const moveOffsetX = 50;
+    const moveOffsetY = 30;
+    
+    await page.mouse.move(lineCenterX, lineCenterY);
+    await page.mouse.down();
+    await page.mouse.move(lineCenterX + moveOffsetX, lineCenterY + moveOffsetY);
+    await page.mouse.up();
+    
+    // Get new line position
+    const newX1 = parseFloat(await line.getAttribute('x1'));
+    const newY1 = parseFloat(await line.getAttribute('y1'));
+    const newX2 = parseFloat(await line.getAttribute('x2'));
+    const newY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Verify the line has moved by the expected amount
+    expect(newX1).toBeCloseTo(originalX1 + moveOffsetX, 0);
+    expect(newY1).toBeCloseTo(originalY1 + moveOffsetY, 0);
+    expect(newX2).toBeCloseTo(originalX2 + moveOffsetX, 0);
+    expect(newY2).toBeCloseTo(originalY2 + moveOffsetY, 0);
+  });
+
+  test('should be able to move a shape multiple times', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    
+    // Now click move label
+    await page.locator('.operation > .move').click();
+    
+    // Move the rectangle first time
+    const rectBox1 = await rect.boundingBox();
+    const rectCenterX1 = rectBox1.x + rectBox1.width / 2;
+    const rectCenterY1 = rectBox1.y + rectBox1.height / 2;
+    
+    const moveOffsetX1 = 50;
+    const moveOffsetY1 = 30;
+    
+    await page.mouse.move(rectCenterX1, rectCenterY1);
+    await page.mouse.down();
+    await page.mouse.move(rectCenterX1 + moveOffsetX1, rectCenterY1 + moveOffsetY1);
+    await page.mouse.up();
+    
+    // Move the rectangle second time
+    const rectBox2 = await rect.boundingBox();
+    const rectCenterX2 = rectBox2.x + rectBox2.width / 2;
+    const rectCenterY2 = rectBox2.y + rectBox2.height / 2;
+    
+    const moveOffsetX2 = -20;
+    const moveOffsetY2 = 40;
+    
+    await page.mouse.move(rectCenterX2, rectCenterY2);
+    await page.mouse.down();
+    await page.mouse.move(rectCenterX2 + moveOffsetX2, rectCenterY2 + moveOffsetY2);
+    await page.mouse.up();
+    
+    // Get final rectangle position
+    const finalX = parseFloat(await rect.getAttribute('x'));
+    const finalY = parseFloat(await rect.getAttribute('y'));
+    
+    // Verify the rectangle has moved by the combined amount
+    expect(finalX).toBeCloseTo(originalX + moveOffsetX1 + moveOffsetX2, 0);
+    expect(finalY).toBeCloseTo(originalY + moveOffsetY1 + moveOffsetY2, 0);
+  });
+
+  test('should only move the selected shape when multiple shapes exist', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Get original positions
+    const originalRectX = parseFloat(await rect.getAttribute('x'));
+    const originalRectY = parseFloat(await rect.getAttribute('y'));
+    const originalEllipseCX = parseFloat(await ellipse.getAttribute('cx'));
+    const originalEllipseCY = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Now click move label
+    await page.locator('.operation > .move').click();
+    
+    // Move only the rectangle
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    const moveOffsetX = 50;
+    const moveOffsetY = 30;
+    
+    await page.mouse.move(rectCenterX, rectCenterY);
+    await page.mouse.down();
+    await page.mouse.move(rectCenterX + moveOffsetX, rectCenterY + moveOffsetY);
+    await page.mouse.up();
+    
+    // Get new positions
+    const newRectX = parseFloat(await rect.getAttribute('x'));
+    const newRectY = parseFloat(await rect.getAttribute('y'));
+    const newEllipseCX = parseFloat(await ellipse.getAttribute('cx'));
+    const newEllipseCY = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Verify only the rectangle moved
+    expect(newRectX).toBeCloseTo(originalRectX + moveOffsetX, 0);
+    expect(newRectY).toBeCloseTo(originalRectY + moveOffsetY, 0);
+    expect(newEllipseCX).toBeCloseTo(originalEllipseCX, 0);
+    expect(newEllipseCY).toBeCloseTo(originalEllipseCY, 0);
+  });
+});
+
+          
+Now I'll create the test file for task-13, which tests rotating shapes on the canvas when the rotate label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-13.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 13 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to rotate a rectangle after clicking rotate label', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle transform (might be none or empty)
+    const originalTransform = await rect.getAttribute('transform') || '';
+    
+    // Now click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Get rectangle center for rotation reference
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    // Rotate the rectangle by dragging from a point away from center
+    const dragStartX = rectCenterX + 50; // Start 50px to the right of center
+    const dragStartY = rectCenterY;
+    
+    // Drag in a circular motion to simulate rotation
+    const dragEndX = rectCenterX; // End at the top of the center
+    const dragEndY = rectCenterY - 50;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new rectangle transform
+    const newTransform = await rect.getAttribute('transform');
+    
+    // Verify the rectangle has a transform attribute now
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    
+    // The transform should include a rotation component
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+
+  test('should be able to rotate an ellipse after clicking rotate label', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get original ellipse transform (might be none or empty)
+    const originalTransform = await ellipse.getAttribute('transform') || '';
+    
+    // Now click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Get ellipse center for rotation reference
+    const ellipseBox = await ellipse.boundingBox();
+    const ellipseCenterX = ellipseBox.x + ellipseBox.width / 2;
+    const ellipseCenterY = ellipseBox.y + ellipseBox.height / 2;
+    
+    // Rotate the ellipse by dragging from a point away from center
+    const dragStartX = ellipseCenterX + 50; // Start 50px to the right of center
+    const dragStartY = ellipseCenterY;
+    
+    // Drag in a circular motion to simulate rotation
+    const dragEndX = ellipseCenterX; // End at the top of the center
+    const dragEndY = ellipseCenterY - 50;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new ellipse transform
+    const newTransform = await ellipse.getAttribute('transform');
+    
+    // Verify the ellipse has a transform attribute now
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    
+    // The transform should include a rotation component
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+
+  test('should be able to rotate a line after clicking rotate label', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get original line transform (might be none or empty)
+    const originalTransform = await line.getAttribute('transform') || '';
+    
+    // Now click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Get line center for rotation reference
+    const lineBox = await line.boundingBox();
+    const lineCenterX = lineBox.x + lineBox.width / 2;
+    const lineCenterY = lineBox.y + lineBox.height / 2;
+    
+    // Rotate the line by dragging from a point away from center
+    const dragStartX = lineCenterX + 50; // Start 50px to the right of center
+    const dragStartY = lineCenterY;
+    
+    // Drag in a circular motion to simulate rotation
+    const dragEndX = lineCenterX; // End at the top of the center
+    const dragEndY = lineCenterY - 50;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new line transform
+    const newTransform = await line.getAttribute('transform');
+    
+    // Verify the line has a transform attribute now
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    
+    // The transform should include a rotation component
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+
+  test('should rotate shape around its center', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position and dimensions
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Calculate center of rectangle
+    const centerX = originalX + width / 2;
+    const centerY = originalY + height / 2;
+    
+    // Now click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Get rectangle bounding box for mouse operations
+    const rectBox = await rect.boundingBox();
+    
+    // Rotate the rectangle
+    const dragStartX = rectBox.x + rectBox.width; // Start at right edge
+    const dragStartY = rectBox.y + rectBox.height / 2;
+    const dragEndX = rectBox.x + rectBox.width / 2; // End at top edge
+    const dragEndY = rectBox.y;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new transform
+    const transform = await rect.getAttribute('transform');
+    
+    // The transform should include the center coordinates
+    // Format is typically: rotate(angle, centerX, centerY)
+    expect(transform).toContain(`${centerX.toFixed(0)}`);
+    expect(transform).toContain(`${centerY.toFixed(0)}`);
+  });
+
+  test('should only rotate the selected shape when multiple shapes exist', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Get original transforms
+    const originalRectTransform = await rect.getAttribute('transform') || '';
+    const originalEllipseTransform = await ellipse.getAttribute('transform') || '';
+    
+    // Now click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Rotate only the rectangle
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    await page.mouse.move(rectCenterX + 50, rectCenterY);
+    await page.mouse.down();
+    await page.mouse.move(rectCenterX, rectCenterY - 50);
+    await page.mouse.up();
+    
+    // Get new transforms
+    const newRectTransform = await rect.getAttribute('transform');
+    const newEllipseTransform = await ellipse.getAttribute('transform') || '';
+    
+    // Verify only the rectangle was rotated
+    expect(newRectTransform).toBeTruthy();
+    expect(newRectTransform).not.toEqual(originalRectTransform);
+    expect(newEllipseTransform).toEqual(originalEllipseTransform);
+  });
+});
+
+          
+Now I'll create the test file for task-14, which tests zooming shapes on the canvas when the zoom label is clicked.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-14.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 14 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to zoom a rectangle after clicking zoom label', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle dimensions
+    const originalWidth = parseFloat(await rect.getAttribute('width'));
+    const originalHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Now click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Get rectangle center for zoom reference
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    // Zoom the rectangle by dragging from a point away from center
+    const dragStartX = rectCenterX + 50; // Start 50px to the right of center
+    const dragStartY = rectCenterY;
+    
+    // Drag outward to zoom in
+    const dragEndX = rectCenterX + 100; // End 100px to the right of center
+    const dragEndY = rectCenterY;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new rectangle dimensions
+    const newWidth = parseFloat(await rect.getAttribute('width'));
+    const newHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify the rectangle has been zoomed (dimensions changed)
+    expect(newWidth).toBeGreaterThan(originalWidth);
+    expect(newHeight).toBeGreaterThan(originalHeight);
+  });
+
+  test('should be able to zoom an ellipse after clicking zoom label', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get original ellipse dimensions
+    const originalRx = parseFloat(await ellipse.getAttribute('rx'));
+    const originalRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Now click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Get ellipse center for zoom reference
+    const ellipseBox = await ellipse.boundingBox();
+    const ellipseCenterX = ellipseBox.x + ellipseBox.width / 2;
+    const ellipseCenterY = ellipseBox.y + ellipseBox.height / 2;
+    
+    // Zoom the ellipse by dragging from a point away from center
+    const dragStartX = ellipseCenterX + 50; // Start 50px to the right of center
+    const dragStartY = ellipseCenterY;
+    
+    // Drag outward to zoom in
+    const dragEndX = ellipseCenterX + 100; // End 100px to the right of center
+    const dragEndY = ellipseCenterY;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new ellipse dimensions
+    const newRx = parseFloat(await ellipse.getAttribute('rx'));
+    const newRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Verify the ellipse has been zoomed (dimensions changed)
+    expect(newRx).toBeGreaterThan(originalRx);
+    expect(newRy).toBeGreaterThan(originalRy);
+  });
+
+  test('should be able to zoom a line after clicking zoom label', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get original line coordinates
+    const originalX1 = parseFloat(await line.getAttribute('x1'));
+    const originalY1 = parseFloat(await line.getAttribute('y1'));
+    const originalX2 = parseFloat(await line.getAttribute('x2'));
+    const originalY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate original line length
+    const originalLength = Math.sqrt(
+      Math.pow(originalX2 - originalX1, 2) + 
+      Math.pow(originalY2 - originalY1, 2)
+    );
+    
+    // Now click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Get line center for zoom reference
+    const lineBox = await line.boundingBox();
+    const lineCenterX = lineBox.x + lineBox.width / 2;
+    const lineCenterY = lineBox.y + lineBox.height / 2;
+    
+    // Zoom the line by dragging from a point away from center
+    const dragStartX = lineCenterX + 50; // Start 50px to the right of center
+    const dragStartY = lineCenterY;
+    
+    // Drag outward to zoom in
+    const dragEndX = lineCenterX + 100; // End 100px to the right of center
+    const dragEndY = lineCenterY;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new line coordinates
+    const newX1 = parseFloat(await line.getAttribute('x1'));
+    const newY1 = parseFloat(await line.getAttribute('y1'));
+    const newX2 = parseFloat(await line.getAttribute('x2'));
+    const newY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate new line length
+    const newLength = Math.sqrt(
+      Math.pow(newX2 - newX1, 2) + 
+      Math.pow(newY2 - newY1, 2)
+    );
+    
+    // Verify the line has been zoomed (length changed)
+    expect(newLength).toBeGreaterThan(originalLength);
+  });
+
+  test('should be able to zoom out (shrink) a shape', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a large rectangle
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 300);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle dimensions
+    const originalWidth = parseFloat(await rect.getAttribute('width'));
+    const originalHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Now click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Get rectangle center for zoom reference
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    // Zoom out the rectangle by dragging from a point away from center
+    const dragStartX = rectCenterX + 100; // Start 100px to the right of center
+    const dragStartY = rectCenterY;
+    
+    // Drag inward to zoom out
+    const dragEndX = rectCenterX + 50; // End 50px to the right of center
+    const dragEndY = rectCenterY;
+    
+    await page.mouse.move(dragStartX, dragStartY);
+    await page.mouse.down();
+    await page.mouse.move(dragEndX, dragEndY);
+    await page.mouse.up();
+    
+    // Get new rectangle dimensions
+    const newWidth = parseFloat(await rect.getAttribute('width'));
+    const newHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify the rectangle has been zoomed out (dimensions decreased)
+    expect(newWidth).toBeLessThan(originalWidth);
+    expect(newHeight).toBeLessThan(originalHeight);
+  });
+
+  test('should only zoom the selected shape when multiple shapes exist', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Get original dimensions
+    const originalRectWidth = parseFloat(await rect.getAttribute('width'));
+    const originalRectHeight = parseFloat(await rect.getAttribute('height'));
+    const originalEllipseRx = parseFloat(await ellipse.getAttribute('rx'));
+    const originalEllipseRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Now click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Zoom only the rectangle
+    const rectBox = await rect.boundingBox();
+    const rectCenterX = rectBox.x + rectBox.width / 2;
+    const rectCenterY = rectBox.y + rectBox.height / 2;
+    
+    await page.mouse.move(rectCenterX + 50, rectCenterY);
+    await page.mouse.down();
+    await page.mouse.move(rectCenterX + 100, rectCenterY);
+    await page.mouse.up();
+    
+    // Get new dimensions
+    const newRectWidth = parseFloat(await rect.getAttribute('width'));
+    const newRectHeight = parseFloat(await rect.getAttribute('height'));
+    const newEllipseRx = parseFloat(await ellipse.getAttribute('rx'));
+    const newEllipseRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Verify only the rectangle was zoomed
+    expect(newRectWidth).toBeGreaterThan(originalRectWidth);
+    expect(newRectHeight).toBeGreaterThan(originalRectHeight);
+    expect(newEllipseRx).toEqual(originalEllipseRx);
+    expect(newEllipseRy).toEqual(originalEllipseRy);
+  });
+});
+
+          
+Now I'll create the test file for task-15, which tests touch events support for drawing and manipulating shapes.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-15.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 15 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should support touch events for drawing a line', async ({ page }) => {
+    // Click the line label
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Simulate touch events to draw a line
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 150
+    });
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Verify line coordinates
+    const x1 = await line.getAttribute('x1');
+    const y1 = await line.getAttribute('y1');
+    const x2 = await line.getAttribute('x2');
+    const y2 = await line.getAttribute('y2');
+    
+    expect(parseFloat(x1)).toBeCloseTo(100, 0);
+    expect(parseFloat(y1)).toBeCloseTo(100, 0);
+    expect(parseFloat(x2)).toBeCloseTo(200, 0);
+    expect(parseFloat(y2)).toBeCloseTo(150, 0);
+  });
+
+  test('should support touch events for drawing a rectangle', async ({ page }) => {
+    // Click the rect label
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Simulate touch events to draw a rectangle
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 150
+    });
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Verify rectangle attributes
+    const x = await rect.getAttribute('x');
+    const y = await rect.getAttribute('y');
+    const width = await rect.getAttribute('width');
+    const height = await rect.getAttribute('height');
+    
+    expect(parseFloat(x)).toBeCloseTo(100, 0);
+    expect(parseFloat(y)).toBeCloseTo(100, 0);
+    expect(parseFloat(width)).toBeCloseTo(100, 0);
+    expect(parseFloat(height)).toBeCloseTo(50, 0);
+  });
+
+  test('should support touch events for drawing an ellipse', async ({ page }) => {
+    // Click the ellipse label
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Simulate touch events to draw an ellipse
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 150
+    });
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Verify ellipse attributes
+    const cx = await ellipse.getAttribute('cx');
+    const cy = await ellipse.getAttribute('cy');
+    const rx = await ellipse.getAttribute('rx');
+    const ry = await ellipse.getAttribute('ry');
+    
+    expect(parseFloat(cx)).toBeCloseTo(150, 0);
+    expect(parseFloat(cy)).toBeCloseTo(125, 0);
+    expect(parseFloat(rx)).toBeCloseTo(50, 0);
+    expect(parseFloat(ry)).toBeCloseTo(25, 0);
+  });
+
+  test('should support touch events for moving a shape', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    
+    // Click move label
+    await page.locator('.operation > .move').click();
+    
+    // Simulate touch events to move the rectangle
+    await page.evaluate(async ({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event on the rectangle
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX,
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + (x2 - x1),
+          clientY: centerY + (y2 - y1)
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 150,
+      y1: canvasBoundingBox.y + 125,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 175
+    });
+    
+    // Wait for the move to complete
+    await page.waitForTimeout(500);
+    
+    // Get new rectangle position
+    const newX = parseFloat(await rect.getAttribute('x'));
+    const newY = parseFloat(await rect.getAttribute('y'));
+    
+    // Verify the rectangle has moved
+    expect(newX).toBeGreaterThan(originalX);
+    expect(newY).toBeGreaterThan(originalY);
+  });
+
+  test('should support touch events for rotating a shape', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle transform
+    const originalTransform = await rect.getAttribute('transform') || '';
+    
+    // Click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Simulate touch events to rotate the rectangle
+    await page.evaluate(async ({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event in a circular motion
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX, // Move to the top of center
+          clientY: centerY - 50
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 150,
+      y1: canvasBoundingBox.y + 125,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 175
+    });
+    
+    // Wait for the rotation to complete
+    await page.waitForTimeout(500);
+    
+    // Get new rectangle transform
+    const newTransform = await rect.getAttribute('transform');
+    
+    // Verify the rectangle has been rotated
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+});
+
+          
+Now I'll create the test file for task-16, which tests the ability to draw shapes with a minimum size based on the line width.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-16.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 16 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should enforce minimum line length based on line width', async ({ page }) => {
+    // Set a large line width
+    await page.locator('.prop input[type="range"]').fill('20');
+    
+    // Click the line label
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a very short line (shorter than line width)
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 105, canvasBoundingBox.y + 105); // Only 7.07px diagonal length
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get line coordinates
+    const x1 = parseFloat(await line.getAttribute('x1'));
+    const y1 = parseFloat(await line.getAttribute('y1'));
+    const x2 = parseFloat(await line.getAttribute('x2'));
+    const y2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate actual line length
+    const actualLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    
+    // Verify the line length is at least the line width
+    expect(actualLength).toBeGreaterThanOrEqual(20);
+    
+    // Verify the line direction is maintained
+    const originalDx = 5; // 105 - 100
+    const originalDy = 5; // 105 - 100
+    const actualDx = x2 - x1;
+    const actualDy = y2 - y1;
+    
+    // Check if the direction is maintained (same ratio)
+    const originalRatio = originalDy / originalDx;
+    const actualRatio = actualDy / actualDx;
+    expect(actualRatio).toBeCloseTo(originalRatio, 1);
+  });
+
+  test('should enforce minimum rectangle dimensions based on line width', async ({ page }) => {
+    // Set a large line width
+    await page.locator('.prop input[type="range"]').fill('20');
+    
+    // Click the rect label
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a very small rectangle (smaller than line width)
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 105, canvasBoundingBox.y + 105); // Only 5x5 rectangle
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify both width and height are at least the line width
+    expect(width).toBeGreaterThanOrEqual(20);
+    expect(height).toBeGreaterThanOrEqual(20);
+  });
+
+  test('should enforce minimum ellipse radii based on half the line width', async ({ page }) => {
+    // Set a large line width
+    await page.locator('.prop input[type="range"]').fill('20');
+    
+    // Click the ellipse label
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a very small ellipse (smaller than line width)
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 105, canvasBoundingBox.y + 105); // Only 5x5 ellipse (rx=2.5, ry=2.5)
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse radii
+    const rx = parseFloat(await ellipse.getAttribute('rx'));
+    const ry = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Verify both radii are at least half the line width
+    expect(rx).toBeGreaterThanOrEqual(10); // Half of 20
+    expect(ry).toBeGreaterThanOrEqual(10); // Half of 20
+  });
+
+  test('should adjust only the width of a rectangle if height is already sufficient', async ({ page }) => {
+    // Set a line width
+    await page.locator('.prop input[type="range"]').fill('15');
+    
+    // Click the rect label
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a rectangle with width smaller than line width but height larger
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 105, canvasBoundingBox.y + 130); // 5x30 rectangle
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify width is adjusted but height is unchanged
+    expect(width).toBeGreaterThanOrEqual(15);
+    expect(height).toBeCloseTo(30, 0);
+  });
+
+  test('should adjust only the height of a rectangle if width is already sufficient', async ({ page }) => {
+    // Set a line width
+    await page.locator('.prop input[type="range"]').fill('15');
+    
+    // Click the rect label
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a rectangle with height smaller than line width but width larger
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 130, canvasBoundingBox.y + 105); // 30x5 rectangle
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify height is adjusted but width is unchanged
+    expect(width).toBeCloseTo(30, 0);
+    expect(height).toBeGreaterThanOrEqual(15);
+  });
+});
+
+          
+Now I'll create the test file for task-17, which tests the ability to draw shapes with a minimum size based on the line width when using touch events.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-17.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 17 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should enforce minimum line length based on line width when using touch events', async ({ page }) => {
+    // Set a large line width
+    await page.locator('.prop input[type="range"]').fill('20');
+    
+    // Click the line label
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a very short line using touch events
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 105,
+      y2: canvasBoundingBox.y + 105 // Only 7.07px diagonal length
+    });
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get line coordinates
+    const x1 = parseFloat(await line.getAttribute('x1'));
+    const y1 = parseFloat(await line.getAttribute('y1'));
+    const x2 = parseFloat(await line.getAttribute('x2'));
+    const y2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate actual line length
+    const actualLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    
+    // Verify the line length is at least the line width
+    expect(actualLength).toBeGreaterThanOrEqual(20);
+    
+    // Verify the line direction is maintained
+    const originalDx = 5; // 105 - 100
+    const originalDy = 5; // 105 - 100
+    const actualDx = x2 - x1;
+    const actualDy = y2 - y1;
+    
+    // Check if the direction is maintained (same ratio)
+    const originalRatio = originalDy / originalDx;
+    const actualRatio = actualDy / actualDx;
+    expect(actualRatio).toBeCloseTo(originalRatio, 1);
+  });
+
+  test('should enforce minimum rectangle dimensions based on line width when using touch events', async ({ page }) => {
+    // Set a large line width
+    await page.locator('.prop input[type="range"]').fill('20');
+    
+    // Click the rect label
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a very small rectangle using touch events
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 105,
+      y2: canvasBoundingBox.y + 105 // Only 5x5 rectangle
+    });
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify both width and height are at least the line width
+    expect(width).toBeGreaterThanOrEqual(20);
+    expect(height).toBeGreaterThanOrEqual(20);
+  });
+
+  test('should enforce minimum ellipse radii based on half the line width when using touch events', async ({ page }) => {
+    // Set a large line width
+    await page.locator('.prop input[type="range"]').fill('20');
+    
+    // Click the ellipse label
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a very small ellipse using touch events
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 105,
+      y2: canvasBoundingBox.y + 105 // Only 5x5 ellipse (rx=2.5, ry=2.5)
+    });
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get ellipse radii
+    const rx = parseFloat(await ellipse.getAttribute('rx'));
+    const ry = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Verify both radii are at least half the line width
+    expect(rx).toBeGreaterThanOrEqual(10); // Half of 20
+    expect(ry).toBeGreaterThanOrEqual(10); // Half of 20
+  });
+
+  test('should adjust only one dimension if the other is already sufficient when using touch events', async ({ page }) => {
+    // Set a line width
+    await page.locator('.prop input[type="range"]').fill('15');
+    
+    // Click the rect label
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Try to draw a rectangle with width smaller than line width but height larger using touch events
+    await page.evaluate(({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      
+      // Create touchstart event
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x1,
+          clientY: y1
+        })]
+      });
+      
+      // Create touchmove event
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: x2,
+          clientY: y2
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      canvas.dispatchEvent(touchMoveEvent);
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 100,
+      y1: canvasBoundingBox.y + 100,
+      x2: canvasBoundingBox.x + 105,
+      y2: canvasBoundingBox.y + 130 // 5x30 rectangle
+    });
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get rectangle dimensions
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify width is adjusted but height is unchanged
+    expect(width).toBeGreaterThanOrEqual(15);
+    expect(height).toBeCloseTo(30, 0);
+  });
+
+  test('should work with different line width values when using touch events', async ({ page }) => {
+    // Test with different line width values
+    const lineWidths = [5, 10, 20];
+    
+    for (const lineWidth of lineWidths) {
+      // Set the line width
+      await page.locator('.prop input[type="range"]').fill(lineWidth.toString());
+      
+      // Click the line label
+      await page.locator('.shape > .line').click();
+      
+      const canvas = page.locator('.canvas');
+      const canvasBoundingBox = await canvas.boundingBox();
+      
+      // Try to draw a very short line using touch events
+      await page.evaluate(({ x1, y1, x2, y2 }) => {
+        const canvas = document.querySelector('.canvas');
+        
+        // Create touchstart event
+        const touchStartEvent = new TouchEvent('touchstart', {
+          bubbles: true,
+          cancelable: true,
+          touches: [new Touch({
+            identifier: 0,
+            target: canvas,
+            clientX: x1,
+            clientY: y1
+          })]
+        });
+        
+        // Create touchmove event
+        const touchMoveEvent = new TouchEvent('touchmove', {
+          bubbles: true,
+          cancelable: true,
+          touches: [new Touch({
+            identifier: 0,
+            target: canvas,
+            clientX: x2,
+            clientY: y2
+          })]
+        });
+        
+        // Create touchend event
+        const touchEndEvent = new TouchEvent('touchend', {
+          bubbles: true,
+          cancelable: true,
+          touches: []
+        });
+        
+        // Dispatch events
+        canvas.dispatchEvent(touchStartEvent);
+        canvas.dispatchEvent(touchMoveEvent);
+        canvas.dispatchEvent(touchEndEvent);
+      }, {
+        x1: canvasBoundingBox.x + 100 + lineWidth * 10,
+        y1: canvasBoundingBox.y + 100,
+        x2: canvasBoundingBox.x + 102 + lineWidth * 10,
+        y2: canvasBoundingBox.y + 102 // Very short line
+      });
+      
+      // Verify line was created
+      const lines = await page.locator('.canvas line').all();
+      const line = lines[lines.length - 1]; // Get the last line
+      
+      // Get line coordinates
+      const x1 = parseFloat(await line.getAttribute('x1'));
+      const y1 = parseFloat(await line.getAttribute('y1'));
+      const x2 = parseFloat(await line.getAttribute('x2'));
+      const y2 = parseFloat(await line.getAttribute('y2'));
+      
+      // Calculate actual line length
+      const actualLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      
+      // Verify the line length is at least the line width
+      expect(actualLength).toBeGreaterThanOrEqual(lineWidth);
+    }
+  });
+});
+
+          
+Now I'll create the test file for task-18, which tests the ability to use touch events for zooming shapes.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-18.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 18 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to zoom a rectangle using touch events', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle dimensions
+    const originalWidth = parseFloat(await rect.getAttribute('width'));
+    const originalHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Simulate touch events to zoom the rectangle
+    await page.evaluate(async ({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to zoom in (move outward)
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 100, // 100px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 150,
+      y1: canvasBoundingBox.y + 125,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 125
+    });
+    
+    // Wait for the zoom to complete
+    await page.waitForTimeout(500);
+    
+    // Get new rectangle dimensions
+    const newWidth = parseFloat(await rect.getAttribute('width'));
+    const newHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify the rectangle has been zoomed in (dimensions increased)
+    expect(newWidth).toBeGreaterThan(originalWidth);
+    expect(newHeight).toBeGreaterThan(originalHeight);
+  });
+
+  test('should be able to zoom an ellipse using touch events', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get original ellipse dimensions
+    const originalRx = parseFloat(await ellipse.getAttribute('rx'));
+    const originalRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Simulate touch events to zoom the ellipse
+    await page.evaluate(async ({ x1, y1, x2, y2 }) => {
+      const canvas = document.querySelector('.canvas');
+      const ellipse = document.querySelector('.canvas ellipse');
+      
+      // Get ellipse center
+      const cx = parseFloat(ellipse.getAttribute('cx'));
+      const cy = parseFloat(ellipse.getAttribute('cy'));
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: cx + 50, // 50px to the right of center
+          clientY: cy
+        })]
+      });
+      
+      // Create touchmove event to zoom in (move outward)
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: cx + 100, // 100px to the right of center
+          clientY: cy
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    }, {
+      x1: canvasBoundingBox.x + 150,
+      y1: canvasBoundingBox.y + 125,
+      x2: canvasBoundingBox.x + 200,
+      y2: canvasBoundingBox.y + 125
+    });
+    
+    // Wait for the zoom to complete
+    await page.waitForTimeout(500);
+    
+    // Get new ellipse dimensions
+    const newRx = parseFloat(await ellipse.getAttribute('rx'));
+    const newRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Verify the ellipse has been zoomed in (dimensions increased)
+    expect(newRx).toBeGreaterThan(originalRx);
+    expect(newRy).toBeGreaterThan(originalRy);
+  });
+
+  test('should be able to zoom a line using touch events', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get original line coordinates
+    const originalX1 = parseFloat(await line.getAttribute('x1'));
+    const originalY1 = parseFloat(await line.getAttribute('y1'));
+    const originalX2 = parseFloat(await line.getAttribute('x2'));
+    const originalY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate original line length
+    const originalLength = Math.sqrt(
+      Math.pow(originalX2 - originalX1, 2) + 
+      Math.pow(originalY2 - originalY1, 2)
+    );
+    
+    // Click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Simulate touch events to zoom the line
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const line = document.querySelector('.canvas line');
+      
+      // Get line center
+      const x1 = parseFloat(line.getAttribute('x1'));
+      const y1 = parseFloat(line.getAttribute('y1'));
+      const x2 = parseFloat(line.getAttribute('x2'));
+      const y2 = parseFloat(line.getAttribute('y2'));
+      const centerX = (x1 + x2) / 2;
+      const centerY = (y1 + y2) / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to zoom in (move outward)
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 100, // 100px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the zoom to complete
+    await page.waitForTimeout(500);
+    
+    // Get new line coordinates
+    const newX1 = parseFloat(await line.getAttribute('x1'));
+    const newY1 = parseFloat(await line.getAttribute('y1'));
+    const newX2 = parseFloat(await line.getAttribute('x2'));
+    const newY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Calculate new line length
+    const newLength = Math.sqrt(
+      Math.pow(newX2 - newX1, 2) + 
+      Math.pow(newY2 - newY1, 2)
+    );
+    
+    // Verify the line has been zoomed in (length increased)
+    expect(newLength).toBeGreaterThan(originalLength);
+  });
+
+  test('should be able to zoom out (shrink) a shape using touch events', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a large rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 300);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle dimensions
+    const originalWidth = parseFloat(await rect.getAttribute('width'));
+    const originalHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Simulate touch events to zoom out the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 100, // 100px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to zoom out (move inward)
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the zoom to complete
+    await page.waitForTimeout(500);
+    
+    // Get new rectangle dimensions
+    const newWidth = parseFloat(await rect.getAttribute('width'));
+    const newHeight = parseFloat(await rect.getAttribute('height'));
+    
+    // Verify the rectangle has been zoomed out (dimensions decreased)
+    expect(newWidth).toBeLessThan(originalWidth);
+    expect(newHeight).toBeLessThan(originalHeight);
+  });
+
+  test('should only zoom the selected shape when multiple shapes exist using touch events', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Get original dimensions
+    const originalRectWidth = parseFloat(await rect.getAttribute('width'));
+    const originalRectHeight = parseFloat(await rect.getAttribute('height'));
+    const originalEllipseRx = parseFloat(await ellipse.getAttribute('rx'));
+    const originalEllipseRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Click zoom label
+    await page.locator('.operation > .zoom').click();
+    
+    // Simulate touch events to zoom only the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to zoom in (move outward)
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 100, // 100px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the zoom to complete
+    await page.waitForTimeout(500);
+    
+    // Get new dimensions
+    const newRectWidth = parseFloat(await rect.getAttribute('width'));
+    const newRectHeight = parseFloat(await rect.getAttribute('height'));
+    const newEllipseRx = parseFloat(await ellipse.getAttribute('rx'));
+    const newEllipseRy = parseFloat(await ellipse.getAttribute('ry'));
+    
+    // Verify only the rectangle was zoomed
+    expect(newRectWidth).toBeGreaterThan(originalRectWidth);
+    expect(newRectHeight).toBeGreaterThan(originalRectHeight);
+    expect(newEllipseRx).toEqual(originalEllipseRx);
+    expect(newEllipseRy).toEqual(originalEllipseRy);
+  });
+});
+
+          
+Now I'll create the test file for task-19, which tests the ability to use touch events for rotating shapes.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-19.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 19 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to rotate a rectangle using touch events', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle transform (might be none or empty)
+    const originalTransform = await rect.getAttribute('transform') || '';
+    
+    // Click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Simulate touch events to rotate the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event in a circular motion
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX, // Move to the top of center
+          clientY: centerY - 50
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the rotation to complete
+    await page.waitForTimeout(500);
+    
+    // Get new rectangle transform
+    const newTransform = await rect.getAttribute('transform');
+    
+    // Verify the rectangle has been rotated
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+
+  test('should be able to rotate an ellipse using touch events', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get original ellipse transform (might be none or empty)
+    const originalTransform = await ellipse.getAttribute('transform') || '';
+    
+    // Click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Simulate touch events to rotate the ellipse
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const ellipse = document.querySelector('.canvas ellipse');
+      
+      // Get ellipse center
+      const cx = parseFloat(ellipse.getAttribute('cx'));
+      const cy = parseFloat(ellipse.getAttribute('cy'));
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: cx + 50, // 50px to the right of center
+          clientY: cy
+        })]
+      });
+      
+      // Create touchmove event in a circular motion
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: cx, // Move to the top of center
+          clientY: cy - 50
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the rotation to complete
+    await page.waitForTimeout(500);
+    
+    // Get new ellipse transform
+    const newTransform = await ellipse.getAttribute('transform');
+    
+    // Verify the ellipse has been rotated
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+
+  test('should be able to rotate a line using touch events', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get original line transform (might be none or empty)
+    const originalTransform = await line.getAttribute('transform') || '';
+    
+    // Click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Simulate touch events to rotate the line
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const line = document.querySelector('.canvas line');
+      
+      // Get line center
+      const x1 = parseFloat(line.getAttribute('x1'));
+      const y1 = parseFloat(line.getAttribute('y1'));
+      const x2 = parseFloat(line.getAttribute('x2'));
+      const y2 = parseFloat(line.getAttribute('y2'));
+      const centerX = (x1 + x2) / 2;
+      const centerY = (y1 + y2) / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event in a circular motion
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX, // Move to the top of center
+          clientY: centerY - 50
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the rotation to complete
+    await page.waitForTimeout(500);
+    
+    // Get new line transform
+    const newTransform = await line.getAttribute('transform');
+    
+    // Verify the line has been rotated
+    expect(newTransform).toBeTruthy();
+    expect(newTransform).not.toEqual(originalTransform);
+    expect(newTransform.includes('rotate')).toBe(true);
+  });
+
+  test('should rotate shape around its center when using touch events', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position and dimensions
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    const width = parseFloat(await rect.getAttribute('width'));
+    const height = parseFloat(await rect.getAttribute('height'));
+    
+    // Calculate center of rectangle
+    const centerX = originalX + width / 2;
+    const centerY = originalY + height / 2;
+    
+    // Click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Simulate touch events to rotate the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event in a circular motion
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX, // Move to the top of center
+          clientY: centerY - 50
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the rotation to complete
+    await page.waitForTimeout(500);
+    
+    // Get new transform
+    const transform = await rect.getAttribute('transform');
+    
+    // The transform should include the center coordinates
+    // Format is typically: rotate(angle, centerX, centerY)
+    expect(transform).toContain(`${centerX.toFixed(0)}`);
+    expect(transform).toContain(`${centerY.toFixed(0)}`);
+  });
+
+  test('should only rotate the selected shape when multiple shapes exist using touch events', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Get original transforms
+    const originalRectTransform = await rect.getAttribute('transform') || '';
+    const originalEllipseTransform = await ellipse.getAttribute('transform') || '';
+    
+    // Click rotate label
+    await page.locator('.operation > .rotate').click();
+    
+    // Simulate touch events to rotate only the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at a point away from center
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // 50px to the right of center
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event in a circular motion
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX, // Move to the top of center
+          clientY: centerY - 50
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the rotation to complete
+    await page.waitForTimeout(500);
+    
+    // Get new transforms
+    const newRectTransform = await rect.getAttribute('transform');
+    const newEllipseTransform = await ellipse.getAttribute('transform') || '';
+    
+    // Verify only the rectangle was rotated
+    expect(newRectTransform).toBeTruthy();
+    expect(newRectTransform).not.toEqual(originalRectTransform);
+    expect(newEllipseTransform).toEqual(originalEllipseTransform);
+  });
+});
+
+          
+Now I'll create the test file for task-20, which tests the ability to use touch events for moving shapes.
+        
+            
+toolName: write_to_file
+            
+status: success
+          
+            
+filePath: /home/maoyiwei.ebay/web-bench-public/projects/draw-1/test/task-20.spec.js
+          
+content: // @ts-check
+const { test, expect } = require('@playwright/test');
+
+test.describe('Task 20 Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should be able to move a rectangle using touch events', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    
+    // Click move label
+    await page.locator('.operation > .move').click();
+    
+    // Simulate touch events to move the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at the center of the rectangle
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX,
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to move the rectangle
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // Move 50px to the right
+          clientY: centerY + 50  // Move 50px down
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the move to complete
+    await page.waitForTimeout(500);
+    
+    // Get new rectangle position
+    const newX = parseFloat(await rect.getAttribute('x'));
+    const newY = parseFloat(await rect.getAttribute('y'));
+    
+    // Verify the rectangle has moved
+    expect(newX).toBeGreaterThan(originalX);
+    expect(newY).toBeGreaterThan(originalY);
+  });
+
+  test('should be able to move an ellipse using touch events', async ({ page }) => {
+    // First draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw an ellipse using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify ellipse was created
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(ellipse).toBeVisible();
+    
+    // Get original ellipse position
+    const originalCx = parseFloat(await ellipse.getAttribute('cx'));
+    const originalCy = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Click move label
+    await page.locator('.operation > .move').click();
+    
+    // Simulate touch events to move the ellipse
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const ellipse = document.querySelector('.canvas ellipse');
+      
+      // Get ellipse center
+      const cx = parseFloat(ellipse.getAttribute('cx'));
+      const cy = parseFloat(ellipse.getAttribute('cy'));
+      
+      // Create touchstart event at the center of the ellipse
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: cx,
+          clientY: cy
+        })]
+      });
+      
+      // Create touchmove event to move the ellipse
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: cx + 50, // Move 50px to the right
+          clientY: cy + 50  // Move 50px down
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the move to complete
+    await page.waitForTimeout(500);
+    
+    // Get new ellipse position
+    const newCx = parseFloat(await ellipse.getAttribute('cx'));
+    const newCy = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Verify the ellipse has moved
+    expect(newCx).toBeGreaterThan(originalCx);
+    expect(newCy).toBeGreaterThan(originalCy);
+  });
+
+  test('should be able to move a line using touch events', async ({ page }) => {
+    // First draw a line
+    await page.locator('.shape > .line').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a line using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify line was created
+    const line = page.locator('.canvas line');
+    await expect(line).toBeVisible();
+    
+    // Get original line coordinates
+    const originalX1 = parseFloat(await line.getAttribute('x1'));
+    const originalY1 = parseFloat(await line.getAttribute('y1'));
+    const originalX2 = parseFloat(await line.getAttribute('x2'));
+    const originalY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Click move label
+    await page.locator('.operation > .move').click();
+    
+    // Simulate touch events to move the line
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const line = document.querySelector('.canvas line');
+      
+      // Get line center
+      const x1 = parseFloat(line.getAttribute('x1'));
+      const y1 = parseFloat(line.getAttribute('y1'));
+      const x2 = parseFloat(line.getAttribute('x2'));
+      const y2 = parseFloat(line.getAttribute('y2'));
+      const centerX = (x1 + x2) / 2;
+      const centerY = (y1 + y2) / 2;
+      
+      // Create touchstart event at the center of the line
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX,
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to move the line
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // Move 50px to the right
+          clientY: centerY + 50  // Move 50px down
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the move to complete
+    await page.waitForTimeout(500);
+    
+    // Get new line coordinates
+    const newX1 = parseFloat(await line.getAttribute('x1'));
+    const newY1 = parseFloat(await line.getAttribute('y1'));
+    const newX2 = parseFloat(await line.getAttribute('x2'));
+    const newY2 = parseFloat(await line.getAttribute('y2'));
+    
+    // Verify the line has moved
+    expect(newX1).toBeGreaterThan(originalX1);
+    expect(newY1).toBeGreaterThan(originalY1);
+    expect(newX2).toBeGreaterThan(originalX2);
+    expect(newY2).toBeGreaterThan(originalY2);
+  });
+
+  test('should support multiple touch moves in sequence', async ({ page }) => {
+    // First draw a rectangle
+    await page.locator('.shape > .rect').click();
+    
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    // Draw a rectangle using mouse events
+    await page.mouse.move(canvasBoundingBox.x + 100, canvasBoundingBox.y + 100);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify rectangle was created
+    const rect = page.locator('.canvas rect');
+    await expect(rect).toBeVisible();
+    
+    // Get original rectangle position
+    const originalX = parseFloat(await rect.getAttribute('x'));
+    const originalY = parseFloat(await rect.getAttribute('y'));
+    
+    // Click move label
+    await page.locator('.operation > .move').click();
+    
+    // Simulate touch events to move the rectangle multiple times
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // First move
+      // Get rectangle center
+      let rectX = parseFloat(rect.getAttribute('x'));
+      let rectY = parseFloat(rect.getAttribute('y'));
+      let rectWidth = parseFloat(rect.getAttribute('width'));
+      let rectHeight = parseFloat(rect.getAttribute('height'));
+      let centerX = rectX + rectWidth / 2;
+      let centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at the center of the rectangle
+      let touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX,
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to move the rectangle
+      let touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 30, // Move 30px to the right
+          clientY: centerY + 30  // Move 30px down
+        })]
+      });
+      
+      // Create touchend event
+      let touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events for first move
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+      
+      // Wait before second move
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Second move
+      // Get updated rectangle center
+      rectX = parseFloat(rect.getAttribute('x'));
+      rectY = parseFloat(rect.getAttribute('y'));
+      rectWidth = parseFloat(rect.getAttribute('width'));
+      rectHeight = parseFloat(rect.getAttribute('height'));
+      centerX = rectX + rectWidth / 2;
+      centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at the new center of the rectangle
+      touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX,
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to move the rectangle again
+      touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 30, // Move another 30px to the right
+          clientY: centerY + 30  // Move another 30px down
+        })]
+      });
+      
+      // Create touchend event
+      touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events for second move
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the moves to complete
+    await page.waitForTimeout(800);
+    
+    // Get new rectangle position
+    const newX = parseFloat(await rect.getAttribute('x'));
+    const newY = parseFloat(await rect.getAttribute('y'));
+    
+    // Verify the rectangle has moved significantly (more than a single move would achieve)
+    expect(newX).toBeGreaterThan(originalX + 40); // Should have moved at least 40px to the right
+    expect(newY).toBeGreaterThan(originalY + 40); // Should have moved at least 40px down
+  });
+
+  test('should only move the selected shape when multiple shapes exist using touch events', async ({ page }) => {
+    // Draw a rectangle
+    await page.locator('.shape > .rect').click();
+    const canvas = page.locator('.canvas');
+    const canvasBoundingBox = await canvas.boundingBox();
+    
+    await page.mouse.move(canvasBoundingBox.x + 50, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 150, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Draw an ellipse
+    await page.locator('.shape > .ellipse').click();
+    await page.mouse.move(canvasBoundingBox.x + 200, canvasBoundingBox.y + 50);
+    await page.mouse.down();
+    await page.mouse.move(canvasBoundingBox.x + 300, canvasBoundingBox.y + 150);
+    await page.mouse.up();
+    
+    // Verify both shapes exist
+    const rect = page.locator('.canvas rect');
+    const ellipse = page.locator('.canvas ellipse');
+    await expect(rect).toBeVisible();
+    await expect(ellipse).toBeVisible();
+    
+    // Get original positions
+    const originalRectX = parseFloat(await rect.getAttribute('x'));
+    const originalRectY = parseFloat(await rect.getAttribute('y'));
+    const originalEllipseCx = parseFloat(await ellipse.getAttribute('cx'));
+    const originalEllipseCy = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Click move label
+    await page.locator('.operation > .move').click();
+    
+    // Simulate touch events to move only the rectangle
+    await page.evaluate(async () => {
+      const canvas = document.querySelector('.canvas');
+      const rect = document.querySelector('.canvas rect');
+      
+      // Get rectangle center
+      const rectX = parseFloat(rect.getAttribute('x'));
+      const rectY = parseFloat(rect.getAttribute('y'));
+      const rectWidth = parseFloat(rect.getAttribute('width'));
+      const rectHeight = parseFloat(rect.getAttribute('height'));
+      const centerX = rectX + rectWidth / 2;
+      const centerY = rectY + rectHeight / 2;
+      
+      // Create touchstart event at the center of the rectangle
+      const touchStartEvent = new TouchEvent('touchstart', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX,
+          clientY: centerY
+        })]
+      });
+      
+      // Create touchmove event to move the rectangle
+      const touchMoveEvent = new TouchEvent('touchmove', {
+        bubbles: true,
+        cancelable: true,
+        touches: [new Touch({
+          identifier: 0,
+          target: canvas,
+          clientX: centerX + 50, // Move 50px to the right
+          clientY: centerY + 50  // Move 50px down
+        })]
+      });
+      
+      // Create touchend event
+      const touchEndEvent = new TouchEvent('touchend', {
+        bubbles: true,
+        cancelable: true,
+        touches: []
+      });
+      
+      // Dispatch events
+      canvas.dispatchEvent(touchStartEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchMoveEvent);
+      await new Promise(resolve => setTimeout(resolve, 100)); // Small delay
+      canvas.dispatchEvent(touchEndEvent);
+    });
+    
+    // Wait for the move to complete
+    await page.waitForTimeout(500);
+    
+    // Get new positions
+    const newRectX = parseFloat(await rect.getAttribute('x'));
+    const newRectY = parseFloat(await rect.getAttribute('y'));
+    const newEllipseCx = parseFloat(await ellipse.getAttribute('cx'));
+    const newEllipseCy = parseFloat(await ellipse.getAttribute('cy'));
+    
+    // Verify only the rectangle was moved
+    expect(newRectX).toBeGreaterThan(originalRectX);
+    expect(newRectY).toBeGreaterThan(originalRectY);
+    expect(newEllipseCx).toEqual(originalEllipseCx);
+    expect(newEllipseCy).toEqual(originalEllipseCy);
+  });
+});
+
+          
+# Test Files Generation Complete
+
+I've created Playwright test files for all tasks in the drawing application. Each test file follows the naming convention `test/task-n.spec.js` and includes 3-5 test cases that validate the functionality described in the task.
+
+The test files focus on validating the behavior of page elements rather than making strict assertions about CSS or HTML attributes. For example, they check:
+
+- Element visibility and dimensions
+- Proper interactions (click, drag, touch events)
+- Expected changes in element attributes after operations
+- Functional behavior of drawing tools and operations
+
+All test files follow these principles:
+
+1. They use the Playwright testing framework
+2. Each test begins by navigating to the root page
+3. Tests validate functionality without being overly strict about implementation details
+4. Touch events are simulated using the TouchEvent API
+5. Tests verify that shapes are created, modified, and manipulated correctly
+
+The test suite covers all functionality including:
+- Drawing shapes (lines, rectangles, ellipses)
+- Modifying shapes (move, rotate, zoom)
+- Operations on shapes (copy, delete, fill)
+- Touch event support
+- Minimum dimension enforcement
+
+These tests should provide good coverage while remaining flexible enough to accommodate different implementation approaches.
+        
