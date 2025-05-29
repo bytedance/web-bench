@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+}
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolkit {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.shape {
+  display: flex;
+  width: calc(3 * 40px);
+  gap: 10px;
+}
+
+.operation {
+  display: flex;
+  width: calc(6 * 40px);
+  gap: 10px;
+}
+
+.prop {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.canvas {
+  flex: 1;
+  width: 100%;
+}
+
+/* Style for the labels with radio buttons */
+label.line,
+label.rect,
+label.ellipse,
+label.move,
+label.rotate,
+label.zoom,
+label.copy,
+label.delete,
+label.fill {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+label.line {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 20L21 4' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+label.rect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+}
+
+label.ellipse {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cellipse cx='12' cy='12' rx='9' ry='9' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+}
+
+label.move {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3L12 21M3 12L21 12M7 7L17 17M17 7L7 17' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+label.rotate {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-2a8 8 0 0 1-8 8 8 8 0 0 1-8-8 8 8 0 0 1 8-8v4l6-6-6-6v4z' fill='black'/%3E%3C/svg%3E");
+}
+
+label.zoom {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='10' cy='10' r='7' stroke='black' stroke-width='2' fill='none'/%3E%3Cpath d='M15 15L21 21' stroke='black' stroke-width='2'/%3E%3Cpath d='M7 10H13M10 7V13' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+label.copy {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='8' y='8' width='12' height='12' stroke='black' stroke-width='2' fill='none'/%3E%3Cpath d='M4 16V4H16' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+}
+
+label.delete {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z' fill='black'/%3E%3C/svg%3E");
+}
+
+label.fill {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M16.56 8.94L7.62 0L6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z' fill='black'/%3E%3C/svg%3E");
+}
+
+input[type="radio"] {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+input[type="radio"]:checked + label,
+label:has(input[type="radio"]:checked) {
+  border: 1px solid #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Hover effect for labels */
+label:hover {
+  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.05);
+}

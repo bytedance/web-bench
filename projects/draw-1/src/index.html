@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SWE101-Bench Draw</title>
+    <link rel="stylesheet" href="index.scss" />
+  </head>
+  <body>
+    <div class="root">
+      <div class="toolkit">
+        <div class="shape">
+          <label class="line">
+            <input type="radio" name="operation" value="line" />
+          </label>
+          <label class="rect">
+            <input type="radio" name="operation" value="rect" />
+          </label>
+          <label class="ellipse">
+            <input type="radio" name="operation" value="ellipse" />
+          </label>
+        </div>
+        <div class="prop">
+          <input type="range" class="line-width" min="1" max="21" value="9" />
+          <input type="color" class="color" value="#000000" />
+        </div>
+        <div class="operation">
+          <label class="move">
+            <input type="radio" name="operation" value="move" />
+          </label>
+          <label class="rotate">
+            <input type="radio" name="operation" value="rotate" />
+          </label>
+          <label class="zoom">
+            <input type="radio" name="operation" value="zoom" />
+          </label>
+          <label class="copy">
+            <input type="radio" name="operation" value="copy" />
+          </label>
+          <label class="delete">
+            <input type="radio" name="operation" value="delete" />
+          </label>
+          <label class="fill">
+            <input type="radio" name="operation" value="fill" />
+          </label>
+        </div>
+      </div>
+      <svg class="canvas"></svg>
+    </div>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
