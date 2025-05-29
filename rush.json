@@ -504,6 +504,10 @@
       "projectFolder": "projects/react-1"
     },
     {
+      "packageName": "@web-bench/draw-1",
+      "projectFolder": "projects/draw-1"
+    },
+    {
       "packageName": "@web-bench/react-no-ts",
       "projectFolder": "projects/react-no-ts"
     },
