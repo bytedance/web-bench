@@ -29,20 +29,23 @@ test('fill operation does not affect lines', async ({ page }) => {
   // Create a line
   await page.click('label.line');
   const canvas = page.locator('.canvas');
-  await page.mouse.move(50, 50);
+  await canvas.hover();
+  await page.mouse.move(100, 100);
   await page.mouse.down();
-  await page.mouse.move(150, 100);
+  await page.mouse.move(200, 200);
   await page.mouse.up();
   
+  const line = page.locator('svg line');
+  await expect(line).toBeVisible();
+
   const originalStroke = await page.locator('svg line').getAttribute('stroke');
   
   // Try to fill the line
   await page.fill('.color', '#ff00ff');
   await page.click('label.fill');
-  await page.mouse.click(100, 75);
+  await page.mouse.click(150, 150);
   
   // Verify line stroke didn't change and no fill was added
-  const line = page.locator('svg line');
   expect(await line.getAttribute('stroke')).toBe(originalStroke);
   expect(await line.getAttribute('fill')).toBeNull();
 });
