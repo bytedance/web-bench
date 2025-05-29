@@ -21,7 +21,7 @@ test('short line maintains minimum width', async ({ page }) => {
   const y2 = parseFloat(await line.getAttribute('y2'));
   
   const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-  expect(length).toBeGreaterThanOrEqual(15);
+  expect(length).toBeCloseTo(15);
 });
 
 test('normal length line is not affected by minimum width rule', async ({ page }) => {
