@@ -1,7 +1,7 @@
 # Generate tasks from source codes
 
 1. Please analyze source code files: 'demo2/src-init/index.html' and 'demo2/src/index.html', generate tasks which.
-2. Generate a list of tasks that describe how to implement 'demo2/src/index.html' based on 'demo2/src-init/index.html'.
+2. Generate 3 tasks that describe how to implement 'demo2/src/index.html' based on 'demo2/src-init/index.html'.
 2. Save tasks to the file 'demo2/tasks.jsonl', format is like:
 
 ```json
