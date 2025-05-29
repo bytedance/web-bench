@@ -20,11 +20,11 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })
 
-test('files', async ({ page }) => {
-  await expect(isExisted('index.html', path.join(__dirname, '../src'))).toBeTruthy()
-  await expect(isExisted('index.js', path.join(__dirname, '../src'))).toBeTruthy()
-  await expect(isExisted('index.scss', path.join(__dirname, '../src'))).toBeTruthy()
-})
+// test('files', async ({ page }) => {
+//   await expect(isExisted('index.html', path.join(__dirname, '../src'))).toBeTruthy()
+//   await expect(isExisted('index.js', path.join(__dirname, '../src'))).toBeTruthy()
+//   await expect(isExisted('index.scss', path.join(__dirname, '../src'))).toBeTruthy()
+// })
 
 test('body', async ({ page }) => {
   await expect(page.locator('body')).toBeAttached()

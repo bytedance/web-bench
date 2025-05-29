@@ -22,8 +22,8 @@ test.beforeEach(async ({ page }) => {
 
 test('files', async ({ page }) => {
   await expect(isExisted('index.html', path.join(__dirname, '../src'))).toBeTruthy()
-  await expect(isExisted('index.js', path.join(__dirname, '../src'))).toBeTruthy()
-  await expect(isExisted('index.scss', path.join(__dirname, '../src'))).toBeTruthy()
+  await expect(isExisted('script.js', path.join(__dirname, '../src'))).toBeTruthy()
+  await expect(isExisted('style.css', path.join(__dirname, '../src'))).toBeTruthy()
 })
 
 test('body', async ({ page }) => {
