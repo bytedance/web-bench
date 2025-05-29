@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web-Bench Project Demo</title>
+    <style>
+      input {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="root">
+      <input id="user" type="text" placeholder="User" /> <br />
+      <input id="password" type="password" placeholder="Password" /> <br />
+      <button id="login">Login</button>
+      <button id="reset">Reset</button>
+    </div>
+    <script>
+      document.querySelector('#reset').addEventListener('click', () => {
+        document.querySelector('#user').value = ''
+        document.querySelector('#password').value = ''
+      })
+
+      document.querySelector('#login').addEventListener('click', () => {
+        const user = document.querySelector('#user').value
+        const password = document.querySelector('#password').value
+        if (!user) {
+          alert('Invalid user')
+        } else if (!password) {
+          alert('Invalid password')
+        } else {
+          alert('Login successfully')
+        }
+      })
+    </script>
+  </body>
+</html>
