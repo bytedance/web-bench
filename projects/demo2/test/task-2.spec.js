@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Task 2: Reset Button Functionality', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3211');
+    await page.goto('/index.html');
   });
 
   test('should clear username field when Reset button is clicked', async ({ page }) => {
@@ -59,7 +59,7 @@ test.describe('Task 2: Reset Button Functionality', () => {
     await userInput.fill('user1');
     await passwordInput.fill('pass1');
     
-    // Multiple reset clicks
+    // Multiple reset clicks should work smoothly
     await resetButton.click();
     await resetButton.click();
     await resetButton.click();
@@ -71,6 +71,10 @@ test.describe('Task 2: Reset Button Functionality', () => {
     // Should still be able to input after multiple resets
     await userInput.fill('newuser');
     await expect(userInput).toHaveValue('newuser');
+    
+    // Reset should still work after refilling
+    await resetButton.click();
+    await expect(userInput).toHaveValue('');
   });
 
   test('should work with various input lengths and special characters', async ({ page }) => {
@@ -85,11 +89,18 @@ test.describe('Task 2: Reset Button Functionality', () => {
     await userInput.fill(longUser);
     await passwordInput.fill(complexPass);
     
-    // Verify content
+    // Verify content is properly stored
     await expect(userInput).toHaveValue(longUser);
     await expect(passwordInput).toHaveValue(complexPass);
     
-    // Reset should clear everything
+    // Reset should clear everything regardless of content complexity
+    await resetButton.click();
+    await expect(userInput).toHaveValue('');
+    await expect(passwordInput).toHaveValue('');
+    
+    // Test with other character types
+    await userInput.fill('user@domain.com');
+    await passwordInput.fill('пароль123');  // Non-Latin characters
     await resetButton.click();
     await expect(userInput).toHaveValue('');
     await expect(passwordInput).toHaveValue('');

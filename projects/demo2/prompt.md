@@ -1,7 +1,13 @@
+# Rules
+
+1. No explanation, no issue, only code.
+
 # Generate tasks from source codes
 
 1. Please analyze source code files: 'demo2/src-init/index.html' and 'demo2/src/index.html', generate tasks which.
 1. Generate 3 tasks that describe how to implement 'demo2/src/index.html' based on 'demo2/src-init/index.html'.
+1. The element should be identified using the shortest possible CSS selector.
+1. Focus on describing the feature in more detail, while keeping HTML tag descriptions concise.
 1. Save tasks to the file 'demo2/tasks.jsonl', format is like:
 
 ```json
@@ -13,6 +19,7 @@
 # Generate test codes from tasks
 
 1. Generate Playwright test codes for each task and save them to the file `demo2/test/task-n.spec.js`.
-1. each test case use `page.goto('http://localhost:3211')` to open the test page
 1. Provide 3–5 test cases for each task.
+1. Each test case use `page.goto('/index.html')` to open the test page
+1. Ensure that the CSS selector used in the test code is consistently referenced in tasks.jsonl.
 1. Avoid overly strict test cases. Minimize direct assertions on CSS or HTML attributes. Instead, focus on validating the behavior of page elements—such as their size (e.g., width/height) and interactions (e.g., click, drag and drop).
