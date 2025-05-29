@@ -428,6 +428,10 @@
       "projectFolder": "projects/demo1"
     },
     {
+      "packageName": "@web-bench/demo2",
+      "projectFolder": "projects/demo2"
+    },
+    {
       "packageName": "@web-bench/selector",
       "projectFolder": "projects/selector"
     },
