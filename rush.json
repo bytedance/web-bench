@@ -500,6 +500,10 @@
       "projectFolder": "projects/react"
     },
     {
+      "packageName": "@web-bench/react-1",
+      "projectFolder": "projects/react-1"
+    },
+    {
       "packageName": "@web-bench/react-no-ts",
       "projectFolder": "projects/react-no-ts"
     },
