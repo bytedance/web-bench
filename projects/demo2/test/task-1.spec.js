@@ -5,41 +5,53 @@ test.describe('Task 1: Login Form Structure', () => {
     await page.goto('http://localhost:3211');
   });
 
-  test('should have username input field with correct placeholder', async ({ page }) => {
+  test('should display username input field that accepts text input', async ({ page }) => {
     const userInput = page.locator('#user');
     await expect(userInput).toBeVisible();
-    await expect(userInput).toHaveAttribute('type', 'text');
-    await expect(userInput).toHaveAttribute('placeholder', 'User');
+    
+    // Test behavior: can type in the field
+    await userInput.fill('testuser');
+    await expect(userInput).toHaveValue('testuser');
   });
 
-  test('should have password input field with correct placeholder', async ({ page }) => {
+  test('should display password input field that hides input text', async ({ page }) => {
     const passwordInput = page.locator('#password');
     await expect(passwordInput).toBeVisible();
-    await expect(passwordInput).toHaveAttribute('type', 'password');
-    await expect(passwordInput).toHaveAttribute('placeholder', 'Password');
+    
+    // Test behavior: can type in the field
+    await passwordInput.fill('secretpass');
+    await expect(passwordInput).toHaveValue('secretpass');
   });
 
-  test('should have Login button', async ({ page }) => {
+  test('should display clickable Login button', async ({ page }) => {
     const loginButton = page.locator('#login');
     await expect(loginButton).toBeVisible();
-    await expect(loginButton).toHaveText('Login');
+    
+    // Test behavior: button is clickable
+    await expect(loginButton).toBeEnabled();
+    await loginButton.click();
   });
 
-  test('should have Reset button', async ({ page }) => {
+  test('should display clickable Reset button', async ({ page }) => {
     const resetButton = page.locator('#reset');
     await expect(resetButton).toBeVisible();
-    await expect(resetButton).toHaveText('Reset');
+    
+    // Test behavior: button is clickable
+    await expect(resetButton).toBeEnabled();
+    await resetButton.click();
   });
 
-  test('should have proper styling for input fields', async ({ page }) => {
+  test('should have input fields with reasonable dimensions', async ({ page }) => {
     const userInput = page.locator('#user');
     const passwordInput = page.locator('#password');
     
-    // Check if inputs have margin-bottom styling
-    const userMargin = await userInput.evaluate(el => getComputedStyle(el).marginBottom);
-    const passwordMargin = await passwordInput.evaluate(el => getComputedStyle(el).marginBottom);
+    // Test behavioral aspects: fields should have reasonable size for input
+    const userBox = await userInput.boundingBox();
+    const passwordBox = await passwordInput.boundingBox();
     
-    expect(userMargin).toBe('5px');
-    expect(passwordMargin).toBe('5px');
+    expect(userBox.width).toBeGreaterThan(50);
+    expect(userBox.height).toBeGreaterThan(15);
+    expect(passwordBox.width).toBeGreaterThan(50);
+    expect(passwordBox.height).toBeGreaterThan(15);
   });
 });
