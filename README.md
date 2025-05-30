@@ -1,6 +1,5 @@
 # Web-Bench
 
-
 <p align="center">
     <a href="./README.zh_CN.md">中文</a> •
     <a href="#-installation">Install</a> •
