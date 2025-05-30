@@ -367,6 +367,24 @@ importers:
         specifier: ^6.2.2
         version: 6.2.5(@types/node@22.10.2)(sass-embedded@1.83.1)
 
+  ../../projects/draw2:
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.49.1
+        version: 1.49.1
+      '@types/node':
+        specifier: ^22.7.9
+        version: 22.10.2
+      '@web-bench/test-util':
+        specifier: workspace:*
+        version: link:../../libraries/test-util
+      sass-embedded:
+        specifier: ~1.83.1
+        version: 1.83.1
+      vite:
+        specifier: ^6.2.2
+        version: 6.2.5(@types/node@22.10.2)(sass-embedded@1.83.1)
+
   ../../projects/esmodule:
     devDependencies:
       '@playwright/test':

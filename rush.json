@@ -444,16 +444,20 @@
       "projectFolder": "projects/draw"
     },
     {
+      "packageName": "@web-bench/draw1",
+      "projectFolder": "projects/draw1"
+    },
+    {
+      "packageName": "@web-bench/draw2",
+      "projectFolder": "projects/draw2"
+    },
+    {
       "packageName": "@web-bench/svg",
       "projectFolder": "projects/svg"
     },
     {
       "packageName": "@web-bench/svg-solar",
       "projectFolder": "projects/svg-solar"
-    },
-    {
-      "packageName": "@web-bench/draw1",
-      "projectFolder": "projects/draw1"
     },
     {
       "packageName": "@web-bench/svg-chart",
