@@ -90,6 +90,7 @@ test.describe('Task 9: Rect Shape Implementation', () => {
     expect(height).toBeGreaterThan(50);
     
     // Create another rectangle dragging in positive direction
+    await page.locator('.rect').click();
     await page.mouse.move(startX + 50, startY + 50);
     await page.mouse.down();
     await page.mouse.move(startX + 150, startY + 130);

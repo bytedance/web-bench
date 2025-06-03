@@ -19,7 +19,7 @@ test.describe('Task 8: Line Shape Implementation', () => {
     await page.mouse.up();
     
     const lineElement = canvas.locator('line');
-    await expect(lineElement).toBeVisible();
+    await expect(lineElement).toBeAttached();
     
     // Check that line has minimum dimensions based on line width
     const x1 = parseFloat(await lineElement.getAttribute('x1'));

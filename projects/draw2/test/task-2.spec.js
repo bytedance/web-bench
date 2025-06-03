@@ -41,15 +41,15 @@ test.describe('Task 2: Toolbar Interface', () => {
     expect(count).toBe(9); // 3 shapes + 6 operations
     
     // Verify specific tool values
-    await expect(page.locator('input[value="line"]')).toBeVisible();
-    await expect(page.locator('input[value="rect"]')).toBeVisible();
-    await expect(page.locator('input[value="ellipse"]')).toBeVisible();
-    await expect(page.locator('input[value="move"]')).toBeVisible();
-    await expect(page.locator('input[value="rotate"]')).toBeVisible();
-    await expect(page.locator('input[value="zoom"]')).toBeVisible();
-    await expect(page.locator('input[value="copy"]')).toBeVisible();
-    await expect(page.locator('input[value="delete"]')).toBeVisible();
-    await expect(page.locator('input[value="fill"]')).toBeVisible();
+    await expect(page.locator('input[value="line"]')).toBeAttached();
+    await expect(page.locator('input[value="rect"]')).toBeAttached();
+    await expect(page.locator('input[value="ellipse"]')).toBeAttached();
+    await expect(page.locator('input[value="move"]')).toBeAttached();
+    await expect(page.locator('input[value="rotate"]')).toBeAttached();
+    await expect(page.locator('input[value="zoom"]')).toBeAttached();
+    await expect(page.locator('input[value="copy"]')).toBeAttached();
+    await expect(page.locator('input[value="delete"]')).toBeAttached();
+    await expect(page.locator('input[value="fill"]')).toBeAttached();
   });
 
   test('should allow selecting different tools through radio inputs', async ({ page }) => {

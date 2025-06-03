@@ -9,7 +9,8 @@ test.describe('Task 7: Base Shape Class and Registry', () => {
     
     // Draw a line
     await page.locator('.line').click();
-    await canvas.click({ position: { x: 100, y: 100 } });
+    await page.mouse.move(100, 100);
+    await page.mouse.down();
     await page.mouse.move(200, 150);
     await page.mouse.up();
     
