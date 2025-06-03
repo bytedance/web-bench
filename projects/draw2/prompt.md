@@ -13,6 +13,26 @@
 ...
 ```
 
+# Context
+read file 'draw2/tasks.jsonl'
+
+read files from 'draw2/src/':
+
+* index.scss
+* index.html
+* index.js
+* common/util.js
+* common/shape/Line.js
+* common/shape/Rect.js
+* common/shape/Ellipse.js
+* common/shape/Shape.js
+* common/Toolkit.js
+* common/config.scss
+* common/Canvas.js
+* common/Toolkit.scss
+* common/Canvas.scss
+* common/util.spec.js
+
 # Generate test codes from tasks
 
 1. Generate Playwright test codes for each task and save them to the file 'draw2/test/task-n.spec.js'.
