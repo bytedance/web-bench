@@ -16,7 +16,7 @@
 # Generate test codes from tasks
 
 1. Generate Playwright test codes for each task and save them to the file 'draw2/test/task-n.spec.js'.
-1. Provide 3–5 test cases for each task.
+1. Provide 3 test cases for each task.
 1. Each test case use `page.goto('/index.html')` to open the test page
 1. Ensure that the CSS selector used in the test code is consistently referenced in 'tasks.jsonl'.
 1. Avoid overly strict test cases. Minimize direct assertions on CSS or HTML attributes. Instead, focus on validating the behavior of page elements—such as their size (e.g., width/height) and interactions (e.g., click, drag and drop).
