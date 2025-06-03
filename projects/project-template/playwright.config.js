@@ -49,7 +49,7 @@ module.exports = defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: `npx vite --port ${PORT} vite.config.js`,
+    command: `npx vite --port ${PORT} --config vite.config.js`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: process.env.IS_EVAL_PRODUCTION ? false : true,
   },
