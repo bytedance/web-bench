@@ -8,44 +8,36 @@
   </head>
   <body>
     <div class="root">
+      <div class="toolbar"></div>
       <div class="toolkit">
         <div class="shape">
-          <label title="Line" class="line">
-            <input value="line" type="radio" name="operation" />
-          </label>
-          <label title="Rect" class="rect">
-            <input value="rect" type="radio" name="operation" />
-          </label>
-          <label title="Ellipse" class="ellipse">
-            <input value="ellipse" type="radio" name="operation" />
-          </label>
+          <input type="radio" id="line-tool" name="operation" value="line" checked>
+          <label for="line-tool" class="line" title="Line"></label>
+          <input type="radio" id="rect-tool" name="operation" value="rect">
+          <label for="rect-tool" class="rect" title="Rectangle"></label>
+          <input type="radio" id="ellipse-tool" name="operation" value="ellipse">
+          <label for="ellipse-tool" class="ellipse" title="Ellipse"></label>
         </div>
         <div class="prop">
-          <input class="line-width" type="range" value="9" max="21" min="1" step="4" />
-          <input class="color" type="color" value="#000000" />
+          <input type="range" id="line-width" class="line-width" min="1" max="21" step="4" value="9">
+          <input type="color" id="color" class="color" value="#000000">
         </div>
         <div class="operation">
-          <label title="Move" class="move">
-            <input value="move" type="radio" name="operation" />
-          </label>
-          <label title="Rotate" class="rotate">
-            <input value="rotate" type="radio" name="operation" />
-          </label>
-          <label title="Zoom" class="zoom">
-            <input value="zoom" type="radio" name="operation" />
-          </label>
-          <label title="Copy" class="copy">
-            <input value="copy" type="radio" name="operation" />
-          </label>
-          <label title="Delete" class="delete">
-            <input value="delete" type="radio" name="operation" />
-          </label>
-          <label title="Fill" class="fill">
-            <input value="fill" type="radio" name="operation" />
-          </label>
+          <input type="radio" id="move-tool" name="operation" value="move">
+          <label for="move-tool" class="move" title="Move"></label>
+          <input type="radio" id="rotate-tool" name="operation" value="rotate">
+          <label for="rotate-tool" class="rotate" title="Rotate"></label>
+          <input type="radio" id="zoom-tool" name="operation" value="zoom">
+          <label for="zoom-tool" class="zoom" title="Zoom"></label>
+          <input type="radio" id="copy-tool" name="operation" value="copy">
+          <label for="copy-tool" class="copy" title="Copy"></label>
+          <input type="radio" id="delete-tool" name="operation" value="delete">
+          <label for="delete-tool" class="delete" title="Delete"></label>
+          <input type="radio" id="fill-tool" name="operation" value="fill">
+          <label for="fill-tool" class="fill" title="Fill"></label>
         </div>
       </div>
-      <svg class="canvas" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>
+      <svg class="canvas" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
 
     <script type="module" src="index.js"></script>
