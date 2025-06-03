@@ -92,6 +92,7 @@ test.describe('Task 10: Ellipse Shape Implementation', () => {
     expect(ry).toBeGreaterThan(20);
     
     // Create another ellipse in positive direction for comparison
+    await page.locator('.ellipse').click();
     await page.mouse.move(startX + 50, startY + 50);
     await page.mouse.down();
     await page.mouse.move(startX + 130, startY + 110);

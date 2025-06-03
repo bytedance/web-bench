@@ -41,7 +41,7 @@ test.describe('Task 1: Drawing Canvas Creation', () => {
     const initialBox = await canvas.boundingBox();
     
     // Resize viewport
-    await page.setViewportSize({ width: 1200, height: 800 });
+    await page.setViewportSize({ width: 1400, height: 800 });
     await page.waitForTimeout(100);
     
     // Get new dimensions

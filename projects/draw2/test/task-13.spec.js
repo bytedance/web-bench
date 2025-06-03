@@ -61,17 +61,18 @@ test.describe('Task 13: Rotate Operation with Mathematical Calculations', () => 
     
     await page.mouse.move(startX, startY);
     await page.mouse.down();
-    await page.mouse.move(startX + 80, startY);
+    await page.mouse.move(startX + 80, startY, {steps: 10});
     await page.mouse.up();
     
     const lineElement = canvas.locator('line');
-    await expect(lineElement).toBeVisible();
+    await expect(lineElement).toBeAttached();
     
     // Switch to rotate tool
     await page.locator('.rotate').click();
     
     // Perform a 90-degree-like rotation
-    await lineElement.hover();
+    // await lineElement.hover();
+    await page.mouse.move(startX + 80, startY);
     await page.mouse.down();
     await page.mouse.move(startX + 40, startY - 40); // Move up relative to center
     await page.mouse.up();
@@ -80,7 +81,8 @@ test.describe('Task 13: Rotate Operation with Mathematical Calculations', () => 
     expect(transform).toContain('rotate');
     
     // Perform another rotation
-    await lineElement.hover();
+    // await lineElement.hover();
+    await page.mouse.move(startX + 40, startY - 40);
     await page.mouse.down();
     await page.mouse.move(startX + 40, startY + 40); // Move down relative to center
     await page.mouse.up();

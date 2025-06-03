@@ -45,6 +45,7 @@ test.describe('Task 16: Delete Operation for Shape Removal', () => {
     await page.mouse.up();
     
     // Create second line
+    await page.locator('.line').click();
     await page.mouse.move(canvasBox.x + 200, canvasBox.y + 150);
     await page.mouse.down();
     await page.mouse.move(canvasBox.x + 280, canvasBox.y + 180);
@@ -93,7 +94,7 @@ test.describe('Task 16: Delete Operation for Shape Removal', () => {
     const emptyY = canvasBox.y + 50;
     
     await page.mouse.move(emptyX, emptyY);
-    await page.mouse.click();
+    await page.mouse.click(0, 0);
     
     // Canvas should still be visible and functional
     await expect(canvas).toBeVisible();

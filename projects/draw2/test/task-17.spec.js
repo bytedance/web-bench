@@ -84,6 +84,7 @@ test.describe('Task 17: Fill Operation for Changing Shape Colors', () => {
     await page.mouse.up();
     
     // Create second rectangle
+    await page.locator('.rect').click();
     await page.mouse.move(canvasBox.x + 200, canvasBox.y + 100);
     await page.mouse.down();
     await page.mouse.move(canvasBox.x + 260, canvasBox.y + 140);
