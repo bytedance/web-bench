@@ -1,0 +1,159 @@
+- id: task-1
+  date: 2025-06-03
+  level: easy
+  description: |
+    1. Create the basic HTML structure inside `.root` with a toolbar and canvas
+    2. Add a `.toolkit` div containing shape tools, properties, and operations
+    3. Add an SVG element with class `.canvas` for the drawing area
+
+- id: task-2
+  date: 2025-06-03
+  level: easy
+  description: |
+    1. Implement the base CSS layout for the drawing application
+    2. Set body margin to 0 and create a full viewport layout using `.root` 
+    3. Configure `.root` as a flex container with column direction, 100vh height
+
+- id: task-3
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Create the shape selection toolbar in `.toolkit .shape`
+    2. Add radio buttons for line, rectangle, and ellipse tools with proper labels
+    3. Use CSS background images to display tool icons for `.line`, `.rect`, `.ellipse`
+
+- id: task-4
+  date: 2025-06-03
+  level: easy
+  description: |
+    1. Add property controls in `.toolkit .prop`
+    2. Create a range input `.line-width` for stroke width (min: 1, max: 21, step: 4, default: 9)
+    3. Add a color input `.color` for selecting stroke color (default: #000000)
+
+- id: task-5
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Create operation tools in `.toolkit .operation`
+    2. Add radio buttons for move, rotate, zoom, copy, delete, and fill operations
+    3. Implement CSS icons for each operation: `.move`, `.rotate`, `.zoom`, `.copy`, `.delete`, `.fill`
+
+- id: task-6
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Style the toolkit with proper layout and hover effects
+    2. Hide radio button appearances and style labels as 32x32px icon buttons
+    3. Add hover states and selected states for radio button labels
+
+- id: task-7
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Style the canvas area with background color and flex layout
+    2. Set `.canvas` to flex: 1 and background-color: #eee
+    3. Configure the canvas to fill remaining space in the layout
+
+- id: task-8
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Create the EventEmitter utility class in `common/util.js`
+    2. Implement on(), emit(), once(), off() methods for event handling
+    3. Add support for event listener management and callback execution
+
+- id: task-9
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Implement geometry utility classes: Point, Rect, Transform, Rotate
+    2. Add transform parsing functions for translate, rotate, and scale operations
+    3. Create helper functions for SVG coordinate calculations and transformations
+
+- id: task-10
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Build the Toolkit class extending EventEmitter
+    2. Implement property getters for operation, lineWidth, and color from form controls
+    3. Add event listeners for radio button changes and spacebar key handling
+
+- id: task-11
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Create the base Shape class with transform operations
+    2. Implement onMove(), onRotate(), and onZoom() methods for shape manipulation
+    3. Add static methods for shape creation, finding by element, and registration
+
+- id: task-12
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Implement the Line shape class extending Shape
+    2. Create SVG line elements with proper attributes (x1, y1, x2, y2, stroke, stroke-width)
+    3. Add onCreateMove() method to update line endpoints during drawing
+
+- id: task-13
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Implement the Rect shape class extending Shape
+    2. Create SVG rect elements with position, size, fill, and stroke attributes
+    3. Add onCreateMove() method to resize rectangle based on cursor movement
+
+- id: task-14
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Implement the Ellipse shape class extending Shape
+    2. Create SVG ellipse elements with center coordinates and radii
+    3. Add onCreateMove() method to adjust ellipse dimensions during creation
+
+- id: task-15
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Create the Canvas class to handle drawing interactions
+    2. Add mouse and touch event listeners for onDrawStart, onDrawMove, onDrawEnd
+    3. Implement shape creation workflow based on selected toolkit operation
+
+- id: task-16
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Implement move operation for repositioning shapes on the canvas
+    2. Calculate position deltas from cursor movement and apply transforms
+    3. Use setTransform() to update shape position with translate values
+
+- id: task-17
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Implement rotate operation for shape rotation around center point
+    2. Calculate rotation angles between cursor positions relative to shape center
+    3. Apply rotation transforms while preserving existing translations and scaling
+
+- id: task-18
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Implement zoom operation for shape scaling
+    2. Calculate scale factors based on distance changes from shape center
+    3. Apply uniform scaling while maintaining aspect ratio and position
+
+- id: task-19
+  date: 2025-06-03
+  level: medium
+  description: |
+    1. Implement copy, delete, and fill operations for shape manipulation
+    2. Add shape duplication with offset positioning for copy operation
+    3. Enable shape removal and fill color changes based on selected color
+
+- id: task-20
+  date: 2025-06-03
+  level: challenging
+  description: |
+    1. Integrate all components in the main application entry point
+    2. Create Toolkit and Canvas instances with proper event handling
+    3. Implement automatic tool switching after shape creation operations
