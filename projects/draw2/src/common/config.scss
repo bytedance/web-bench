@@ -12,20 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Canvas } from './common/Canvas'
-import { Shape } from './common/shape/Shape'
-import { Toolkit } from './common/Toolkit'
+$color: black;
+$bgColor: white;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const toolkit = new Toolkit('.toolkit')
-  const canvas = new Canvas('.canvas', toolkit)
+body {
+  margin: 0;
+  color: $color;
+  background-color: $bgColor;
+}
 
-  const whitelist = ['copy', ...Shape.registeredShapes]
-  canvas.on('done', ({ operation }) => {
-    console.log('[canvas.done]', operation)
-    if (whitelist.includes(operation)) {
-      // @ts-ignore
-      toolkit.root.querySelector('.move')?.click()
-    }
-  })
-})
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
