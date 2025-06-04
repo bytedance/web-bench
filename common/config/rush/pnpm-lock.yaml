@@ -1375,12 +1375,18 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      nyc:
+        specifier: ^17.1.0
+        version: 17.1.0
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.1
       vite:
         specifier: ^6.2.2
         version: 6.2.2(@types/node@22.10.2)(sass-embedded@1.83.1)
+      vite-plugin-istanbul:
+        specifier: ^7.0.0
+        version: 7.0.0(vite@6.2.2)
 
   ../../projects/svg-chart:
     devDependencies:
