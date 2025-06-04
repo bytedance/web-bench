@@ -1,0 +1,176 @@
+- id: task-1
+  date: 2025-06-03
+  level: easy
+  description: |
+    1. Update the body styling to include full-height layout with centered content and gray background
+    2. Add flexbox properties to center the calculator vertically and horizontally
+    3. Modify body element to have `min-height: 100vh`, `margin: 0`, `display: flex`, `flex-direction: column`, `align-items: center`, and `background-color: #aaa`
+
+- id: task-2
+  date: 2025-06-02
+  level: easy
+  description: |
+    1. Add smooth transitions to the calculator container for theme switching
+    2. Add `transition: all 0.3s ease` property to `.calculator` class
+    3. This will enable smooth color transitions when dark mode is toggled
+
+- id: task-3
+  date: 2025-06-01
+  level: medium
+  description: |
+    1. Implement dark mode styling for the calculator container
+    2. Create `.calculator.dark-mode` class with dark background (`background-color: #333`) and darker border (`border-color: #666`)
+    3. Add white background color to the base `.calculator` class (`background-color: #fff`)
+
+- id: task-4
+  date: 2025-05-31
+  level: medium
+  description: |
+    1. Add dark mode styling for the display input field
+    2. Enhance `.display` class with smooth transitions (`transition: all 0.3s ease`), white background, and black text color
+    3. Create `.dark-mode .display` class with dark background (`background-color: #444`) and white text (`color: #fff`)
+    4. Add `box-sizing: border-box` to the display element
+
+- id: task-5
+  date: 2025-05-30
+  level: medium
+  description: |
+    1. Implement comprehensive dark mode styling for all buttons
+    2. Add transition effects to base button styling (`transition: all 0.3s ease`)
+    3. Create `.dark-mode button` styles with dark background (`background-color: #444`), white text (`color: #fff`), and darker borders (`border-color: #666`)
+    4. Update hover states for both light and dark modes
+
+- id: task-6
+  date: 2025-05-29
+  level: medium
+  description: |
+    1. Add special styling for operator buttons (division, multiplication, subtraction, addition, equals)
+    2. Target specific button positions using nth-child selectors: 4th, 8th, 12th, 16th, and 18th buttons
+    3. Apply golden background color (`background-color: #ffd700`) and black text for light mode
+    4. Create corresponding dark mode styles with orange background (`background-color: #ff8c00`) and white text
+
+- id: task-7
+  date: 2025-05-28
+  level: easy
+  description: |
+    1. Update the Clear button to span across 3 columns instead of 4
+    2. Modify the Clear button's inline style from `grid-column: span 4` to `grid-column: span 3`
+    3. Change the onclick function call from `calculate('C')` to `calculate('Clear')`
+
+- id: task-8
+  date: 2025-05-27
+  level: challenging
+  description: |
+    1. Add scientific calculator buttons after the Clear button
+    2. Insert buttons for: √, ^2, 1/x, π, sin, cos, tan, sinh, cosh
+    3. Each button should call the calculate function with its respective operation
+    4. These buttons should be hidden by default and only shown in scientific mode
+
+- id: task-9
+  date: 2025-05-26
+  level: medium
+  description: |
+    1. Add memory function buttons with special styling
+    2. Create buttons for MR, M+, M-, MC with `class="memory-btn"`
+    3. Style memory buttons with green background (`background-color: #4caf50`) and white text
+    4. Add hover effects and dark mode variants for memory buttons
+
+- id: task-10
+  date: 2025-05-25
+  level: easy
+  description: |
+    1. Hide scientific calculator buttons by default
+    2. Add CSS rule to hide buttons starting from the 19th button: `.buttons button:nth-of-type(n + 19) { display: none; }`
+    3. Create override rule to show these buttons when calculator has scientific class: `.scientific .buttons button:nth-of-type(n + 19) { display: block; }`
+
+- id: task-11
+  date: 2025-05-24
+  level: challenging
+  description: |
+    1. Create information panels section below the calculator buttons
+    2. Add `.info-panels` container with top border and smooth transitions
+    3. Include memory panel and clicks/history panel with proper dark mode styling
+    4. Panels should be hidden by default and only visible in scientific mode
+
+- id: task-12
+  date: 2025-05-23
+  level: medium
+  description: |
+    1. Implement memory display panel
+    2. Create `.memory-panel` with flexbox layout displaying "Memory" label and current memory value
+    3. Add `#memory` element with monospace font, subtle background, and right-aligned text
+    4. Include dark mode styling for the memory display
+
+- id: task-13
+  date: 2025-05-22
+  level: challenging
+  description: |
+    1. Create interactive click history panel
+    2. Build `.clicks-panel` containing a "History" label and `.clicks-history` container
+    3. Style history items as clickable elements with hover effects
+    4. History should display recent calculator operations in reverse chronological order
+
+- id: task-14
+  date: 2025-05-21
+  level: medium
+  description: |
+    1. Add dark mode toggle button positioned at bottom of screen
+    2. Create `#toggle` button with fixed positioning at `bottom: 20px` and `left: 35%`
+    3. Style with rounded corners, shadow effects, and transform centering
+    4. Button should display "Light" when in dark mode and "Dark" when in light mode
+
+- id: task-15
+  date: 2025-05-20
+  level: medium
+  description: |
+    1. Add scientific/basic mode toggle button
+    2. Create `#mode` button positioned at `bottom: 20px` and `left: 65%`
+    3. Apply similar styling to the dark mode toggle with fixed positioning and shadow
+    4. Button should display "Basic" when in scientific mode and "Scientific" when in basic mode
+
+- id: task-16
+  date: 2025-05-19
+  level: easy
+  description: |
+    1. Initialize calculator with dark mode and scientific mode enabled by default
+    2. Add both `dark-mode` and `scientific` classes to the `.calculator` element
+    3. This sets the initial state when the page loads
+
+- id: task-17
+  date: 2025-05-18
+  level: challenging
+  description: |
+    1. Replace inline onclick handlers with proper event listeners
+    2. Remove all onclick attributes from buttons and implement centralized event handling
+    3. Use `document.querySelectorAll('.buttons button')` to attach click listeners to all calculator buttons
+    4. Extract button text content and pass to calculate function
+
+- id: task-18
+  date: 2025-05-17
+  level: challenging
+  description: |
+    1. Implement comprehensive memory functions (MR, M+, M-, MC)
+    2. Add memory recall (MR) to append stored value to display
+    3. Implement memory addition (M+) and subtraction (M-) with current display value
+    4. Add memory clear (MC) to reset memory to zero
+    5. Include error handling and update memory display after each operation
+
+- id: task-19
+  date: 2025-05-16
+  level: challenging
+  description: |
+    1. Implement all scientific calculator functions
+    2. Add square root (√), square (^2), reciprocal (1/x), and pi (π) operations
+    3. Implement trigonometric functions: sin, cos, tan, sinh, cosh, tanh
+    4. Include proper error handling for invalid operations (like division by zero)
+    5. Handle mathematical edge cases and display "Error" for invalid calculations
+
+- id: task-20
+  date: 2025-05-15
+  level: challenging
+  description: |
+    1. Implement interactive click history system
+    2. Maintain array of recent button clicks (maximum 5 items)
+    3. Display history items as clickable elements that can be re-executed
+    4. Update history display with each button click and enable click-to-repeat functionality
+    5. Style history items with hover effects and proper dark mode support
