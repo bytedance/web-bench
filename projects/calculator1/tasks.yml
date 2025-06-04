@@ -1,0 +1,139 @@
+- id: task-1
+  date: 2025-05-01
+  level: easy
+  description: |
+    1. Add a centered page background by setting body styles for min-height, margin, display flex, and background-color
+    2. Update the `body` element to have a light gray background (#aaa) and center the calculator vertically and horizontally
+
+- id: task-2
+  date: 2025-05-02
+  level: easy
+  description: |
+    1. Add white background color and smooth transitions to the calculator container
+    2. Update the `.calculator` class to include background-color, transition properties, and enhanced border styling
+
+- id: task-3
+  date: 2025-05-03
+  level: medium
+  description: |
+    1. Implement dark mode styling for the calculator container
+    2. Add the `.dark-mode` class with dark background (#333) and border color (#666) to `.calculator.dark-mode`
+
+- id: task-4
+  date: 2025-05-04
+  level: easy
+  description: |
+    1. Add transition effects and styling improvements to the display input
+    2. Update the `.display` class to include transitions, proper box-sizing, and color properties
+
+- id: task-5
+  date: 2025-05-05
+  level: medium
+  description: |
+    1. Implement dark mode styling for the display input field
+    2. Add dark background (#444) and white text color to `.dark-mode .display`
+
+- id: task-6
+  date: 2025-05-06
+  level: easy
+  description: |
+    1. Add transition effects and enhanced styling to all calculator buttons
+    2. Update the `button` selector to include transition, background-color, and color properties
+
+- id: task-7
+  date: 2025-05-07
+  level: medium
+  description: |
+    1. Implement dark mode styling for all calculator buttons
+    2. Add styles to `.dark-mode button` with dark background (#444), white text, and darker borders (#666)
+
+- id: task-8
+  date: 2025-05-08
+  level: medium
+  description: |
+    1. Style operator buttons with distinctive gold coloring in light mode
+    2. Target buttons at positions 4, 8, 12, 16, and 18 using nth-child selectors with background-color #ffd700
+
+- id: task-9
+  date: 2025-05-09
+  level: medium
+  description: |
+    1. Add hover effects for operator buttons in light mode
+    2. Style hover states for nth-child(4), nth-child(8), nth-child(12), nth-child(16), and nth-child(18) with lighter gold (#ffed4a)
+
+- id: task-10
+  date: 2025-05-10
+  level: challenging
+  description: |
+    1. Implement dark mode styling for operator buttons with orange coloring
+    2. Add styles to `.dark-mode .buttons button` nth-child selectors with orange background (#ff8c00) and white text
+
+- id: task-11
+  date: 2025-05-11
+  level: challenging
+  description: |
+    1. Add hover effects for operator buttons in dark mode
+    2. Style dark mode hover states for operator buttons with lighter orange (#ffa500)
+
+- id: task-12
+  date: 2025-05-12
+  level: medium
+  description: |
+    1. Create distinctive styling for memory function buttons
+    2. Add `.memory-btn` class with green background (#4caf50) and white text, including hover effects
+
+- id: task-13
+  date: 2025-05-13
+  level: medium
+  description: |
+    1. Implement dark mode styling for memory buttons
+    2. Add darker green styling (#2e7d32) to `.dark-mode .buttons button.memory-btn` with appropriate hover effects
+
+- id: task-14
+  date: 2025-05-14
+  level: challenging
+  description: |
+    1. Create fixed position toggle buttons for dark/light mode and basic/scientific mode
+    2. Style `#toggle` and `#mode` buttons with fixed positioning, rounded borders, and shadow effects
+
+- id: task-15
+  date: 2025-05-15
+  level: medium
+  description: |
+    1. Hide extended scientific calculator buttons by default
+    2. Add CSS rule to hide buttons starting from the 19th button using nth-of-type selector
+
+- id: task-16
+  date: 2025-05-16
+  level: medium
+  description: |
+    1. Show scientific buttons when calculator is in scientific mode
+    2. Add rule for `.scientific .buttons button:nth-of-type(n + 19)` to display scientific function buttons
+
+- id: task-17
+  date: 2025-05-17
+  level: challenging
+  description: |
+    1. Create information panels container for memory and history display
+    2. Add `.info-panels` class with hidden default state, border styling, and transitions
+
+- id: task-18
+  date: 2025-05-18
+  level: challenging
+  description: |
+    1. Style memory and clicks panels with proper layout and dark mode support
+    2. Implement `.memory-panel` and `.clicks-panel` classes with flexbox layout and spacing
+
+- id: task-19
+  date: 2025-05-19
+  level: challenging
+  description: |
+    1. Style memory and clicks display elements with monospace font and background
+    2. Add styling to `#memory` and `#clicks` elements with proper padding, border-radius, and dark mode variants
+
+- id: task-20
+  date: 2025-05-20
+  level: challenging
+  description: |
+    1. Implement interactive history items with hover effects and click functionality
+    2. Style `.history-item` class with cursor pointer, padding, transitions, and hover effects for both light and dark modes
