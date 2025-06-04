@@ -14,7 +14,7 @@
 
 const { test, expect } = require('@playwright/test')
 const { getOffsetByLocator } = require('../../../libraries/test-util/src')
-
+require('../../../libraries/test-util/src/coverage');
 test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })

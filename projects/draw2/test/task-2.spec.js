@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 2: Basic CSS Layout', () => {
   test('should have body with zero margin', async ({ page }) => {
     await page.goto('/index.html');

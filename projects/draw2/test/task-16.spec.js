@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 16: Move Operation Implementation', () => {
   test('should move shapes when using move operation', async ({ page }) => {
     await page.goto('/index.html');
