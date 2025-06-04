@@ -392,6 +392,10 @@
       "projectFolder": "projects/calculator"
     },
     {
+      "packageName": "@web-bench/calculator1",
+      "projectFolder": "projects/calculator1"
+    },
+    {
       "packageName": "@web-bench/calculator-files",
       "projectFolder": "projects/calculator-files"
     },
