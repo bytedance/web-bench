@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 11: Base Shape Class', () => {
   test('should have Shape class with transform operations', async ({ page }) => {
     await page.goto('/index.html');

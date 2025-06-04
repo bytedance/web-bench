@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 20: Application Integration', () => {
   test('should initialize Toolkit and Canvas instances properly', async ({ page }) => {
     await page.goto('/index.html');

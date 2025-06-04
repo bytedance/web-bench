@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 18: Zoom Operation Implementation', () => {
   test('should scale shapes from their center point', async ({ page }) => {
     await page.goto('/index.html');

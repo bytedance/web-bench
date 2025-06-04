@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import { defineConfig } from 'vite'
+import IstanbulPlugin from 'vite-plugin-istanbul';
 
 const PROJECT_DIR = process.env.EVAL_PROJECT_ROOT || 'src'
 const PORT = process.env.EVAL_PROJECT_PORT || 3211
@@ -30,5 +31,13 @@ export default defineConfig({
       input: PROJECT_DIR + '/index.html',
     },
   },
-  plugins: [],
+  plugins: [
+    IstanbulPlugin({
+      include: 'src/**/*.{js,ts,jsx,tsx}',
+      exclude: ['node_modules', 'test/'],
+      extension: [ '.js', '.ts', '.vue', '.jsx', '.tsx' ],
+      cypress: false,
+      requireEnv: false, // 插桩总是启用（也可只在特定 env 启用）
+    }),
+  ],
 })
