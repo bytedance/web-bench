@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 15: Canvas Class Drawing Interactions', () => {
   test('should handle mouse events for drawing interactions', async ({ page }) => {
     await page.goto('/index.html');

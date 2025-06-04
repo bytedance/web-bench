@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 5: Operation Tools', () => {
   test('should have all operation tools with proper radio buttons', async ({ page }) => {
     await page.goto('/index.html');

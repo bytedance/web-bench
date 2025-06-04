@@ -15,7 +15,7 @@
 const { test, expect } = require('@playwright/test')
 const { isExisted } = require('@web-bench/test-util')
 const path = require('path')
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })

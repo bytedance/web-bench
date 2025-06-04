@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 6: Toolkit Styling', () => {
   test('should have radio buttons hidden and labels styled as icon buttons', async ({ page }) => {
     await page.goto('/index.html');

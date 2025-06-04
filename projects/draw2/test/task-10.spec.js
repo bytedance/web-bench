@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 10: Toolkit Class Implementation', () => {
   test('should have Toolkit class extending EventEmitter', async ({ page }) => {
     await page.goto('/index.html');

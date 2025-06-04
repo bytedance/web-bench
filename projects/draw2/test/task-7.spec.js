@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 7: Canvas Styling', () => {
   test('should have canvas with background color #eee', async ({ page }) => {
     await page.goto('/index.html');
