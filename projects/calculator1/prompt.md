@@ -5,9 +5,12 @@
 # Generate tasks from source codes
 
 1. Analyze the source code files located in 'calculator1/src-init/*' and 'calculator1/src/*'.
-2. Generate 20 implementation tasks that describe how to implement the features in 'calculator1/src/*', based on comparisons with 'calculator1/src-init/*'. Ensure no features are omitted.
-3. Prioritize clear, descriptive explanations of each UI feature. Minimize discussion of JavaScript, CSS, or HTML implementation details — only include the shortest possible CSS selectors necessary to identify relevant elements.
-4. Save the output as a file at 'calculator1/tasks.yml' with the following format:
+1. Generate 20 implementation tasks that describe how to implement the features in 'calculator1/src/*', based on comparisons with 'calculator1/src-init/*'. 
+1. Ensure no features are omitted.
+1. Focus on feature-level requirements. Reduce styling-related tasks unless they are essential (e.g., dark mode).
+1. Generate tasks from level easy to level challenging.
+1. Prioritize clear, descriptive explanations of each UI feature. Minimize discussion of JavaScript, CSS, or HTML implementation details — only include the shortest possible CSS selectors necessary to identify relevant elements.
+1. Save the output as a file at 'calculator1/tasks.yml' with the following format:
 
 ```yaml
 - id: task-1
