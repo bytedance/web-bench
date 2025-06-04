@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 9: Geometry Utility Classes', () => {
   test('should have Point, Rect, Transform, and Rotate classes available', async ({ page }) => {
     await page.goto('/index.html');

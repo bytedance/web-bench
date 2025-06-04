@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-
+require('../../../libraries/test-util/src/coverage');
 test.describe('Task 1: Basic HTML Structure', () => {
   test('should have root container with toolkit and canvas', async ({ page }) => {
     await page.goto('/index.html');

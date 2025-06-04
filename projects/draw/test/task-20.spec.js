@@ -15,7 +15,7 @@
 const { test, expect, devices } = require('@playwright/test')
 const { getOffsetByLocator } = require('../../../libraries/test-util/src')
 const { pan } = require('./util/util')
-
+require('../../../libraries/test-util/src/coverage');
 // test.use({ ...devices['iPhone 12'] })
 test.use({ ...devices['Pixel 7'] })
 
