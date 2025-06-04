@@ -61,7 +61,7 @@ test.describe('Task 14: Ellipse Shape Implementation', () => {
     await page.mouse.down();
     
     // Drag to create ellipse
-    await page.mouse.move(startX + 120, startY + 80);
+    await page.mouse.move(startX + 120, startY + 80, {steps: 20});
     await page.mouse.up();
     
     const ellipseElement = page.locator('.canvas ellipse');
@@ -95,7 +95,7 @@ test.describe('Task 14: Ellipse Shape Implementation', () => {
     // Draw from bottom-right to top-left
     await page.mouse.move(startX, startY);
     await page.mouse.down();
-    await page.mouse.move(endX, endY);
+    await page.mouse.move(endX, endY, {steps: 20});
     await page.mouse.up();
     
     const ellipseElement = page.locator('.canvas ellipse');

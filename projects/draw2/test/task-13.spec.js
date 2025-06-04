@@ -60,7 +60,7 @@ test.describe('Task 13: Rect Shape Implementation', () => {
     await page.mouse.down();
     
     // Drag to create rectangle
-    await page.mouse.move(startX + 80, startY + 60);
+    await page.mouse.move(startX + 80, startY + 60, {steps: 20});
     await page.mouse.up();
     
     const rectElement = page.locator('.canvas rect');
@@ -94,7 +94,7 @@ test.describe('Task 13: Rect Shape Implementation', () => {
     // Draw from top-right to bottom-left
     await page.mouse.move(startX, startY);
     await page.mouse.down();
-    await page.mouse.move(endX, endY);
+    await page.mouse.move(endX, endY, {steps: 20});
     await page.mouse.up();
     
     const rectElement = page.locator('.canvas rect');
