@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 13: Rect Shape Implementation', () => {
   test('should create SVG rect elements with proper attributes', async ({ page }) => {
     await page.goto('/index.html');

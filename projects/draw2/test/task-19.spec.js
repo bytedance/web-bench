@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 19: Copy, Delete, and Fill Operations', () => {
   test('should copy shapes with offset positioning', async ({ page }) => {
     await page.goto('/index.html');

@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 4: Property Controls', () => {
   test('should have line width range input with correct attributes', async ({ page }) => {
     await page.goto('/index.html');

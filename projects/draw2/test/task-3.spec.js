@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 3: Shape Selection Toolbar', () => {
   test('should have shape tools with radio buttons and proper labels', async ({ page }) => {
     await page.goto('/index.html');

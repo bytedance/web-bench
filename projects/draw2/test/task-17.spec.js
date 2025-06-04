@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 17: Rotate Operation Implementation', () => {
   test('should rotate shapes around their center point', async ({ page }) => {
     await page.goto('/index.html');

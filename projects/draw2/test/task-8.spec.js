@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-require('../../../libraries/test-util/src/coverage');
+const coverage = require('../../../libraries/test-util/src/coverage');test.afterEach(coverage);;
 test.describe('Task 8: EventEmitter Utility Class', () => {
   test('should have EventEmitter class available and functional', async ({ page }) => {
     await page.goto('/index.html');
