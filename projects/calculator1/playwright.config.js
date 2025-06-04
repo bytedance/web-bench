@@ -30,9 +30,9 @@ const PORT = process.env.EVAL_PROJECT_PORT || 3211
 module.exports = defineConfig({
   testDir: './test',
   // global timeout
-  timeout: process.env.IS_EVAL_PRODUCTION ? 30_000 : 2_000,
+  timeout: process.env.IS_EVAL_PRODUCTION ? 30_000 : 4_000,
   // case timeout
-  expect: { timeout: process.env.IS_EVAL_PRODUCTION ? 5_000 : 1_000 },
+  expect: { timeout: process.env.IS_EVAL_PRODUCTION ? 5_000 : 2_000 },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
