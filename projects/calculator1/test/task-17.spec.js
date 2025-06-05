@@ -8,15 +8,15 @@ test.describe('Task 17: Interactive history functionality', () => {
     const clicksDisplay = page.locator('#clicks');
     
     // Perform a calculation
-    await page.locator('text=5').click();
-    await page.locator('text=+').click();
-    await page.locator('text=3').click();
-    await page.locator('text==').click();
+    await page.locator('.buttons button:has-text("5")').click();
+    await page.locator('.buttons button:nth-child(16)').click(); // + button using nth-child
+    await page.locator('.buttons button:has-text("3")').click();
+    await page.locator('.buttons button:nth-child(15)').click(); // = button using nth-child
     
     await expect(display).toHaveValue('8');
     
     // Clear the display
-    await page.locator('text=Clear').click();
+    await page.locator('button:has-text("Clear")').click();
     await expect(display).toHaveValue('');
     
     // Click on a history item to re-execute
@@ -33,7 +33,7 @@ test.describe('Task 17: Interactive history functionality', () => {
     const clicksDisplay = page.locator('#clicks');
     
     // Click a button to create history
-    await page.locator('text=9').click();
+    await page.locator('.buttons button:has-text("9")').click();
     
     const historyItem = clicksDisplay.locator('.history-item').first();
     
@@ -53,10 +53,10 @@ test.describe('Task 17: Interactive history functionality', () => {
     
     const clicksDisplay = page.locator('#clicks');
     
-    // Create some history
-    await page.locator('text=1').click();
-    await page.locator('text=2').click();
-    await page.locator('text=3').click();
+    // Create some history using nth-child for conflicting buttons
+    await page.locator('.buttons button:nth-child(9)').click(); // "1"
+    await page.locator('.buttons button:nth-child(10)').click(); // "2"
+    await page.locator('.buttons button:has-text("3")').click();
     
     // Click on a history item
     const historyItems = clicksDisplay.locator('.history-item');

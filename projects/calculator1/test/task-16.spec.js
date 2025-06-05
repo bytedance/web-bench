@@ -7,7 +7,7 @@ test.describe('Task 16: Click history tracking', () => {
     const clicksDisplay = page.locator('#clicks');
     
     // Click a button and verify it appears in history
-    await page.locator('text=7').click();
+    await page.locator('.buttons button:has-text("7")').click();
     
     const historyItems = clicksDisplay.locator('.history-item');
     await expect(historyItems).toHaveCount(1);
@@ -19,10 +19,10 @@ test.describe('Task 16: Click history tracking', () => {
     
     const clicksDisplay = page.locator('#clicks');
     
-    // Click multiple buttons in sequence
-    await page.locator('text=1').click();
-    await page.locator('text=2').click();
-    await page.locator('text=3').click();
+    // Click multiple buttons in sequence using nth-child to avoid conflicts
+    await page.locator('.buttons button:nth-child(9)').click(); // "1"
+    await page.locator('.buttons button:nth-child(10)').click(); // "2"
+    await page.locator('.buttons button:has-text("3")').click();
     
     const historyItems = clicksDisplay.locator('.history-item');
     
@@ -37,14 +37,14 @@ test.describe('Task 16: Click history tracking', () => {
     
     const clicksDisplay = page.locator('#clicks');
     
-    // Click 7 buttons
-    await page.locator('text=1').click();
-    await page.locator('text=2').click();
-    await page.locator('text=3').click();
-    await page.locator('text=4').click();
-    await page.locator('text=5').click();
-    await page.locator('text=6').click();
-    await page.locator('text=7').click();
+    // Click 7 buttons using nth-child for conflicting numbers
+    await page.locator('.buttons button:nth-child(9)').click(); // "1"
+    await page.locator('.buttons button:nth-child(10)').click(); // "2"
+    await page.locator('.buttons button:has-text("3")').click();
+    await page.locator('.buttons button:has-text("4")').click();
+    await page.locator('.buttons button:has-text("5")').click();
+    await page.locator('.buttons button:has-text("6")').click();
+    await page.locator('.buttons button:has-text("7")').click();
     
     const historyItems = clicksDisplay.locator('.history-item');
     

@@ -22,13 +22,13 @@ test.describe('Task 14: Memory panel implementation', () => {
     await expect(memoryDisplay).toHaveText('0');
     
     // Add a decimal value to memory and check formatting
-    await page.locator('text=1').click();
-    await page.locator('text=.').click();
-    await page.locator('text=2').click();
-    await page.locator('text=3').click();
-    await page.locator('text=4').click();
-    await page.locator('text=5').click();
-    await page.locator('text=M+').click();
+    await page.locator('.buttons button:nth-child(9)').click(); // "1"
+    await page.locator('.buttons button:has-text(".")').click();
+    await page.locator('.buttons button:nth-child(10)').click(); // "2"
+    await page.locator('.buttons button:has-text("3")').click();
+    await page.locator('.buttons button:has-text("4")').click();
+    await page.locator('.buttons button:has-text("5")').click();
+    await page.locator('button:has-text("M+")').click();
     
     // Memory should display the formatted number
     const memoryText = await memoryDisplay.textContent();
@@ -40,23 +40,23 @@ test.describe('Task 14: Memory panel implementation', () => {
     
     const memoryDisplay = page.locator('#memory');
     
-    // Add 100 to memory
-    await page.locator('text=1').click();
-    await page.locator('text=0').click();
-    await page.locator('text=0').click();
-    await page.locator('text=M+').click();
+    // Add 100 to memory - use nth-child for specific buttons
+    await page.locator('.buttons button:nth-child(9)').click(); // "1"
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("M+")').click();
     await expect(memoryDisplay).toHaveText('100');
     
     // Add 50 more
-    await page.locator('text=5').click();
-    await page.locator('text=0').click();
-    await page.locator('text=M+').click();
+    await page.locator('.buttons button:has-text("5")').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("M+")').click();
     await expect(memoryDisplay).toHaveText('150');
     
     // Subtract 25
-    await page.locator('text=2').click();
-    await page.locator('text=5').click();
-    await page.locator('text=M-').click();
+    await page.locator('.buttons button:nth-child(10)').click(); // "2"
+    await page.locator('.buttons button:has-text("5")').click();
+    await page.locator('button:has-text("M-")').click();
     await expect(memoryDisplay).toHaveText('125');
   });
 });

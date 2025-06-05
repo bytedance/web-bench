@@ -5,11 +5,11 @@ test.describe('Task 10: Trigonometric function buttons', () => {
     await page.goto('/index.html');
     
     // Should be in scientific mode by default
-    const sinButton = page.locator('text=sin');
-    const cosButton = page.locator('text=cos');
-    const tanButton = page.locator('text=tan');
-    const sinhButton = page.locator('text=sinh');
-    const coshButton = page.locator('text=cosh');
+    const sinButton = page.locator('button:has-text("sin"):not(:has-text("sinh"))');
+    const cosButton = page.locator('button:has-text("cos"):not(:has-text("cosh"))');
+    const tanButton = page.locator('button:has-text("tan")');
+    const sinhButton = page.locator('button:has-text("sinh")');
+    const coshButton = page.locator('button:has-text("cosh")');
     
     await expect(sinButton).toBeVisible();
     await expect(cosButton).toBeVisible();
@@ -24,22 +24,22 @@ test.describe('Task 10: Trigonometric function buttons', () => {
     const display = page.locator('#display');
     
     // Test sin(0) = 0
-    await page.locator('text=0').click();
-    await page.locator('text=sin').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("sin"):not(:has-text("sinh"))').click();
     const sinResult = await display.inputValue();
     expect(parseFloat(sinResult)).toBeCloseTo(0, 10);
     
     // Test cos(0) = 1
-    await page.locator('text=Clear').click();
-    await page.locator('text=0').click();
-    await page.locator('text=cos').click();
+    await page.locator('button:has-text("Clear")').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("cos"):not(:has-text("cosh"))').click();
     const cosResult = await display.inputValue();
     expect(parseFloat(cosResult)).toBeCloseTo(1, 10);
     
     // Test tan(0) = 0
-    await page.locator('text=Clear').click();
-    await page.locator('text=0').click();
-    await page.locator('text=tan').click();
+    await page.locator('button:has-text("Clear")').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("tan")').click();
     const tanResult = await display.inputValue();
     expect(parseFloat(tanResult)).toBeCloseTo(0, 10);
   });
@@ -50,15 +50,15 @@ test.describe('Task 10: Trigonometric function buttons', () => {
     const display = page.locator('#display');
     
     // Test sinh(0) = 0
-    await page.locator('text=0').click();
-    await page.locator('text=sinh').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("sinh")').click();
     const sinhResult = await display.inputValue();
     expect(parseFloat(sinhResult)).toBeCloseTo(0, 10);
     
     // Test cosh(0) = 1
-    await page.locator('text=Clear').click();
-    await page.locator('text=0').click();
-    await page.locator('text=cosh').click();
+    await page.locator('button:has-text("Clear")').click();
+    await page.locator('.buttons button:has-text("0")').click();
+    await page.locator('button:has-text("cosh")').click();
     const coshResult = await display.inputValue();
     expect(parseFloat(coshResult)).toBeCloseTo(1, 10);
   });

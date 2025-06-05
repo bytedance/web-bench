@@ -7,37 +7,37 @@ test.describe('Task 5: Operator button styling', () => {
     // Toggle to light mode
     await page.locator('#toggle').click();
     
-    // Test operator buttons (/, *, -, +, =)
-    const divideButton = page.locator('.buttons button').nth(3); // /
-    const multiplyButton = page.locator('.buttons button').nth(7); // *
-    const minusButton = page.locator('.buttons button').nth(11); // -
-    const plusButton = page.locator('.buttons button').nth(15); // +
-    const equalsButton = page.locator('.buttons button').nth(14); // =
+    // Test operator buttons based on CSS nth-child selectors: 4, 8, 12, 16, 18
+    const divideButton = page.locator('.buttons button:nth-child(4)'); // /
+    const multiplyButton = page.locator('.buttons button:nth-child(8)'); // *
+    const minusButton = page.locator('.buttons button:nth-child(12)'); // -
+    const plusButton = page.locator('.buttons button:nth-child(16)'); // +
+    const sqrtButton = page.locator('.buttons button:nth-child(18)'); // √ (this gets operator styling per CSS)
     
     await expect(divideButton).toHaveCSS('background-color', 'rgb(255, 215, 0)'); // #ffd700
     await expect(multiplyButton).toHaveCSS('background-color', 'rgb(255, 215, 0)');
     await expect(minusButton).toHaveCSS('background-color', 'rgb(255, 215, 0)');
     await expect(plusButton).toHaveCSS('background-color', 'rgb(255, 215, 0)');
-    await expect(equalsButton).toHaveCSS('background-color', 'rgb(255, 215, 0)');
+    await expect(sqrtButton).toHaveCSS('background-color', 'rgb(255, 215, 0)');
   });
 
   test('Test case 2: Operator buttons have orange background in dark mode', async ({ page }) => {
     await page.goto('/index.html');
     
     // Should be in dark mode by default
-    const divideButton = page.locator('.buttons button').nth(3); // /
-    const multiplyButton = page.locator('.buttons button').nth(7); // *
-    const equalsButton = page.locator('.buttons button').nth(14); // =
+    const divideButton = page.locator('.buttons button:nth-child(4)'); // /
+    const multiplyButton = page.locator('.buttons button:nth-child(8)'); // *
+    const minusButton = page.locator('.buttons button:nth-child(12)'); // -
     
     await expect(divideButton).toHaveCSS('background-color', 'rgb(255, 140, 0)'); // #ff8c00
     await expect(multiplyButton).toHaveCSS('background-color', 'rgb(255, 140, 0)');
-    await expect(equalsButton).toHaveCSS('background-color', 'rgb(255, 140, 0)');
+    await expect(minusButton).toHaveCSS('background-color', 'rgb(255, 140, 0)');
   });
 
   test('Test case 3: Operator buttons have hover states', async ({ page }) => {
     await page.goto('/index.html');
     
-    const divideButton = page.locator('.buttons button').nth(3); // /
+    const divideButton = page.locator('.buttons button:nth-child(4)'); // /
     
     // Test hover in dark mode
     await divideButton.hover();

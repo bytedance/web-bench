@@ -36,19 +36,19 @@ test.describe('Task 15: History panel implementation', () => {
     
     const clicksDisplay = page.locator('#clicks');
     
-    // Click several buttons
-    await page.locator('text=1').click();
-    await page.locator('text=2').click();
-    await page.locator('text=3').click();
-    await page.locator('text=4').click();
-    await page.locator('text=5').click();
+    // Click several buttons using nth-child to avoid conflicts
+    await page.locator('.buttons button:nth-child(9)').click(); // "1"
+    await page.locator('.buttons button:nth-child(10)').click(); // "2"
+    await page.locator('.buttons button:has-text("3")').click();
+    await page.locator('.buttons button:has-text("4")').click();
+    await page.locator('.buttons button:has-text("5")').click();
     
     // Check that history items are displayed
     const historyItems = clicksDisplay.locator('.history-item');
     await expect(historyItems).toHaveCount(5);
     
     // Click one more button
-    await page.locator('text=6').click();
+    await page.locator('.buttons button:has-text("6")').click();
     
     // Should still have only 5 items (oldest removed)
     await expect(historyItems).toHaveCount(5);
