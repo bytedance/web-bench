@@ -1,0 +1,155 @@
+- id: task-1
+  date: 2025-05-01
+  level: easy
+  description: |
+    1. Add a dark mode toggle button with id "toggle" positioned at the bottom-left of the page.
+    2. The button should display "Light" when in dark mode and "Dark" when in light mode.
+    3. Clicking the button should toggle the "dark-mode" class on the calculator element.
+
+- id: task-2
+  date: 2025-05-02
+  level: easy
+  description: |
+    1. Apply dark mode styling when the "dark-mode" class is present on the calculator.
+    2. In dark mode, the calculator background should be #333, display background #444, and buttons #444.
+    3. Text colors should be inverted appropriately for visibility.
+
+- id: task-3
+  date: 2025-05-03
+  level: easy
+  description: |
+    1. Add a mode toggle button with id "mode" positioned at the bottom-right of the page.
+    2. The button should display "Basic" when in scientific mode and "Scientific" when in basic mode.
+    3. Clicking the button should toggle the "scientific" class on the calculator element.
+
+- id: task-4
+  date: 2025-05-04
+  level: easy
+  description: |
+    1. Change the page background color to #aaa to provide better contrast.
+    2. Update the calculator container to have a white background (#fff) for better visual separation.
+
+- id: task-5
+  date: 2025-05-05
+  level: easy
+  description: |
+    1. Style operator buttons (/, *, -, +, =) with a golden background color (#ffd700).
+    2. In dark mode, change operator button colors to orange (#ff8c00).
+    3. Add appropriate hover states for these highlighted buttons.
+
+- id: task-6
+  date: 2025-05-06
+  level: medium
+  description: |
+    1. Add smooth transition animations (0.3s ease) to all color and background changes.
+    2. Apply transitions to the calculator container, display, and all buttons.
+
+- id: task-7
+  date: 2025-05-07
+  level: medium
+  description: |
+    1. Add four new buttons for scientific operations: √ (square root), ^2 (square), 1/x (reciprocal), and π (pi).
+    2. These buttons should only be visible when the "scientific" class is present on the calculator.
+
+- id: task-8
+  date: 2025-05-08
+  level: medium
+  description: |
+    1. Implement the square root operation (√) that calculates the square root of the current display value.
+    2. Implement the square operation (^2) that squares the current display value.
+    3. Implement the reciprocal operation (1/x) that calculates 1 divided by the current display value.
+
+- id: task-9
+  date: 2025-05-09
+  level: medium
+  description: |
+    1. Implement the pi (π) button that replaces the current display value with the value of Math.PI.
+    2. Handle error cases appropriately, showing "Error" when operations fail.
+
+- id: task-10
+  date: 2025-05-10
+  level: medium
+  description: |
+    1. Add four trigonometric function buttons: sin, cos, tan, and their hyperbolic variants sinh, cosh.
+    2. These buttons should only be visible in scientific mode.
+    3. Implement each function to calculate the respective trigonometric value of the display value.
+
+- id: task-11
+  date: 2025-05-11
+  level: medium
+  description: |
+    1. Add four memory buttons: MR (Memory Recall), M+ (Memory Add), M- (Memory Subtract), MC (Memory Clear).
+    2. Style these buttons with a green background (#4caf50) to distinguish them from other buttons.
+    3. These buttons should only be visible in scientific mode.
+
+- id: task-12
+  date: 2025-05-12
+  level: challenging
+  description: |
+    1. Implement memory functionality with a memoryValue variable initialized to 0.
+    2. MR should append the memory value to the current display.
+    3. M+ should add the current display value to memory and clear the display.
+    4. M- should subtract the current display value from memory and clear the display.
+    5. MC should clear the memory value to 0.
+
+- id: task-13
+  date: 2025-05-13
+  level: medium
+  description: |
+    1. Create an info panels container with class "info-panels" that appears below the buttons.
+    2. The panels should only be visible when in scientific mode.
+    3. Add a border-top to visually separate the panels from the calculator buttons.
+
+- id: task-14
+  date: 2025-05-14
+  level: medium
+  description: |
+    1. Add a memory panel within the info panels showing "Memory" label and current memory value.
+    2. Create a span with id "memory" to display the formatted memory value.
+    3. Format the memory value with appropriate number formatting (locale string with up to 10 decimal places).
+
+- id: task-15
+  date: 2025-05-15
+  level: challenging
+  description: |
+    1. Add a history panel showing "History" label and a clickable history display area.
+    2. Create a span with id "clicks" and class "clicks-history" to show the last 5 clicked buttons.
+    3. Style the history area with a monospace font and appropriate background color.
+
+- id: task-16
+  date: 2025-05-16
+  level: challenging
+  description: |
+    1. Implement click history tracking that stores the last 5 button clicks.
+    2. Each new click should be added to the beginning of the history.
+    3. Display each history item as a clickable span element with class "history-item".
+
+- id: task-17
+  date: 2025-05-17
+  level: challenging
+  description: |
+    1. Make history items interactive - clicking on a history item should re-execute that operation.
+    2. Add hover effects to history items to indicate they are clickable.
+    3. Ensure the history updates correctly when items are clicked.
+
+- id: task-18
+  date: 2025-05-18
+  level: easy
+  description: |
+    1. Update the Clear button to span 3 columns instead of 4 in the grid layout.
+    2. Ensure the button layout adjusts properly when scientific buttons are shown/hidden.
+
+- id: task-19
+  date: 2025-05-19
+  level: medium
+  description: |
+    1. Initialize the calculator to start in both dark mode and scientific mode by default.
+    2. Ensure all UI elements reflect these initial states correctly.
+
+- id: task-20
+  date: 2025-05-20
+  level: challenging
+  description: |
+    1. Refactor the event handling to use addEventListener instead of inline onclick attributes.
+    2. Set up proper event delegation for all calculator buttons on DOMContentLoaded.
+    3. Ensure all functionality works correctly with the new event handling approach.
