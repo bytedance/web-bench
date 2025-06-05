@@ -50,14 +50,14 @@ ${
 }
         
     
-*Request${result.inputTokens ? ` (${result.inputTokens} input tokens)` : ''}:*
+*Request${result.inputTokens ? ` (${result.inputTokens} inputTokens)` : ''}:*
         
 \`\`\`json
 ${JSON.stringify(JSON.parse(result.request || '{}'), null, 2)}
 \`\`\`
         
         
-*Response${result.outputTokens ? ` (${result.outputTokens} output tokens)` : ''}:*
+*Response${result.outputTokens ? ` (${result.outputTokens} outputTokens)` : ''}:*
 
 ${Object.keys(result.response || {})
   .map((path) => {
@@ -132,7 +132,7 @@ ${errorRate.map((v, i) => `|error@${i + 1} | ${v}% |`).join('\n')}
     const timeArr = new Array(times).fill(0)
 
     return `
-| Task             | ${timeArr.map((v, i) => `${getOrdinalNumberAbbreviation(i + 1)} Result |`).join('')} Input Tokens | Output Tokens |
+| Task             | ${timeArr.map((v, i) => `${getOrdinalNumberAbbreviation(i + 1)} Result |`).join('')} inputTokens | outputTokens |
 | ---------------- | ${timeArr.map((v, i) => `----------- | `).join('')} ----------- | ----------- |
 ${taskSnippets
   .map(
