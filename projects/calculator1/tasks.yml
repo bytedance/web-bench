@@ -1,0 +1,159 @@
+- id: task-1
+  date: 2025-05-01
+  level: easy
+  description: |
+    1. Add body styling to center the calculator with a gray background (#aaa).
+    2. Set the body to use flex layout with flex-direction column and align-items center.
+    3. Add minimum height of 100vh and remove default margin.
+
+- id: task-2
+  date: 2025-05-02
+  level: easy
+  description: |
+    1. Add a white background color to the .calculator element.
+    2. Add transition effect "all 0.3s ease" to the calculator for smooth animations.
+    3. Update the display styling to include transition effects and box-sizing border-box.
+
+- id: task-3
+  date: 2025-05-03
+  level: easy
+  description: |
+    1. Create a dark mode class "dark-mode" for the .calculator element.
+    2. Add dark mode styling with background-color #333 and border-color #666 for the calculator.
+    3. Add dark mode styling for the display with background-color #444 and white text color.
+
+- id: task-4
+  date: 2025-05-04
+  level: easy
+  description: |
+    1. Add dark mode styling for buttons with background-color #444, white text, and border-color #666.
+    2. Update button hover effects to use background-color #eee for light mode and #555 for dark mode.
+    3. Add transition effects "all 0.3s ease" to all buttons.
+
+- id: task-5
+  date: 2025-05-05
+  level: easy
+  description: |
+    1. Add a fixed position toggle button with id "toggle" positioned at bottom 20px, left 35%.
+    2. Style the toggle button with padding, font-size 16px, border-radius 20px, and box-shadow.
+    3. Add transform translateX(-50%) to center the button properly.
+
+- id: task-6
+  date: 2025-05-06
+  level: easy
+  description: |
+    1. Add a fixed position mode button with id "mode" positioned at bottom 20px, left 65%.
+    2. Apply the same styling as the toggle button with appropriate positioning.
+    3. Add click event listener to toggle between dark and light modes, updating button text accordingly.
+
+- id: task-7
+  date: 2025-05-07
+  level: medium
+  description: |
+    1. Create highlighting for operator buttons (4th, 8th, 12th, 16th, 18th child) with background-color #ffd700.
+    2. Add hover effects for operator buttons with background-color #ffed4a.
+    3. Add dark mode operator styling with background-color #ff8c00 and hover color #ffa500.
+
+- id: task-8
+  date: 2025-05-08
+  level: medium
+  description: |
+    1. Add scientific mode functionality with a "scientific" class that shows additional buttons.
+    2. Hide buttons nth-of-type(n + 19) by default and show them when scientific class is active.
+    3. Add mode toggle functionality to switch between "Basic" and "Scientific" text and toggle the scientific class.
+
+- id: task-9
+  date: 2025-05-09
+  level: medium
+  description: |
+    1. Add scientific function buttons: √, ^2, 1/x, π positioned after the Clear button.
+    2. Modify the Clear button to span 3 columns instead of 4.
+    3. Add basic mathematical functionality for square root, square, reciprocal, and pi operations.
+
+- id: task-10
+  date: 2025-05-10
+  level: medium
+  description: |
+    1. Add trigonometric function buttons: sin, cos, tan, sinh, cosh.
+    2. Implement the mathematical functions for sine, cosine, tangent, hyperbolic sine, and hyperbolic cosine.
+    3. Add proper error handling for mathematical operations that might result in invalid values.
+
+- id: task-11
+  date: 2025-05-11
+  level: medium
+  description: |
+    1. Add memory function buttons: MR, M+, M-, MC with class "memory-btn".
+    2. Style memory buttons with background-color #4caf50, white text, and hover color #45a049.
+    3. Add dark mode styling for memory buttons with background-color #2e7d32 and hover color #388e3c.
+
+- id: task-12
+  date: 2025-05-12
+  level: medium
+  description: |
+    1. Add info panels container with class "info-panels" that displays when scientific mode is active.
+    2. Create memory panel with class "memory-panel" showing "Memory" label and memory value display.
+    3. Create clicks panel with class "clicks-panel" for displaying operation history.
+
+- id: task-13
+  date: 2025-05-13
+  level: medium
+  description: |
+    1. Implement memory operations: MR (memory recall), M+ (memory add), M- (memory subtract), MC (memory clear).
+    2. Add a memoryValue variable to track the stored memory value.
+    3. Create updateMemoryDisplay function to show memory value with proper number formatting.
+
+- id: task-14
+  date: 2025-05-14
+  level: challenging
+  description: |
+    1. Implement click history tracking with a clickHistory array storing the last 5 operations.
+    2. Create updateClicksDisplay function that adds new operations to history and removes old ones.
+    3. Display history items as clickable elements in the clicks panel.
+
+- id: task-15
+  date: 2025-05-15
+  level: challenging
+  description: |
+    1. Remove all inline onclick handlers from buttons and replace with dynamic event listeners.
+    2. Add DOMContentLoaded event listener to initialize the calculator functionality.
+    3. Attach click event listeners to all buttons using querySelectorAll and forEach.
+
+- id: task-16
+  date: 2025-05-16
+  level: challenging
+  description: |
+    1. Implement interactive history functionality where clicking history items re-executes operations.
+    2. Add proper styling for history items with hover effects and cursor pointer.
+    3. Ensure clicking history items updates both the display and adds to history again.
+
+- id: task-17
+  date: 2025-05-17
+  level: challenging
+  description: |
+    1. Consolidate all mathematical operations into a single calculate function with switch statement.
+    2. Handle all button operations including memory functions, scientific functions, and basic operations.
+    3. Ensure proper error handling for division by zero and invalid mathematical operations.
+
+- id: task-18
+  date: 2025-05-18
+  level: challenging
+  description: |
+    1. Initialize the calculator in dark mode and scientific mode by adding both classes to the calculator element.
+    2. Set initial button text values to "Light" for toggle button and "Basic" for mode button.
+    3. Ensure proper initialization of memory display and event listeners on page load.
+
+- id: task-19
+  date: 2025-05-19
+  level: challenging
+  description: |
+    1. Implement advanced number formatting for memory display using toLocaleString with proper fraction digits.
+    2. Add responsive history panel styling with proper spacing, wrapping, and alignment.
+    3. Ensure consistent styling for all interactive elements across light and dark modes.
+
+- id: task-20
+  date: 2025-05-20
+  level: challenging
+  description: |
+    1. Optimize the styling system with proper CSS organization for dark mode variants.
+    2. Add comprehensive transition effects across all calculator elements for smooth user experience.
+    3. Implement proper z-index management for fixed positioned elements and ensure accessibility.
