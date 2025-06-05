@@ -7,6 +7,32 @@
       "title": "claude-3-5-sonnet-20241022"
     },
     {
+      "model": "claude-sonnet-4-20250514",
+      "provider": "anthropic",
+      "extendThinking": true,
+      "apiKey": "{{ANTHROPIC_API_KEY}}",
+      "title": "claude-4-0-sonnet-latest-thinking"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "provider": "anthropic",
+      "apiKey": "{{ANTHROPIC_API_KEY}}",
+      "title": "claude-4-0-sonnet-latest"
+    },
+    {
+      "model": "claude-opus-4-20250514",
+      "provider": "anthropic",
+      "extendThinking": true,
+      "apiKey": "{{ANTHROPIC_API_KEY}}",
+      "title": "claude-4-0-opus-latest-thinking"
+    },
+    {
+      "model": "claude-opus-4-20250514",
+      "provider": "anthropic",
+      "apiKey": "{{ANTHROPIC_API_KEY}}",
+      "title": "claude-4-0-opus-latest"
+    },
+    {
       "model": "claude-3-7-sonnet-latest",
       "provider": "anthropic",
       "extendThinking": true,
