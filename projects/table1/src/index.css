@@ -49,7 +49,8 @@ thead tr {
   background: #e4e5e7;
   border: 0.1rem solid #cbcbcb;
   padding: 0.4rem;
-  min-width: 15rem;
+  min-width: 10rem;
+  min-height: 10rem;
   display: none;
   z-index: 1000;
   border-radius: 0.4rem;
