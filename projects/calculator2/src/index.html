@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Calculator</title>
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #aaa;
+      }
+
+      .calculator {
+        width: 300px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .calculator.dark-mode {
+        background-color: #333;
+        border-color: #666;
+      }
+
+      .display {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 10px;
+        text-align: right;
+        font-size: 24px;
+        background-color: #fff;
+        color: #000;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .dark-mode .display {
+        background-color: #444;
+        color: #fff;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+      }
+
+      button {
+        padding: 10px;
+        font-size: 18px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #fff;
+        color: #000;
+        transition: all 0.3s ease;
+      }
+
+      .dark-mode button {
+        background-color: #444;
+        color: #fff;
+        border-color: #666;
+      }
+
+      .dark-mode button {
+        background-color: #444;
+        color: #fff;
+        border-color: #666;
+      }
+
+      button:hover {
+        background-color: #eee;
+      }
+
+      .dark-mode button:hover {
+        background-color: #555;
+      }
+
+      .buttons button:nth-child(4),
+      .buttons button:nth-child(8),
+      .buttons button:nth-child(12),
+      .buttons button:nth-child(16),
+      .buttons button:nth-child(18) {
+        background-color: #ffd700;
+        color: #000;
+      }
+
+      .buttons button:nth-child(4):hover,
+      .buttons button:nth-child(8):hover,
+      .buttons button:nth-child(12):hover,
+      .buttons button:nth-child(16):hover,
+      .buttons button:nth-child(18):hover {
+        background-color: #ffed4a;
+      }
+
+      .dark-mode .buttons button:nth-child(4),
+      .dark-mode .buttons button:nth-child(8),
+      .dark-mode .buttons button:nth-child(12),
+      .dark-mode .buttons button:nth-child(16),
+      .dark-mode .buttons button:nth-child(18) {
+        background-color: #ff8c00;
+        color: #fff;
+      }
+
+      .dark-mode .buttons button:nth-child(4):hover,
+      .dark-mode .buttons button:nth-child(8):hover,
+      .dark-mode .buttons button:nth-child(12):hover,
+      .dark-mode .buttons button:nth-child(16):hover,
+      .dark-mode .buttons button:nth-child(18):hover {
+        background-color: #ffa500;
+      }
+
+      .buttons button.memory-btn {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .buttons button.memory-btn:hover {
+        background-color: #45a049;
+      }
+
+      .dark-mode .buttons button.memory-btn {
+        background-color: #2e7d32;
+        color: white;
+      }
+
+      .dark-mode .buttons button.memory-btn:hover {
+        background-color: #388e3c;
+      }
+
+      #toggle,
+      #mode {
+        position: fixed;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+
+      #toggle {
+        bottom: 20px;
+        left: 35%;
+        transform: translateX(-50%);
+      }
+
+      #mode {
+        bottom: 20px;
+        left: 65%;
+        transform: translateX(-50%);
+      }
+
+      .dark-mode #toggle,
+      .dark-mode #mode {
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+      }
+
+      .buttons button:nth-of-type(n + 19) {
+        display: none;
+      }
+
+      .scientific .buttons button:nth-of-type(n + 19) {
+        display: block;
+      }
+
+      /* Add styles for the panels container and panels */
+      .info-panels {
+        display: none;
+        margin-top: 15px;
+        border-top: 1px solid #ccc;
+        transition: all 0.3s ease;
+      }
+
+      .dark-mode .info-panels {
+        border-color: #666;
+      }
+
+      .scientific .info-panels {
+        display: block;
+      }
+
+      .memory-panel,
+      .clicks-panel {
+        padding: 10px;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .dark-mode .memory-panel,
+      .dark-mode .clicks-panel {
+        color: #fff;
+      }
+
+      #memory,
+      #clicks {
+        font-family: monospace;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 4px 8px;
+        border-radius: 3px;
+        min-width: 50px;
+        text-align: right;
+      }
+
+      .dark-mode #memory,
+      .dark-mode #clicks {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      #clicks {
+        width: 180px;
+      }
+
+      .clicks-history {
+        font-family: monospace;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 4px 8px;
+        border-radius: 3px;
+        min-width: 150px;
+        text-align: right;
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+
+      .dark-mode .clicks-history {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .history-item {
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 3px;
+        transition: all 0.2s ease;
+      }
+
+      .history-item:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .dark-mode .history-item:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator dark-mode scientific">
+      <input type="text" class="display" id="display" readonly />
+      <div class="buttons">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>/</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>*</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+        <button>0</button>
+        <button>.</button>
+        <button>=</button>
+        <button>+</button>
+        <button style="grid-column: span 3">Clear</button>
+        <button>√</button>
+        <button>^2</button>
+        <button>1/x</button>
+        <button>π</button>
+        <button>sin</button>
+        <button>cos</button>
+        <button>tan</button>
+        <button>sinh</button>
+        <button>cosh</button>
+        <button class="memory-btn">MR</button>
+        <button class="memory-btn">M+</button>
+        <button class="memory-btn">M-</button>
+        <button class="memory-btn">MC</button>
+      </div>
+
+      <div class="info-panels">
+        <div class="memory-panel">
+          <span>Memory</span>
+          <span id="memory">0</span>
+        </div>
+        <div class="clicks-panel">
+          <span>History</span>
+          <span id="clicks" class="clicks-history">&nbsp;</span>
+        </div>
+      </div>
+    </div>
+
+    <button id="toggle">Light</button>
+    <button id="mode">Basic</button>
+
+    <script>
+      let displayValue = ''
+      let isDarkMode = true
+      let isScientific = true
+      let memoryValue = 0
+      let clickHistory = []
+
+      document.getElementById('toggle').addEventListener('click', function () {
+        isDarkMode = !isDarkMode
+        document.querySelector('.calculator').classList.toggle('dark-mode')
+        this.textContent = isDarkMode ? 'Light' : 'Dark'
+      })
+
+      document.getElementById('mode').addEventListener('click', function () {
+        isScientific = !isScientific
+        document.querySelector('.calculator').classList.toggle('scientific')
+        this.textContent = isScientific ? 'Basic' : 'Scientific'
+      })
+
+      function updateMemoryDisplay() {
+        const memoryElement = document.getElementById('memory')
+        memoryElement.textContent = memoryValue.toLocaleString('en-US', {
+          maximumFractionDigits: 10,
+          minimumFractionDigits: 0,
+        })
+      }
+
+      function updateClicksDisplay(text) {
+        clickHistory.unshift(text)
+        if (clickHistory.length > 5) {
+          clickHistory.pop()
+        }
+
+        const clicksElement = document.getElementById('clicks')
+        clicksElement.innerHTML = ''
+
+        clickHistory.forEach((value) => {
+          const historyItem = document.createElement('span')
+          historyItem.textContent = value
+          historyItem.className = 'history-item'
+          historyItem.addEventListener('click', () => {
+            updateClicksDisplay(value)
+            calculate(value)
+          })
+          clicksElement.appendChild(historyItem)
+        })
+      }
+
+      function calculate(text) {
+        switch (text) {
+          case 'M+':
+            try {
+              if (displayValue) {
+                memoryValue += eval(displayValue)
+                updateMemoryDisplay()
+                displayValue = ''
+              }
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'MR':
+            displayValue += memoryValue.toString()
+            break
+
+          case 'M-':
+            try {
+              if (displayValue) {
+                memoryValue -= eval(displayValue)
+                updateMemoryDisplay()
+                displayValue = ''
+              }
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'MC':
+            if (memoryValue !== 0) {
+              memoryValue = 0
+              updateMemoryDisplay()
+            }
+            break
+
+          case 'Clear':
+            displayValue = ''
+            break
+
+          case '=':
+            try {
+              displayValue = eval(displayValue).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case '√':
+            try {
+              displayValue = Math.sqrt(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case '^2':
+            try {
+              displayValue = Math.pow(parseFloat(displayValue), 2).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case '1/x':
+            try {
+              const num = parseFloat(displayValue)
+              if (num === 0) throw new Error('Cannot divide by zero')
+              displayValue = (1 / num).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'sin':
+            try {
+              displayValue = Math.sin(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'π':
+            displayValue = Math.PI.toString()
+            break
+
+          case 'cos':
+            try {
+              displayValue = Math.cos(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'tan':
+            try {
+              displayValue = Math.tan(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'sinh':
+            try {
+              displayValue = Math.sinh(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'cosh':
+            try {
+              displayValue = Math.cosh(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          case 'tanh':
+            try {
+              displayValue = Math.tanh(parseFloat(displayValue)).toString()
+            } catch (error) {
+              displayValue = 'Error'
+            }
+            break
+
+          default:
+            displayValue += text
+        }
+        document.getElementById('display').value = displayValue
+      }
+
+      document.addEventListener('DOMContentLoaded', (event) => {
+        updateMemoryDisplay()
+
+        document.querySelectorAll('.buttons button').forEach((element) => {
+          element.addEventListener('click', function (event) {
+            const text = element.innerHTML
+            updateClicksDisplay(text)
+            calculate(text)
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

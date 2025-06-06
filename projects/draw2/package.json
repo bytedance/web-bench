@@ -2,7 +2,7 @@
   "name": "@web-bench/draw2",
   "version": "0.0.1",
   "eval": {
-    "stable": true
+    "stable": false
   },
   "scripts": {
     "start": "vite src --config vite.config.js",
