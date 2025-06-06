@@ -8,7 +8,7 @@ Please perform the following analysis:
 
 Identify format errors in tasks.jsonl, including:
 
-* Incorrect level values (valid values are: easy, medium, challenging)
+* Incorrect level values (valid values are: easy, moderate, challenging)
 * English grammar issues
 * Inaccurate English expressions
 * Punctuation problems
