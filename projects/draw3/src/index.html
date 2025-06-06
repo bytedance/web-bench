@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web-Bench Draw</title>
+    <link rel="stylesheet" href="index.scss" />
+  </head>
+  <body>
+    <div class="root">
+      <div class="toolkit">
+        <div class="shape">
+          <label title="Line" class="line">
+            <input value="line" type="radio" name="operation" />
+          </label>
+          <label title="Rect" class="rect">
+            <input value="rect" type="radio" name="operation" />
+          </label>
+          <label title="Ellipse" class="ellipse">
+            <input value="ellipse" type="radio" name="operation" />
+          </label>
+        </div>
+        <div class="prop">
+          <input class="line-width" type="range" value="9" max="21" min="1" step="4" />
+          <input class="color" type="color" value="#000000" />
+        </div>
+        <div class="operation">
+          <label title="Move" class="move">
+            <input value="move" type="radio" name="operation" />
+          </label>
+          <label title="Rotate" class="rotate">
+            <input value="rotate" type="radio" name="operation" />
+          </label>
+          <label title="Zoom" class="zoom">
+            <input value="zoom" type="radio" name="operation" />
+          </label>
+          <label title="Copy" class="copy">
+            <input value="copy" type="radio" name="operation" />
+          </label>
+          <label title="Delete" class="delete">
+            <input value="delete" type="radio" name="operation" />
+          </label>
+          <label title="Fill" class="fill">
+            <input value="fill" type="radio" name="operation" />
+          </label>
+        </div>
+      </div>
+      <svg class="canvas" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
