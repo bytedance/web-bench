@@ -496,6 +496,10 @@
       "projectFolder": "projects/table"
     },
     {
+      "packageName": "@web-bench/table1",
+      "projectFolder": "projects/table1"
+    },
+    {
       "packageName": "@web-bench/form",
       "projectFolder": "projects/form"
     },
