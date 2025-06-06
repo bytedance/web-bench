@@ -460,6 +460,10 @@
       "projectFolder": "projects/draw2"
     },
     {
+      "packageName": "@web-bench/draw3",
+      "projectFolder": "projects/draw3"
+    },
+    {
       "packageName": "@web-bench/svg",
       "projectFolder": "projects/svg"
     },

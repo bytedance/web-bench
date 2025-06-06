@@ -69,12 +69,6 @@
         border-color: #666;
       }
 
-      .dark-mode button {
-        background-color: #444;
-        color: #fff;
-        border-color: #666;
-      }
-
       button:hover {
         background-color: #eee;
       }
@@ -466,14 +460,6 @@
           case 'cosh':
             try {
               displayValue = Math.cosh(parseFloat(displayValue)).toString()
-            } catch (error) {
-              displayValue = 'Error'
-            }
-            break
-
-          case 'tanh':
-            try {
-              displayValue = Math.tanh(parseFloat(displayValue)).toString()
             } catch (error) {
               displayValue = 'Error'
             }

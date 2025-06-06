@@ -1,21 +1,20 @@
-{"id":"init","date":"2025-05-12","level":"easy","description":"generate a calculator in a single HTML file named 'index.html'. the first row should be an input element with id 'display'; the next 4 rows should contain buttons with digits from '0' to '9' and operators including '+-*/=.'; the last row should have a 'Clear' button. display 'Error' when catching exception or getting undefined value during calculating."}
-{"id":"task-1","date":"2025-05-12","level":"easy","description":"add button sqrt with text '√' at the right of button clear; click it to calculate result using display content directly"}
-{"id":"task-2","date":"2025-05-12","level":"easy","description":"add button square with text '^2' at the right of button sqrt"}
-{"id":"task-3","date":"2025-05-12","level":"easy","description":"add button reciprocal with text '1/x' at the right of button square"}
-{"id":"task-4","date":"2025-05-12","level":"easy","description":"add button sin with text 'sin' at the end of all the buttons"}
-{"id":"task-5","date":"2025-05-12","level":"easy","description":"add button π with text 'π' at the right of button sin; click button π to cover display content"}
-{"id":"task-6","date":"2025-05-12","level":"easy","description":"revert position of button sin, button π, no change for other buttons"}
-{"id":"task-7","date":"2025-05-12","level":"easy","description":"change button 'clear' width to 3 columns"}
-{"id":"task-8","date":"2025-05-12","level":"easy","description":"add toggle button with id 'toggle' to change theme between dark and light mode; toggle button's text  is 'dark' at light mode and 'light' at dark mode"}
-{"id":"task-9","date":"2025-05-12","level":"easy","description":"move toggle button to bottom-center of the page"}
-{"id":"task-10","date":"2025-05-12","level":"easy","description":"change default theme to dark"}
-{"id":"task-11","date":"2025-05-12","level":"easy","description":"add button with id 'mode' near the toggle button to change mode between scientific(default) and basic; its text is 'basic' at scientific mode and 'scientific' at basic mode; basic mode just display the first 5 rows in buttons panel"}
-{"id":"task-12","date":"2025-05-12","level":"challenging","description":"make the last button of the first 5 rows in buttons panel, background color brighter; consider dark and light mode"}
-{"id":"task-13","date":"2025-05-12","level":"challenging","description":"fix display input width to be equal to the buttons content width; change display input css properties as less as possible"}
-{"id":"task-14","date":"2025-05-12","level":"challenging","description":"add buttons cos, tan, sinh, cosh at the end of buttons panel"}
-{"id":"task-15","date":"2025-05-12","level":"challenging","description":"add button MemoryPlus(text 'M+') at the end to plus display content and store the data; add button MemoryRecall(text 'MR') before button M+ to append stored data to display content"}
-{"id":"task-16","date":"2025-05-12","level":"challenging","description":"display stored data in a panel(id 'memory') next to the buttons panel in the calculator at scientific mode"}
-{"id":"task-17","date":"2025-05-12","level":"challenging","description":"show latest 5 clicked button text in a history panel(id 'clicks') next to memory panel at scientific mode"}
-{"id":"task-18","date":"2025-05-12","level":"challenging","description":"add button MemoryMinus(text 'M-') next to button M+ to minus display content and store the data"}
-{"id":"task-19","date":"2025-05-12","level":"challenging","description":"add button MemoryClear(text 'MC') next to button M- to reset stored data to 0"}
-{"id":"task-20","date":"2025-05-12","level":"challenging","description":"click item(class 'history-item') in history panel to perform the same action like calculator button"}
+{"id":"task-1","date":"2025-05-12","level":"easy","description":"Add a sqrt button with text '√' to the right of the clear button; click it to calculate the result using display content directly."}
+{"id":"task-2","date":"2025-05-12","level":"easy","description":"Add a square button with text '^2' to the right of the sqrt button."}
+{"id":"task-3","date":"2025-05-12","level":"easy","description":"Add a reciprocal button with text '1/x' to the right of the square button."}
+{"id":"task-4","date":"2025-05-12","level":"easy","description":"Add a sin button with text 'sin' at the end of all the buttons."}
+{"id":"task-5","date":"2025-05-12","level":"easy","description":"Add a π button with text 'π' to the right of the sin button; click the π button to replace display content."}
+{"id":"task-6","date":"2025-05-12","level":"easy","description":"Reverse the positions of the sin and π buttons, no change for other buttons."}
+{"id":"task-7","date":"2025-05-12","level":"easy","description":"Change the 'clear' button width to 3 columns."}
+{"id":"task-8","date":"2025-05-12","level":"easy","description":"Add a toggle button with id 'toggle' to change theme between dark and light mode; toggle button's text is 'dark' in light mode and 'light' in dark mode."}
+{"id":"task-9","date":"2025-05-12","level":"easy","description":"Move the toggle button to bottom-center of the page."}
+{"id":"task-10","date":"2025-05-12","level":"easy","description":"Change default theme to dark."}
+{"id":"task-11","date":"2025-05-12","level":"easy","description":"Add a button with id 'mode' near the toggle button to change mode between scientific (default) and basic; its text is 'basic' in scientific mode and 'scientific' in basic mode; basic mode only displays the first 5 rows of the buttons panel."}
+{"id":"task-12","date":"2025-05-12","level":"challenging","description":"Make the last button of the first 5 rows in the buttons panel have a brighter background color; consider both dark and light modes."}
+{"id":"task-13","date":"2025-05-12","level":"challenging","description":"Fix display input width to be equal to the buttons content width; change display input CSS properties as little as possible."}
+{"id":"task-14","date":"2025-05-12","level":"challenging","description":"Add buttons cos, tan, sinh, cosh at the end of the buttons panel."}
+{"id":"task-15","date":"2025-05-12","level":"challenging","description":"Add button MemoryPlus (text 'M+') at the end to add display content and store the data; add button MemoryRecall (text 'MR') before the M+ button to append stored data to display content."}
+{"id":"task-16","date":"2025-05-12","level":"challenging","description":"Display stored data in a panel (id 'memory') next to the buttons panel in the calculator in scientific mode."}
+{"id":"task-17","date":"2025-05-12","level":"challenging","description":"Show the latest 5 clicked button texts in a history panel (id 'clicks') next to the memory panel in scientific mode."}
+{"id":"task-18","date":"2025-05-12","level":"challenging","description":"Add button MemoryMinus (text 'M-') next to the M+ button to subtract display content and store the data."}
+{"id":"task-19","date":"2025-05-12","level":"challenging","description":"Add button MemoryClear (text 'MC') next to the M- button to reset stored data to 0."}
+{"id":"task-20","date":"2025-05-12","level":"challenging","description":"Click item (class 'history-item') in the history panel to perform the same action as the calculator button."}
