@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })
 
-test('resize col height', async ({ page }) => {
+test('resize col width', async ({ page }) => {
   const th = page.locator('.table thead tr:nth-child(1) th:nth-child(2)')
   const offset = await getOffsetByLocator(th)
 
@@ -33,7 +33,7 @@ test('resize col height', async ({ page }) => {
   await expect(offset.width * 2).toBeCloseTo(offset1.width)
 })
 
-test('resize new col height', async ({ page }) => {
+test('resize new col width', async ({ page }) => {
   const th = page.locator('.table thead tr:nth-child(1) th:nth-child(2)')
 
   // insert new col left
@@ -52,7 +52,7 @@ test('resize new col height', async ({ page }) => {
   await expect(offset.width * 2).toBeCloseTo(offset1.width)
 })
 
-test('resize col min height', async ({ page }) => {
+test('resize col min width', async ({ page }) => {
   const th = page.locator('.table thead tr:nth-child(1) th:nth-child(2)')
   const offset = await getOffsetByLocator(th)
 
@@ -62,5 +62,6 @@ test('resize col min height', async ({ page }) => {
   await page.mouse.move(offset.left + 40, offset.centerY, { steps: 10 })
   await page.mouse.up()
 
-  await expect(offset.width).toBeCloseTo(80)
+  const newOffset = await getOffsetByLocator(th)
+  await expect(newOffset.width).toBeCloseTo(80)
 })

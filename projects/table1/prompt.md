@@ -1,7 +1,9 @@
 # Context
-* read file content from 'table1/tasks.jsonl'
-* read files content from 'table1/src/*'
-* read files content from 'table1/test/*.spec.js'
+Read and analyze all files from the 'table1/' directory:
+- tasks.jsonl
+- All files in src/ and subdirectories (src/**/*) 
+- All test specification files, from 'task-1.spec.js' to 'task-20.spec.js'
+- NO any other files
 
 # Task 1: Analyze tasks.jsonl for Format Errors
 Please identify format errors in tasks.jsonl, including:

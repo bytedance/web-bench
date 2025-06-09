@@ -45,7 +45,7 @@ thead tr {
 }
 
 .menu {
-  position: fixed;
+  position: absolute;
   background: #e4e5e7;
   border: 0.1rem solid #cbcbcb;
   padding: 0.4rem;

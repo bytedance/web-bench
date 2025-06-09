@@ -81,5 +81,6 @@ test('resize row min height', async ({ page }) => {
   await page.mouse.move(offset.centerX, offset.top + 20, { steps: 10 })
   await page.mouse.up()
 
-  await expect(offset.height).toBeCloseTo(40)
+  const newOffset = await getOffsetByLocator(td)
+  await expect(newOffset.height).toBeCloseTo(40)
 })
