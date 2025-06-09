@@ -33,10 +33,4 @@ test('1 sin', async ({ page }) => {
   await expect(result).toBeCloseTo(0.8414709848078965, 5)
 })
 
-// test('π sin', async ({ page }) => {
-//   await page.click('button:text("1")')
-//   await page.click('button:text("sin")')
 
-//   const result = parseFloat(await page.locator('#display').inputValue())
-//   await expect(result).toBeClose(0.8414709848078965, 5)
-// })

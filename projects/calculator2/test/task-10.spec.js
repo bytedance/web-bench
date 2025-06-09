@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/index.html')
 })
 
-test('toggle button position', async ({ page }) => {
+test('default theme is dark', async ({ page }) => {
   const text = await page.locator('button#toggle').textContent()
   await expect(text?.toLowerCase() === 'light').toBeTruthy()
 })

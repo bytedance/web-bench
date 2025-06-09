@@ -29,7 +29,7 @@ test('3 ^2 = 9', async ({ page }) => {
   await expect(page.locator('#display')).toHaveValue('9')
 })
 
-test('2 ^2 ^2 ^2 ^2 = 32', async ({ page }) => {
+test('2 ^2 ^2 ^2 ^2 = 65536', async ({ page }) => {
   await page.click('button:text("2")')
   await page.click('button:text("^2")')
   await page.click('button:text("^2")')
