@@ -73,8 +73,8 @@ test('.menu-item-select-col', async ({ page }) => {
 
   await th.click()
   await expect(th).toHaveClass('selected')
-  await expect(row2.locator('td:nth-child(1)')).not.toHaveClass('selected')
-  await expect(row3.locator('td:nth-child(1)')).not.toHaveClass('selected')
+  await expect(row2.locator('td:nth-child(2)')).not.toHaveClass('selected')
+  await expect(row3.locator('td:nth-child(3)')).not.toHaveClass('selected')
   await expect(row1.locator('th:nth-child(2)')).not.toHaveClass('selected')
 })
 
@@ -92,8 +92,8 @@ test('.menu-item-select-col unselect', async ({ page }) => {
   await menuitem.click()
   await th.click()
   await expect(th).toHaveClass('selected')
-  await expect(row2.locator('td:nth-child(1)')).not.toHaveClass('selected')
-  await expect(row3.locator('td:nth-child(1)')).not.toHaveClass('selected')
+  await expect(row2.locator('td:nth-child(2)')).not.toHaveClass('selected')
+  await expect(row3.locator('td:nth-child(3)')).not.toHaveClass('selected')
   await expect(row1.locator('th:nth-child(2)')).not.toHaveClass('selected')
 })
 
