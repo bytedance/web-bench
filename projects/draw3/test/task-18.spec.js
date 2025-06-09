@@ -53,17 +53,21 @@ test('press and hold blankspace to move', async ({ page }) => {
 test('release blankspace | no prev checked', async ({ page }) => {
   const canvas = page.locator('.canvas')
 
+  // Verify no operation is initially selected
+  await expect(page.locator('input[name="operation"]:checked')).toHaveCount(0)
+
   // Press and hold blankspace to move
-  // No Error
   await page.keyboard.down(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('move')
+  
   await canvas.hover()
   await page.mouse.down()
   await canvas.hover({ position: { x: 125, y: 200 } })
   await page.mouse.up()
 
-  // Release blankspace
+  // Release blankspace should restore no selection
   await page.keyboard.up(' ')
-  // await expect(page.locator('input[name="operation"]:checked'))
+  // await expect(page.locator('input[name="operation"]:checked')).toHaveCount(0)
 })
 
 test('release blankspace', async ({ page }) => {
@@ -82,4 +86,44 @@ test('release blankspace', async ({ page }) => {
   // Release blankspace
   await page.keyboard.up(' ')
   await expect(page.locator('input[name="operation"]:checked')).toHaveValue('move')
+})
+
+test('spacebar switches to move temporarily', async ({ page }) => {
+  const canvas = page.locator('.canvas')
+  
+  // Start with rect selected
+  await page.locator('.rect').click()
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('rect')
+  
+  // Press spacebar should switch to move
+  await page.keyboard.down(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('move')
+  
+  // Release spacebar should restore rect
+  await page.keyboard.up(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('rect')
+})
+
+test('spacebar with different operations', async ({ page }) => {
+  const canvas = page.locator('.canvas')
+  
+  // Test with rotate operation
+  await page.locator('.rotate').click()
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('rotate')
+  
+  await page.keyboard.down(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('move')
+  
+  await page.keyboard.up(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('rotate')
+  
+  // Test with zoom operation
+  await page.locator('.zoom').click()
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('zoom')
+  
+  await page.keyboard.down(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('move')
+  
+  await page.keyboard.up(' ')
+  await expect(page.locator('input[name="operation"]:checked')).toHaveValue('zoom')
 })

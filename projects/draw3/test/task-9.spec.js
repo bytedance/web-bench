@@ -33,8 +33,9 @@ test('create minimal line', async ({ page }) => {
   await expect(shape).toHaveAttribute('x1', '50')
   await expect(shape).toHaveAttribute('y1', '50')
 
+  const lineWidth = parseFloat((await page.locator('.line-width').inputValue()) ?? '0')
   const offset = await getOffsetByLocator(shape)
-  await expect(Math.sqrt(offset.width ** 2 + offset.height ** 2)).toBeCloseTo(9)
+  await expect(Math.sqrt(offset.width ** 2 + offset.height ** 2)).toBeCloseTo(lineWidth)
 })
 
 test('create minimal line 2', async ({ page }) => {
@@ -53,8 +54,9 @@ test('create minimal line 2', async ({ page }) => {
   // await expect(shape).toHaveAttribute('x2', '59')
   // await expect(shape).toHaveAttribute('y2', '50')
 
+  const lineWidth = parseFloat((await page.locator('.line-width').inputValue()) ?? '0')
   const offset = await getOffsetByLocator(shape)
-  await expect(Math.sqrt(offset.width ** 2 + offset.height ** 2)).toBeCloseTo(9)
+  await expect(Math.sqrt(offset.width ** 2 + offset.height ** 2)).toBeCloseTo(lineWidth)
 })
 
 test('create minimal line 3', async ({ page }) => {
@@ -73,6 +75,7 @@ test('create minimal line 3', async ({ page }) => {
   // await expect(shape).toHaveAttribute('x2', '41')
   // await expect(shape).toHaveAttribute('y2', '50')
 
+  const lineWidth = parseFloat((await page.locator('.line-width').inputValue()) ?? '0')
   const offset = await getOffsetByLocator(shape)
-  await expect(Math.sqrt(offset.width ** 2 + offset.height ** 2)).toBeCloseTo(9)
+  await expect(Math.sqrt(offset.width ** 2 + offset.height ** 2)).toBeCloseTo(lineWidth)
 })
