@@ -380,6 +380,10 @@
       "projectFolder": "projects/project-template"
     },
     {
+      "packageName": "@web-bench/pull-loading",
+      "projectFolder": "projects/pull-loading"
+    },
+    {
       "packageName": "@web-bench/bom",
       "projectFolder": "projects/bom"
     },
