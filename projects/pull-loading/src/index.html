@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pullloading</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="content">
+        <h1>欢迎来到我的页面</h1>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <p>这是内容</p>
+        <h1>我是尾巴 </h1>
+        <p id="noticeTxt">继续拖动，查看详情</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+    <script>
+
+        function getElementBottomInDocument(element) {
+        // 获取元素相对于视口的边界矩形
+        const rect = element.getBoundingClientRect();
+        
+        // 计算底边在文档中的位置：视口底部位置 + 已滚动的距离
+        const bottomInDocument = rect.bottom + window.scrollY;
+        
+        return bottomInDocument;
+        }
+
+
+        document.addEventListener('click', function () {
+
+            let noticeTxt = document.getElementById('noticeTxt');
+            console.log('noticeTxt.offsetTop ' + noticeTxt.offsetTop );
+
+            let rectBottom = noticeTxt.getBoundingClientRect().bottom;
+            console.log('rect.bottom '  + rectBottom );
+            let windowScrollY= window.scrollY;
+            console.log('window.scrollY '  + windowScrollY );
+
+
+            console.log('offsetHeight '+ noticeTxt.offsetHeight);
+            console.log('scrollTop '+noticeTxt.scrollTop);
+            console.log('clientHeight '+noticeTxt.clientHeight);
+            console.log('scrollHeight '+ noticeTxt.scrollHeight); 
+        })
+
+    </script>
+</html>
