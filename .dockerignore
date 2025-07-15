@@ -4,7 +4,11 @@ dist/
 *.log
 .env
 report/
-project/**/eval/
+projects/**/eval/
+.DS_Store
+# next.js build output
+.next/
+.mongo/
 
 # Rush temporary files
 common/deploy/
