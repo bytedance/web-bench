@@ -3,6 +3,8 @@ node_modules/
 dist/
 *.log
 .env
+report/
+project/**/eval/
 
 # Rush temporary files
 common/deploy/
@@ -10,3 +12,4 @@ common/temp/
 common/autoinstallers/*/.npmrc
 **/.rush/temp/
 *.lock
+test-results/
