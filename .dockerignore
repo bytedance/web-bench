@@ -9,7 +9,7 @@ projects/**/eval/
 # next.js build output
 .next/
 .mongo/
-test.sqlite
+*.sqlite
 
 # Rush temporary files
 common/deploy/
