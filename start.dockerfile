@@ -35,7 +35,7 @@ RUN rm -rf common/temp/*
 RUN npm i playwright@1.49.1 -g
 
 # install chromium only
-RUN npx playwright install --with-deps chromium
+RUN npx playwright install --with-deps --only-shell chromium
 
 # Update dependencies
 RUN rush update
