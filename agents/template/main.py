@@ -1,4 +1,4 @@
-from ..server import create_app
+from server import create_app, AgentRequest
 
 class AgentConfig:
   workspace: str = ".workspace"

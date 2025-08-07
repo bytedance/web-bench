@@ -12,7 +12,7 @@ from datetime import datetime
 from fastapi import HTTPException
 from typing import Dict, Any, Optional
 
-from utils.config import MAX_WORKERS
+from ..utils.config import MAX_WORKERS
 
 logger = logging.getLogger(__name__)
 

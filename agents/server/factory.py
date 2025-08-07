@@ -2,14 +2,13 @@
 Application factory module
 Responsible for creating and configuring FastAPI application
 """
-
+import uvicorn
 import logging
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-
-from api.routes import router
-from utils.config import LOG_LEVEL
-from models.config import AgentConfig
+from .services import CommandService, AgentService
+from .utils.config import LOG_LEVEL, API_PORT
+from .models import AgentConfig, AgentRequest, AgentResponse
 
 def create_app(config: AgentConfig) -> FastAPI:
     """
@@ -21,6 +20,10 @@ def create_app(config: AgentConfig) -> FastAPI:
     # Configure logging
     logging.basicConfig(level=getattr(logging, LOG_LEVEL))
     logger = logging.getLogger(__name__)
+
+    # Initialize services
+    command_service = CommandService()
+    agent_service = AgentService(config, command_service)
     
     # Create FastAPI application
     app = FastAPI(
@@ -37,10 +40,23 @@ def create_app(config: AgentConfig) -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    
-    # Register routes
-    app.include_router(router, prefix="")
 
+    @app.post("/agent", response_model=AgentResponse)
+    async def run_agent(request: AgentRequest, config: AgentConfig = Depends(AgentConfig)):
+        return await agent_service.run(request)
+
+    @app.get("/health")
+    async def health_check():
+        """Health check endpoint"""
+        return command_service.get_health_status()
+
+    @app.get("/stats")
+    async def get_stats():
+        """Get service statistics"""
+        return command_service.get_service_stats()
+    
+
+    uvicorn.run(app, host="0.0.0.0", port=API_PORT)
     # Print startup information
     print("🚀 Start Agent Server...")
     print("📋 Available endpoints:")
@@ -52,5 +68,4 @@ def create_app(config: AgentConfig) -> FastAPI:
     print(f"⚙️ MAX Workers: 10")
     print(f"🌐 Service running at http://localhost:{API_PORT}")
     
-    
-    return app
+    return 

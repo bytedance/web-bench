@@ -1,3 +1,0 @@
-# Agent Template
-
-## API Reference

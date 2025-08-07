@@ -2,9 +2,9 @@ import os
 import uuid
 from typing import Dict
 
-from models.config import AgentConfig
-from models.schemas import AgentRequest, AgentResponse
-from services.command_service import CommandService
+from ..models.config import AgentConfig
+from ..models.schemas import AgentRequest, AgentResponse
+from .command_service import CommandService
 
 class AgentService:
   def __init__(self, config: AgentConfig, command_service: CommandService):
