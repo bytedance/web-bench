@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  template-agent-server:
+    build:
+      context: ./
+      dockerfile: ./template/Dockerfile
+    container_name: template-agent-server
+    restart: unless-stopped
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - '8000:8000'
+    networks:
+      - agent-network
+
+networks:
+  agent-network:
+    driver: bridge
