@@ -5,6 +5,11 @@ HTTP CLI执行服务 - 重构版
 """
 
 import uvicorn
+import sys
+import os
+
+# 添加当前目录到Python路径
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from app_factory import create_app
 from utils.config import API_HOST, API_PORT

@@ -15,40 +15,32 @@ agents/server/
 ├── services/               # 业务逻辑层
 │   ├── __init__.py
 │   ├── command_executor.py  # 命令执行服务
-│   ├── command_service.py   # 命令业务逻辑服务（新增）
 │   └── execution_manager.py # 执行管理器
 ├── utils/                  # 工具模块
 │   ├── __init__.py
 │   └── config.py          # 配置管理
 ├── app_factory.py          # 应用工厂
 ├── main.py                # 应用入口
-└── requirements.txt       # 依赖列表
+├── requirements.txt       # 依赖列表（兼容传统pip安装）
+├── pyproject.toml         # uv项目配置（推荐）
 ```
-
-## 架构改进
-
-### 服务层抽象 ✅
-- **CommandService** 类封装了所有业务逻辑
-- API路由现在只负责接收请求和返回响应
-- 业务逻辑与API层完全解耦
-- 支持更易于单元测试
-
-## 职责分离
-- **API层** (`api/routes.py`): 处理HTTP请求/响应
-- **服务层** (`services/command_service.py`): 处理业务逻辑
-- **执行层** (`services/command_executor.py`): 实际命令执行
-- **管理层** (`services/execution_manager.py`): 状态管理
 
 ## 使用说明
 
 ### 安装依赖
+使用 uv 进行依赖管理：
 ```bash
-pip install -r requirements.txt
+uv sync
 ```
 
 ### 启动服务
 ```bash
-python main.py
+uv run python main.py
+```
+
+或者使用 uv 直接运行：
+```bash
+uv run fastapi dev main.py --reload
 ```
 
 ### API端点
@@ -62,8 +54,7 @@ python main.py
 ## 架构特点
 
 1. **模块化设计** - 代码按功能分层，职责清晰
-2. **服务层抽象** - 业务逻辑集中在CommandService中
-3. **可扩展性** - 易于添加新功能或修改现有功能
-4. **可测试性** - 各个模块可以独立测试
-5. **配置管理** - 集中管理配置参数
-6. **错误处理** - 完善的异常处理机制
+2. **可扩展性** - 易于添加新功能或修改现有功能
+3. **可测试性** - 各个模块可以独立测试
+4. **配置管理** - 集中管理配置参数
+5. **错误处理** - 完善的异常处理机制

@@ -7,8 +7,8 @@ import logging
 from fastapi import HTTPException
 from fastapi.routing import APIRouter
 
-from ..models.schemas import CLICommandRequest, CLICommandResponse
-from ..services.command_service import CommandService
+from models.schemas import CLICommandRequest, CLICommandResponse
+from services.command_service import CommandService
 
 logger = logging.getLogger(__name__)
 

@@ -9,9 +9,9 @@ from concurrent.futures import ThreadPoolExecutor
 from fastapi import HTTPException
 from typing import Dict, Any
 
-from .command_executor import CommandExecutor
-from .execution_manager import ExecutionManager
-from ..utils.config import MAX_WORKERS
+from services.command_executor import CommandExecutor
+from services.execution_manager import ExecutionManager
+from utils.config import MAX_WORKERS
 
 logger = logging.getLogger(__name__)
 
