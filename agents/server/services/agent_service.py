@@ -1,5 +1,7 @@
 import os
 import uuid
+import datetime
+import random
 from typing import Dict
 
 from ..models.config import AgentConfig
@@ -49,13 +51,22 @@ class AgentService:
       for filename in filenames:
         file_path = os.path.join(root, filename)
         relative_path = os.path.relpath(file_path, workspace)
-        with open(file_path, 'r', encoding='utf-8') as f:
-          files[relative_path] = f.read()
+        try:
+          with open(file_path, 'r', encoding='utf-8') as f:
+            files[relative_path] = f.read()
+        except (UnicodeDecodeError, IOError):
+          # Skip files that cannot be read as UTF-8 or have other read issues
+          continue
     return files
 
   async def run(self, request: AgentRequest) -> AgentResponse:
-    # 0. Generate unique task ID
-    taskId = uuid.uuid4().hex
+    start_time = datetime.datetime.now().isoformat()
+
+    # 0. Generate unique task ID (format: YYYYMMDD-HHMMSS-randomID)
+    now = datetime.datetime.now()
+    date_str = now.strftime("%Y%m%d-%H%M%S")
+    random_suffix = str(uuid.uuid4().hex[:6])
+    taskId = f"{date_str}-{random_suffix}"
 
     # 1. Prepare workspace
     workspace = os.path.join(self.config.workspace, taskId)
@@ -76,5 +87,10 @@ class AgentService:
       taskId=taskId,
       files=result_files,
       trajectory=trajectory,
-      executeRes=execute_res
+      stdout=execute_res["stdout"],
+      stderr=execute_res["stderr"],
+      exit_code=execute_res["exit_code"],
+      error=execute_res["error"],
+      end_time=execute_res["end_time"],
+      start_time=start_time,
     )

@@ -76,11 +76,23 @@ class CommandService:
                 cwd=working_dir
             )
             
-            stdout, stderr = process.communicate(timeout=timeout)
+            out_lines = []
+            error_lines = []
+
+            for line in iter(process.stdout.readline, ''):
+                if logger.isEnabledFor(logging.DEBUG):
+                    print(line, end='')
+                out_lines.append(line)
             
+            for line in process.stderr:
+                if logger.isEnabledFor(logging.DEBUG):
+                    print(line, end='')
+                error_lines.append(line)
+            
+            process.wait(timeout=timeout)
             result.update({
-                "stdout": stdout,
-                "stderr": stderr,
+                "stdout": ''.join(out_lines),
+                "stderr": ''.join(error_lines),
                 "exit_code": process.returncode,
                 "end_time": datetime.now().isoformat()
             })

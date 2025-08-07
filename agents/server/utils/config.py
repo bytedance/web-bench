@@ -10,4 +10,4 @@ API_HOST = "0.0.0.0"
 API_PORT = 8000
 
 # Logging configuration
-LOG_LEVEL = "INFO"
+LOG_LEVEL = "DEBUG"

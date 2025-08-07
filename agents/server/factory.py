@@ -55,17 +55,17 @@ def create_app(config: AgentConfig) -> FastAPI:
         """Get service statistics"""
         return command_service.get_service_stats()
     
-
-    uvicorn.run(app, host="0.0.0.0", port=API_PORT)
     # Print startup information
     print("🚀 Start Agent Server...")
     print("📋 Available endpoints:")
-    print("  POST /execute - Execute CLI commands")
-    print("  GET  /status/{execution_id} - Query execution status")
+    print("  POST /agent - Run agent")
     print("  GET  /health - Health check")
     print("  GET  /stats - Statistics")
     print("  DELETE /clear - Clear completed records")
     print(f"⚙️ MAX Workers: 10")
     print(f"🌐 Service running at http://localhost:{API_PORT}")
+
+    uvicorn.run(app, host="0.0.0.0", port=API_PORT)
+
     
     return 

@@ -145,3 +145,4 @@ temp/
 .tmp/
 
 .workspace
+.trajectory/
