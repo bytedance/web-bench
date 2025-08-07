@@ -1,1 +1,5 @@
-"""数据模型模块"""
+"""Data model module"""
+
+from .config import AgentConfig
+
+__all__ = ["AgentConfig"]

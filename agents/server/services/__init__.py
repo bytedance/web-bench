@@ -1,5 +1,6 @@
-"""服务层模块"""
+"""Service layer module"""
 
 from .command_service import CommandService
+from .agent_service import AgentService
 
-__all__ = ["CommandExecutor", "ExecutionManager", "CommandService"]
+__all__ = ["CommandService", "AgentService"]

@@ -20,6 +20,10 @@ projects/*/eval/
 **/parcel/src/sourcemaps/
 **/*.sqlite
 **/.parcel-cache/
+**/.workspace/
+**/logs/
+**/__pycache__/
+**/.venv/
 
 
 # Rush temporary files

@@ -1,7 +1,7 @@
 [project]
 name = "agent-server"
 version = "0.1.0"
-description = "Agent Server HTTP 服务"
+description = "Agent Server HTTP service"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [

@@ -1,34 +1,37 @@
 """
-API路由定义
-包含所有FastAPI路由端点
+API routing definition
+Contains all FastAPI routing endpoints
 """
 
 import logging
-from fastapi import HTTPException
+from fastapi import HTTPException, Depends
 from fastapi.routing import APIRouter
 
-from models.schemas import CLICommandRequest, CLICommandResponse
+from models.schemas import CLICommandRequest, CLICommandResponse, AgentRequest, AgentResponse
+from models.config import AgentConfig
 from services.command_service import CommandService
+from services.agent_service import AgentService
 
 logger = logging.getLogger(__name__)
 
-# 创建路由实例
+# Create router instance
 router = APIRouter()
 
-# 初始化服务
+# Initialize services
 command_service = CommandService()
 
 
-@router.post("/execute", response_model=CLICommandResponse)
-async def execute_command(request: CLICommandRequest):
+@router.post("/agent", response_model=AgentResponse)
+async def run_agent(request: AgentRequest, config: AgentConfig = Depends(AgentConfig)):
+  return await AgentService(config, command_service).run(request)
     """
-    执行CLI命令的API端点
+    API endpoint for executing CLI commands
     
     Args:
-        request: CLI命令请求
+        request: CLI command request
         
     Returns:
-        执行结果
+        Execution result
     """
     result = await command_service.execute_command(
         command=request.command,
@@ -38,17 +41,16 @@ async def execute_command(request: CLICommandRequest):
     
     return CLICommandResponse(**result)
 
-
 @router.get("/status/{execution_id}", response_model=CLICommandResponse)
 async def get_execution_status(execution_id: str):
     """
-    获取命令执行状态的API端点
+    API endpoint for getting command execution status
     
     Args:
-        execution_id: 执行ID
+        execution_id: Execution ID
         
     Returns:
-        执行状态
+        Execution status
     """
     result = command_service.get_execution_status(execution_id)
     return CLICommandResponse(execution_id=execution_id, **result)
@@ -56,17 +58,17 @@ async def get_execution_status(execution_id: str):
 
 @router.get("/health")
 async def health_check():
-    """健康检查端点"""
+    """Health check endpoint"""
     return command_service.get_health_status()
 
 
 @router.get("/stats")
 async def get_stats():
-    """获取服务统计信息"""
+    """Get service statistics"""
     return command_service.get_service_stats()
 
 
 @router.delete("/clear")
 async def clear_results():
-    """清除已完成的执行结果"""
+    """Clear completed execution results"""
     return command_service.clear_completed_executions()

@@ -37,5 +37,6 @@ class AgentRequest(BaseModel):
 
 class AgentResponse(BaseModel):
     """Agent response model"""
+    taskId: str = Field(..., description="Task ID")
     files: Dict[str, str] = Field(..., description="Mapping of file paths to content")
     trajectory: str = Field(..., description="LLM thinking trajectory")
