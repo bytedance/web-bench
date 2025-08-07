@@ -1,21 +1,21 @@
 """
-数据模型定义
-包含所有Pydantic模型定义
+Data model definitions
+Contains all Pydantic model definitions
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Dict
 
 
 class CLICommandRequest(BaseModel):
-    """CLI命令请求模型"""
-    command: str = Field(..., description="要执行的CLI命令")
-    timeout: Optional[int] = Field(default=60, description="命令超时时间（秒）")
-    working_dir: Optional[str] = Field(default=None, description="命令执行的工作目录")
+    """CLI command request model"""
+    command: str = Field(..., description="CLI command to execute")
+    timeout: Optional[int] = Field(default=60, description="Command timeout in seconds")
+    working_dir: Optional[str] = Field(default=None, description="Working directory for command execution")
 
 
 class CLICommandResponse(BaseModel):
-    """CLI命令响应模型"""
+    """CLI command response model"""
     execution_id: str
     status: str
     command: str
@@ -25,3 +25,17 @@ class CLICommandResponse(BaseModel):
     start_time: str
     end_time: Optional[str] = None
     error: Optional[str] = None
+
+
+class AgentRequest(BaseModel):
+    """Agent request model"""
+    type: str = Field(..., description="Request type, e.g., normal")
+    files: Dict[str, str] = Field(..., description="Mapping of file paths to content")
+    task: str = Field(..., description="LLM thinking task description")
+    error: str = Field(..., description="Error context information")
+
+
+class AgentResponse(BaseModel):
+    """Agent response model"""
+    files: Dict[str, str] = Field(..., description="Mapping of file paths to content")
+    trajectory: str = Field(..., description="LLM thinking trajectory")
