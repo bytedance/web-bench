@@ -3,7 +3,7 @@ from .schemas import AgentRequest
 class AgentConfig:
   workspace: str = ".workspace"
 
-  def parseCommand(self, request: AgentRequest) -> str:
+  def parseCommand(self, request: AgentRequest, task_id: str) -> str:
     """Parse agent request to cli command"""
     return "echo 'hello world' > res.txt"
 

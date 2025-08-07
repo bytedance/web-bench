@@ -1,16 +1,30 @@
 version: '3.8'
 
 services:
-  template-agent-server:
+  # template-agent-server:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./template/Dockerfile
+  #   container_name: template-agent-server
+  #   restart: unless-stopped
+  #   environment:
+  #     - PYTHONPATH=/app
+  #   ports:
+  #     - '8000:8000'
+  #   networks:
+  #     - agent-network
+  trae-agent-server:
     build:
       context: ./
-      dockerfile: ./template/Dockerfile
-    container_name: template-agent-server
+      dockerfile: ./trae-agent/Dockerfile
+    container_name: trae-agent-server
     restart: unless-stopped
     environment:
       - PYTHONPATH=/app
     ports:
-      - '8000:8000'
+      - '8001:8000'
+    volumes:
+      - ./trae-agent/trae_config.yml:/app/trae-agent/trae_config.yml
     networks:
       - agent-network
 

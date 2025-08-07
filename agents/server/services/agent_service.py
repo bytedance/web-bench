@@ -65,7 +65,7 @@ class AgentService:
     self._write_files_to_workspace(workspace, request.files)
 
     # 2. Execute command in workspace
-    command = self.config.parseCommand(request)
+    command = self.config.parseCommand(request, taskId)
     execute_res = await self.command_service.execute_command(command, working_dir=workspace)
 
     # 3. Copy execution results from workspace
