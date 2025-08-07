@@ -1,0 +1,11 @@
+[project]
+name = "agent-server"
+version = "0.1.0"
+description = "Agent Server HTTP 服务"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.4.0",
+]
