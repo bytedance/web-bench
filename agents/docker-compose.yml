@@ -22,9 +22,9 @@ services:
     environment:
       - PYTHONPATH=/app
     ports:
-      - '8001:8000'
+      - '8000:8000'
     volumes:
-      - ./trae-agent/trae_config.yml:/app/trae-agent/trae_config.yml
+      - ./trae-agent/trae_config.yaml:/app/trae-agent-source/trae_config.yaml
     networks:
       - agent-network
 

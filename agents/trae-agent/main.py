@@ -5,14 +5,14 @@ class AgentConfig:
   # Get the directory of current file
   _current_dir = os.path.dirname(os.path.abspath(__file__))
   
-  # trae_agent_source: str = "/app/trae-agent-source"
-  # workspace: str = "/.workspace"
-  # trajectory_root: str = "/.trajectory"
+  trae_agent_source: str = "/app/trae-agent-source"
+  workspace: str = "/.workspace"
+  trajectory_root: str = "/.trajectory"
 
   # Debug locally
-  trae_agent_source: str = os.path.join(_current_dir, "trae-agent-source")
-  workspace: str = os.path.join(_current_dir, "..", ".workspace")
-  trajectory_root: str = os.path.join(_current_dir, "..", ".trajectory")
+  # trae_agent_source: str = os.path.join(_current_dir, "trae-agent-source")
+  # workspace: str = os.path.join(_current_dir, "..", ".workspace")
+  # trajectory_root: str = os.path.join(_current_dir, "..", ".trajectory")
 
   def parseCommand(self, request: AgentRequest, task_id: str) -> str:
     """Parse agent request to cli command"""
