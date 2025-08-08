@@ -70,8 +70,9 @@ ${(result.response || {})[path]}
   `
   })
   .join('\n')}
-    
-        
+
+${result.trajectory ? `*Trajectory:*\n\`\`\`\n${result.trajectory}\n\`\`\`` : ''}
+
 ${
   result.errorMessage
     ? `
