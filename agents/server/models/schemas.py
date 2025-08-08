@@ -11,7 +11,8 @@ class AgentRequest(BaseModel):
     type: str = Field(..., description="Request type, e.g., normal")
     files: Dict[str, str] = Field(..., description="Mapping of file paths to content")
     task: str = Field(..., description="LLM thinking task description")
-    error: str = Field(..., description="Error context information")
+    error: Optional[str] = Field(None, description="Error context information")
+
 
 
 class AgentResponse(BaseModel):

@@ -16,7 +16,7 @@ class AgentConfig:
     prompt = f'# Task \n {request.task} \n'
     prompt += f' # Constraint \n do not execute any generated code, just write & modify code \n'
     if request.error:
-      prompt += f' # Error Response From Playwright \n {request.error}'
+      prompt += f' # Error Context \n {request.error}'
 
     return f'cd {self.source} && uv run trae-cli run "{prompt}" --working-dir {self.workspace}/{task_id} --trajectory-file {self.trajectory_root}/{task_id}.json'
 
