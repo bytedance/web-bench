@@ -146,3 +146,9 @@ temp/
 
 .workspace
 .trajectory/
+trae-agent-source/
+
+trae_config.yaml
+trae_config.yml
+
+.source

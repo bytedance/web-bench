@@ -1,0 +1,6 @@
+__pycache__/
+**/__pycache__/
+.venv/
+**/.venv/
+**/.source/
+**/.trae_config.yaml
