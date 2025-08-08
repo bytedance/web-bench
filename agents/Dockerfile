@@ -7,7 +7,8 @@ COPY --from=docker.io/astral/uv:latest /uv /uvx /bin/
 RUN apt-get update && apt-get install -y curl tar
 
 # Install Node.js & Npx For MCP
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs
 
 # Remove useless trash
 RUN apt-get autoremove -y \

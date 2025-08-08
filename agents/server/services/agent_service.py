@@ -81,7 +81,7 @@ class AgentService:
 
     # 3. Copy execution results from workspace
     result_files = self._read_files_in_workspace(workspace)
-    trajectory = self.config.getTrajectory(taskId)
+    trajectory = self.config.getTrajectory(taskId, execute_res)
 
     return AgentResponse(
       taskId=taskId,
