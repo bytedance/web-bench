@@ -20,7 +20,9 @@ class AgentConfig:
     # mkdir {self.workspace}/{task_id}
     os.makedirs(f'{self.workspace}/{task_id}', exist_ok=True)
 
-    return f'cd {self.workspace}/{task_id} && qwen --yolo --prompt "{prompt}"'
+    # Escape double quotes in prompt to prevent shell parsing issues
+    escaped_prompt = prompt.replace('"', '\\"')
+    return f'cd {self.workspace}/{task_id} && qwen --yolo --prompt "{escaped_prompt}"'
 
   def getTrajectory(self, task_id: str, execute_res: dict) -> str:
     """Get trajectory of agent request"""

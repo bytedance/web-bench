@@ -18,7 +18,10 @@ class AgentConfig:
     if request.error:
       prompt += f' # Error Context \n {request.error}'
 
-    return f'cd {self.source} && uv run trae-cli run "{prompt}" --working-dir {self.workspace}/{task_id} --trajectory-file {self.trajectory_root}/{task_id}.json'
+    # Escape double quotes in prompt to prevent shell parsing issues
+    escaped_prompt = prompt.replace('"', '\\"')
+
+    return f'cd {self.source} && uv run trae-cli run "{escaped_prompt}" --working-dir {self.workspace}/{task_id} --trajectory-file {self.trajectory_root}/{task_id}.json'
 
   def getTrajectory(self, task_id: str) -> str:
     """Get trajectory of agent request"""
