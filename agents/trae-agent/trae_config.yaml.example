@@ -4,7 +4,8 @@ agents:
     model: trae_agent_model
     max_steps: 200
     tools:
-      - bash
+      # ONLY View and Edit files, no bash needed
+      # - bash
       - str_replace_based_edit_tool
       - sequentialthinking
       - task_done
