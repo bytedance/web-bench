@@ -30,3 +30,4 @@ else
     echo "❌ Installation may have failed, please check npm permissions and network connection"
     exit 1
 fi
+

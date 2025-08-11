@@ -14,6 +14,7 @@ class AgentConfig:
     """Parse agent request to cli command"""
 
     prompt = f'# Task \n {request.task} \n'
+
     if request.error:
       prompt += f' # Error Context \n {request.error}'
 
@@ -32,5 +33,7 @@ class AgentConfig:
 if __name__ == "__main__":
   os.system(f'bash {AgentConfig._current_dir}/install.sh')
   print("✅ Install source success")
+  os.system(f'bash {AgentConfig._current_dir}/cp_settings.sh')
+  print("✅ Copy settings success")
 
   create_app(AgentConfig())
