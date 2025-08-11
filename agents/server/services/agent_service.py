@@ -38,7 +38,7 @@ class AgentService:
 
 
   def _read_files_in_workspace(self, workspace: str) -> Dict[str, str]:
-    """Recursively read all file contents from workspace
+    """Recursively read all file contents from workspace, ignoring common build and dependency directories
     
     Args:
         workspace: Workspace directory path
@@ -46,11 +46,35 @@ class AgentService:
     Returns:
         Dictionary mapping file paths to content
     """
+    # Directories to ignore during file traversal
+    ignore_dirs = {
+        'node_modules',
+        '.next',
+        'dist',
+        'build',
+        '.git',
+        '__pycache__',
+        '.pytest_cache',
+        '.venv',
+        'venv',
+        '.env',
+        'coverage',
+        '.nyc_output'
+    }
+    
     files = {}
-    for root, _, filenames in os.walk(workspace):
+    for root, dirs, filenames in os.walk(workspace):
+      # Filter out directories we want to ignore
+      dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.startswith('.')]
+      
       for filename in filenames:
         file_path = os.path.join(root, filename)
         relative_path = os.path.relpath(file_path, workspace)
+        
+        # Skip hidden files and common binary extensions
+        if filename.startswith('.') or any(filename.endswith(ext) for ext in ['.pyc', '.pyo', '.pyd']):
+          continue
+            
         try:
           with open(file_path, 'r', encoding='utf-8') as f:
             files[relative_path] = f.read()
