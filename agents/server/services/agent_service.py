@@ -21,13 +21,16 @@ class AgentService:
         workspace: Target workspace directory path
         files: Dictionary mapping file paths to content
     """
+    src_dir = os.path.join(workspace, 'src')
+    os.makedirs(src_dir, exist_ok=True)
+
     for file_path, file_content in files.items():
       # Ensure file path is safe
       safe_file_path = os.path.normpath(file_path)
       if safe_file_path.startswith('..'):
         continue  # Skip unsafe paths
         
-      full_file_path = os.path.join(workspace, safe_file_path)
+      full_file_path = os.path.join(src_dir,  safe_file_path)
       
       # Ensure directory exists
       os.makedirs(os.path.dirname(full_file_path), exist_ok=True)
@@ -63,13 +66,14 @@ class AgentService:
     }
     
     files = {}
-    for root, dirs, filenames in os.walk(workspace):
+    src_dir = os.path.join(workspace, 'src')
+    for root, dirs, filenames in os.walk(src_dir):
       # Filter out directories we want to ignore
       dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.startswith('.')]
       
       for filename in filenames:
         file_path = os.path.join(root, filename)
-        relative_path = os.path.relpath(file_path, workspace)
+        relative_path = os.path.relpath(file_path, src_dir)
         
         # Skip hidden files and common binary extensions
         if filename.startswith('.') or any(filename.endswith(ext) for ext in ['.pyc', '.pyo', '.pyd']):
