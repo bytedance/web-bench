@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node scripts/dev.js",
     "dev": "node scripts/dev.js",
-    "build": "VITE_CJS_IGNORE_WARNING=true vite build",
+    "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
     "db": "node scripts/init-db.js",
     "test": "npx @web-bench/test-util"
   },
@@ -32,7 +32,8 @@
     "@types/node": "^22.7.9",
     "typescript": "^5.6.3",
     "@vitejs/plugin-react": "^4.3.3",
-    "vite": "^6.2.2"
+    "vite": "^6.2.2",
+    "cross-env": "~7.0.3"
   },
   "eval": {
     "stable": true,

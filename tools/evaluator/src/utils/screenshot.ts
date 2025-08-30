@@ -87,6 +87,9 @@ export const generateScreenShot = async (
   const screenshotPath = path.join(settings.testDir, `screenshot-${port}.spec.js`)
   const taskTestSpec = path.join(settings.testDir, `${task.id}.spec.js`)
 
+  // Fix: https://github.com/bytedance/web-bench/issues/71
+  const escapedFilename = filename.replace(/\\/g, '\\\\'); // Replace \ with \\
+
   const content = `${
     isESModule
       ? `import { test } from '@playwright/test'`
@@ -99,7 +102,7 @@ test("Take Screenshot", async ({ page }) => {
   await page.waitForLoadState()
   await page.waitForLoadState('networkidle', { timeout: 5000 })
   await page.screenshot({
-    path: "${filename}"
+    path: "${escapedFilename}"
   })
 })`
 

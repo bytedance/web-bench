@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "vite src --config vite.config.js",
-    "build": "VITE_CJS_IGNORE_WARNING=true vite build",
+    "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
     "test": "npx @web-bench/test-util"
   },
   "author": "luics",
@@ -16,6 +16,7 @@
     "@types/node": "^22.7.9",
     "@web-bench/test-util": "workspace:*",
     "vite": "^6.2.2",
-    "sass-embedded": "~1.83.1"
+    "sass-embedded": "~1.83.1",
+    "cross-env": "~7.0.3"
   }
 }

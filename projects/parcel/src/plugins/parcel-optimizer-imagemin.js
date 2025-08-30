@@ -22,13 +22,13 @@ const imageminSvgo = require('imagemin-svgo');
 
 module.exports = new Optimizer({
   async optimize({ contents, map, bundle }) {
-    // 检查文件类型是否为图片
+    // Check if file type is image
     const supportedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg'];
     if (!supportedExtensions.some(ext => bundle.getMainEntry().filePath.endsWith(ext))) {
       return { contents, map };
     }
 
-    // 只在构建命令时运行
+    // Only run during build command
     if (process.env.NODE_ENV !== 'production') {
       return { contents, map };
     }
@@ -44,9 +44,9 @@ module.exports = new Optimizer({
           progressive: true
         }),
         imageminPngquant({
-          quality: [0.6, 0.8],  // 压缩质量范围
-          speed: 4,             // 压缩速度（1-11，1最慢但质量最好）
-          strip: true          // 删除不必要的元数据
+          quality: [0.6, 0.8],  // Compression quality range
+          speed: 4,             // Compression speed (1-11, 1 is slowest but best quality)
+          strip: true          // Delete unnecessary metadata
         }),
         imageminSvgo.default({
           plugins: [
@@ -64,4 +64,4 @@ module.exports = new Optimizer({
       map
     };
   }
-}); 
+});

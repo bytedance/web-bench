@@ -16,35 +16,35 @@ const marked = require('marked');
 const matter = require('gray-matter');
 
 module.exports = function(source) {
-  // 存储找到的图片路径和对应的变量名
+  // Store found image paths and corresponding variable names
   const images = new Map();
   let imageCount = 0;
   
-  // 自定义 renderer 来捕获和处理图片
+  // Custom renderer to capture and process images
   const renderer = new marked.Renderer();
   renderer.image = function({ href, title, text }) {
     if (href && !href.startsWith('http')) {
-      // 为每个本地图片生成唯一的变量名
+      // Generate unique variable name for each local image
       const varName = `img${imageCount}`;
       images.set(href, varName);
       imageCount++;
-      // 直接返回使用变量的图片标签
+      // Directly return image tag using variable
       return `<img src="\${${varName}}" alt="${text}"${title ? ` title="${title}"` : ''}>`;
     }
-    // 对于外部图片，保持原样
+    // For external images, keep as original
     return `<img src="${href}" alt="${text}"${title ? ` title="${title}"` : ''}>`;
   };
 
-  // 使用 gray-matter 解析 frontmatter 和内容
+  // Use gray-matter to parse frontmatter and content
   const { data: frontmatter, content } = matter(source);
   const html = marked.parse(content, { renderer });
 
-  // 生成图片 imports
+  // Generate image imports
   const imports = Array.from(images.entries())
     .map(([path, varName]) => `import ${varName} from ${JSON.stringify(path)};`)
     .join('\n');
 
-  // 导出处理后的内容
+  // Export processed content
   return `
     ${imports}
     const html = \`${html}\`;

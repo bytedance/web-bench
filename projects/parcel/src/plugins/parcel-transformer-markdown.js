@@ -19,17 +19,17 @@ const path = require('path')
 
 exports.default = new Transformer({
   async transform({ asset }) {
-    // 只处理 .md 文件
+    // Only process .md files
     if (asset.type !== 'md') {
       return [asset];
     }
 
     const dir = path.dirname(asset.filePath)
 
-    // 获取 markdown 内容
+    // Get markdown content
     const source = await asset.getCode();
     
-    // 解析 frontmatter
+    // Parse frontmatter
     const { data: frontmatter, content } = matter(source);
     
     const imports = new Set()
@@ -46,10 +46,10 @@ exports.default = new Transformer({
         }
     }
 
-    // 使用解析后的 content 而不是原始的 fileContent
+    // Use parsed content instead of original fileContent
     const html = marked.parse(content, { renderer })
     
-    // 生成最终的代码，包括 frontmatter 导出
+    // Generate final code, including frontmatter export
     const code = `
         ${Array.from(imports).join('\n')}
         const html = \`${html}\`;
@@ -57,10 +57,10 @@ exports.default = new Transformer({
         export default html;
     `
 
-    // 设置新的代码和类型
+    // Set new code and type
     asset.type = 'js';
     asset.setCode(code);
 
     return [asset];
   }
-}); 
+});

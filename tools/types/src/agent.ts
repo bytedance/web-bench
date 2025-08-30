@@ -36,6 +36,10 @@ export interface AgentResponse {
   outputTokens?: number
 
   // [filePath:string]: string  Poor Extension
+
+  // Return the trajectory of the agent
+   
+  trajectory?: string
 }
 
 export interface AgentRequest {

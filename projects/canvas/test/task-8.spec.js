@@ -20,7 +20,7 @@ test.beforeEach(async ({ page }) => {
   await page.click('canvas');
 });
 
-// 新增模块化测试
+// Add modular test
 test('modules should be properly loaded', async ({ page }) => {
   const modulesLoaded = await page.evaluate(() => {
     return {

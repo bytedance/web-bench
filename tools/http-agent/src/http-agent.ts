@@ -53,7 +53,6 @@ export class HttpAgent implements IAgent {
     } catch (error) {
       console.log('error', error)
     }
-    console.log('request', res)
 
     if (res) {
       if (res.status !== 200) {

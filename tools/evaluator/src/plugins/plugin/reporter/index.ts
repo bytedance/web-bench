@@ -22,7 +22,7 @@ import { formatEndpoint, formatModelName } from '../../../utils/format'
 import stripAnsi from 'strip-ansi'
 import fse from 'fs-extra'
 import { getOrdinalNumberAbbreviation } from '../../../utils/report'
-import { TesterFactory } from '../../utils'
+import { isJSONString, TesterFactory } from '../../utils'
 
 const getReportName = (project: IProjectRunner) => {
   const { name, model } = project.settings
@@ -195,9 +195,13 @@ export const ReportPlugin: EvalPlugin[] = [
         encoding: 'utf-8',
       })
       project.logger.info('The report was generated successfully. The file path is ', reportPath)
-      await fs.appendFile(logPath, stripAnsi(project.logger.getHistory().join('\n')), {
-        encoding: 'utf-8',
-      })
+      // Write log history directly to avoid RangeError
+      const logHistory = project.logger.getHistory()
+      for (const log of logHistory) {
+        await fs.appendFile(logPath, stripAnsi(log) + '\n', {
+          encoding: 'utf-8',
+        })
+      }
       project.logger.clearHistory()
     },
 
@@ -241,7 +245,7 @@ export const ReportPlugin: EvalPlugin[] = [
             '## Request',
             '```json\n' + JSON.stringify(JSON.parse(request || '{}'), null, 2) + '\n```\n',
             '## Response',
-            response,
+            isJSONString(response) ? '```json\n' + JSON.stringify(JSON.parse(response || '{}'), null, 2) + '\n```\n' : response,
             '',
           ].join('\n'),
           {

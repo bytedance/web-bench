@@ -1,8 +1,30 @@
 node_modules/
+**/node_modules/
 .git/
-dist/
+**/dist/
+**/dist-server/
+**/*.log
 *.log
 .env
+**/.env
+apps/eval/report/
+projects/*/eval/
+**/.DS_Store
+# next.js build output
+**/.next/
+**/.nuxt/
+**/.output/
+**.mongo/
+**/.angular/
+**/prisma/src/generated/
+**/parcel/src/sourcemaps/
+**/*.sqlite
+**/.parcel-cache/
+**/.workspace/
+**/logs/
+**/__pycache__/
+**/.venv/
+
 
 # Rush temporary files
 common/deploy/
@@ -10,3 +32,4 @@ common/temp/
 common/autoinstallers/*/.npmrc
 **/.rush/temp/
 *.lock
+**/test-results/

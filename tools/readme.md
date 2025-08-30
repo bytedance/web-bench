@@ -10,13 +10,13 @@
 rush update
 ```
 
-2. 启动服务
+2. Start service
 
 ```
 rush dev:eval
 ```
 
-3. 执行
+3. Execute
 
 ```
 rush eval

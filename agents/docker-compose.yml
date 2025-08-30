@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  agent-server:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: agent-server
+    restart: unless-stopped
+    environment:
+      - PYTHONPATH=/app
+    ports:
+      - '8000:8000'
+    volumes:
+      # Map Trae Agent Configuration File to Container
+      - ./trae-agent/trae_config.yaml:/app/trae-agent/trae_config.yaml
+    networks:
+      - agent-network
+    env_file:
+      - ./qwen-code/.env
+    # run target agent
+    command: ['uv', 'run', 'python', '-m', 'qwen-code.main']
+
+networks:
+  agent-network:
+    driver: bridge

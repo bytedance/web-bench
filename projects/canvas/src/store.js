@@ -155,7 +155,7 @@ export function spawnBoss(canvas) {
     const currentTime = Date.now();
     const timeSinceLastBoss = currentTime - window.store.bossSpawnTime;
     
-    // 检查是否应该生成新的 Boss（10秒后）
+    // Check if a new Boss should be generated (after 10 seconds)
     if (!window.store.boss && timeSinceLastBoss >= 10000) {
         const boss = {
             x: canvas.width / window.store.dpr - BOSS_SIZE,

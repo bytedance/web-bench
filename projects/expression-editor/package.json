@@ -4,7 +4,7 @@
   "scripts": {
     "build": "",
     "test": "npx @web-bench/test-util",
-    "src:test": "EVAL_PROJECT_ROOT=$(pwd)/src npx playwright test"
+    "src:test": "cross-env EVAL_PROJECT_ROOT=$(pwd)/src npx playwright test"
   },
   "author": "fengzilong",
   "eval": {
@@ -15,6 +15,7 @@
     "@types/node": "^22.7.9",
     "serve": "^14.2.4",
     "@web-bench/test-util": "workspace:*",
-    "tinycolor2": "^1.6.0"
+    "tinycolor2": "^1.6.0",
+    "cross-env": "~7.0.3"
   }
 }

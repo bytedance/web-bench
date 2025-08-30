@@ -79,6 +79,10 @@ export interface TaskResultSnippet {
    * errorMessage
    */
   errorMessage?: string
+  /**
+   * trajectory
+   */
+  trajectory?: string
 }
 
 export interface TaskSnippet {

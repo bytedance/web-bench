@@ -19,7 +19,7 @@ const glob = require('glob');
 
 module.exports = new Resolver({
   async resolve({specifier, dependency, options}) {
-    // 只处理 ~files 导入
+    // Only handle ~files imports
     if (specifier !== '~files') {
       return null;
     }
@@ -43,11 +43,11 @@ export default {
 ${exports}
 };`;
 
-    // 创建虚拟模块
+    // Create virtual module
     return {
       filePath,
       code,
       invalidateOnFileChange: files
     };
   }
-}); 
+});

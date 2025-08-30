@@ -40,28 +40,25 @@ export default function sourceMapMover() {
       const sourcemapDir = path.resolve('sourcemaps')
 
       try {
-        // 确保 sourcemaps 目录存在
-        await fs.mkdir(sourcemapDir, { recursive: true })
-
-        // 递归读取构建输出目录中的所有文件
+        // Recursively read all files in build output directory
         const files = await getAllFiles(outDir)
 
-        // 移动所有 .map 文件
+        // Move all .map files
         for (const filePath of files) {
           if (filePath.endsWith('.map')) {
-            // 保持原始目录结构
+            // Maintain original directory structure
             const relativePath = path.relative(outDir, filePath)
             const targetPath = path.join(sourcemapDir, relativePath)
             const targetDir = path.dirname(targetPath)
 
-            // 确保目标目录存在
+            // Ensure target directory exists
             await fs.mkdir(targetDir, { recursive: true })
 
             await fs.copyFile(filePath, targetPath)
             await fs.unlink(filePath)
 
-            // 更新原始文件中的 sourceMappingURL
-            const originalFilePath = filePath.slice(0, -4) // 移除 .map 扩展名
+            // Update sourceMappingURL in original file
+            const originalFilePath = filePath.slice(0, -4) // Remove .map extension
             
             if (await fs.stat(originalFilePath).catch(() => false)) {
               let content = await fs.readFile(originalFilePath, 'utf-8')
@@ -78,4 +75,4 @@ export default function sourceMapMover() {
       }
     }
   }
-} 
+}

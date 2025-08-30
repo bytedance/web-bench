@@ -234,6 +234,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.4
@@ -312,6 +315,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.4
@@ -345,6 +351,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       serve:
         specifier: ^14.2.4
         version: 14.2.4
@@ -498,6 +507,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       tsx:
         specifier: ~4.19.3
         version: 4.19.4
@@ -607,6 +619,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       mockjs:
         specifier: ^1.1.0
         version: 1.1.0
@@ -631,6 +646,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       less:
         specifier: ~4.2.1
         version: 4.2.2
@@ -723,6 +741,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       mockjs:
         specifier: ^1.1.0
         version: 1.1.0
@@ -861,6 +882,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       execa:
         specifier: ^9.5.2
         version: 9.6.0
@@ -949,6 +973,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       vite:
         specifier: ^6.2.2
         version: 6.3.5(@types/node@22.15.32)(stylus@0.64.0)
@@ -980,6 +1007,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1014,6 +1044,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1057,6 +1090,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       mockjs:
         specifier: ^1.1.0
         version: 1.1.0
@@ -1081,6 +1117,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.4
@@ -1176,6 +1215,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1194,6 +1236,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       stylus:
         specifier: ~0.64.0
         version: 0.64.0
@@ -1240,6 +1285,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1258,6 +1306,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.4
@@ -1276,6 +1327,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.4
@@ -1294,6 +1348,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       sass-embedded:
         specifier: ~1.83.1
         version: 1.83.4
@@ -1346,6 +1403,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1389,6 +1449,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       execa:
         specifier: ^9.5.2
         version: 9.6.0
@@ -1422,6 +1485,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       unocss:
         specifier: ~66.1.0-beta.6
         version: 66.1.4(vite@6.3.5)
@@ -1440,6 +1506,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       execa:
         specifier: ^9.5.2
         version: 9.6.0
@@ -1468,6 +1537,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -1489,6 +1561,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       execa:
         specifier: ^9.5.2
         version: 9.6.0
@@ -1532,6 +1607,9 @@ importers:
       '@web-bench/test-util':
         specifier: workspace:*
         version: link:../../libraries/test-util
+      cross-env:
+        specifier: ~7.0.3
+        version: 7.0.3
       mockjs:
         specifier: ^1.1.0
         version: 1.1.0
@@ -10144,6 +10222,14 @@ packages:
     resolution: {integrity: sha512-p9nwwR4qyT5W996vBZhdvBCnMhicY5ytZkR4D1Xj0wuTDEiMnjwR57Q3RXYY/s0EpX6Ay3vgIcfaR+ewGHsi+g==}
     engines: {node: '>=18.0'}
     dev: false
+
+  /cross-env@7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.6
+    dev: true
 
   /cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}

@@ -30,7 +30,7 @@ function updateBird() {
             const canvas = document.getElementById('myCanvas');
             const maxX = canvas.width / window.store.dpr - window.store.assets.birdImg.width;
             
-            // 使用单一的水平移动值
+            // Use a single horizontal movement value
             x += window.store.horizontalMovement * 5;
             x = Math.max(0, Math.min(maxX, x));
             

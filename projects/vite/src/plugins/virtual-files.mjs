@@ -32,7 +32,7 @@ export default function virtualFiles() {
       if (id === RESOLVED_VIRTUAL_MODULE_ID) {
         const filesDir = path.resolve(process.cwd(), 'src/files')
         
-        // 确保目录存在
+        // Ensure directory exists
         if (!fs.existsSync(filesDir)) {
           return 'export default {}'
         }
@@ -54,4 +54,4 @@ export default function virtualFiles() {
       }
     }
   }
-} 
+}

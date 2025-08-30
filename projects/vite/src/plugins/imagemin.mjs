@@ -30,8 +30,8 @@ export default function imageminPlugin(options = {}) {
 
   return {
     name: 'vite-plugin-imagemin',
-    apply: 'build', // 只在构建时运行
-    enforce: 'post', // 在构建后运行
+    apply: 'build', // Only run during build
+    enforce: 'post', // Run after build
 
     async generateBundle(options, bundle) {
       for (const fileName in bundle) {
@@ -67,4 +67,4 @@ export default function imageminPlugin(options = {}) {
       }
     }
   }
-} 
+}

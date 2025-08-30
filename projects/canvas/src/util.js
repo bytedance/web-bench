@@ -150,16 +150,16 @@ export function updateWeatherParticles(canvas) {
 export async function createInvertedBirdImage(birdImg) {
     const offscreenCanvas = document.createElement('canvas');
     const ctx = offscreenCanvas.getContext('2d');
-    
+
     // Set canvas size to match bird image
     offscreenCanvas.width = birdImg.width;
     offscreenCanvas.height = birdImg.height;
-    
+
     // Draw and transform bird image
     ctx.translate(offscreenCanvas.width, 0);
     ctx.scale(-1, 1); // Mirror horizontally
     ctx.drawImage(birdImg, 0, 0);
-    
+
     // Invert colors
     const imageData = ctx.getImageData(0, 0, offscreenCanvas.width, offscreenCanvas.height);
     const data = imageData.data;
@@ -169,7 +169,7 @@ export async function createInvertedBirdImage(birdImg) {
         data[i + 2] = 255 - data[i + 2]; // Invert blue
     }
     ctx.putImageData(imageData, 0, 0);
-    
+
     // Create new image from canvas
     const img = new Image();
     img.src = offscreenCanvas.toDataURL();
@@ -206,10 +206,10 @@ export function checkEnemyCollision() {
  * Check if two rectangles overlap
  */
 export const checkRectCollision = (rect1, rect2) => {
-    return rect1.right > rect2.left && 
-           rect1.left < rect2.right && 
-           rect1.bottom > rect2.top && 
-           rect1.top < rect2.bottom;
+    return rect1.right > rect2.left &&
+        rect1.left < rect2.right &&
+        rect1.bottom > rect2.top &&
+        rect1.top < rect2.bottom;
 };
 
 // Add bullet update function
@@ -255,7 +255,7 @@ export const updateBullets = (canvas) => {
         enemies: remainingEnemies
     });
 };
-// 添加 Boss 更新函数
+// Add Boss update function
 export function updateBoss(canvas) {
     if (!window.store.boss) return;
 
@@ -263,7 +263,7 @@ export function updateBoss(canvas) {
     const maxY = canvas.height / window.store.dpr - window.store.floorHeight - BOSS_SIZE;
     let newY = boss.y + boss.verticalVelocity * window.store.frameAdjustedRate;
 
-    // 边界检测并反向
+    // Boundary detection and reversal
     if (newY <= 0 || newY >= maxY) {
         boss.verticalVelocity *= -1;
         newY = Math.max(0, Math.min(maxY, newY));
@@ -276,7 +276,7 @@ export function updateBoss(canvas) {
         }
     });
 
-    // 检查子弹碰撞
+    // Check bullet collision
     const remainingBullets = window.store.bullets.filter(bullet => {
         const bulletHitbox = {
             left: bullet.x,
@@ -293,10 +293,10 @@ export function updateBoss(canvas) {
         };
 
         if (checkRectCollision(bulletHitbox, bossHitbox)) {
-            // 击中 Boss
+            // Hit Boss
             const newLives = boss.lives - 1;
             if (newLives <= 0) {
-                // Boss 被击败，设置新的生成时间
+                // Boss defeated, set new spawn time
                 updateStore({
                     boss: null,
                     bossSpawnTime: Date.now()
@@ -310,7 +310,8 @@ export function updateBoss(canvas) {
                     }
                 });
             }
-            return false; // 移除子弹
+            // Remove bullet
+            return false;
         }
         return true;
     });
@@ -318,11 +319,11 @@ export function updateBoss(canvas) {
     updateStore({ bullets: remainingBullets });
 }
 
-// 添加 Boss 子弹更新函数
+// Add Boss bullet update function
 export function updateBossBullets(canvas) {
     if (!window.store.boss) return;
 
-    // 生成新子弹
+    // Generate new bullets
     const currentTime = Date.now();
     if (currentTime - window.store.lastBossBulletFiredTime >= BULLET_FIRING_INTERVAL) {
         const newBullet = {
@@ -330,7 +331,7 @@ export function updateBossBullets(canvas) {
             y: window.store.boss.y + BOSS_SIZE / 2 - BULLET_SIZE / 2,
             width: BULLET_SIZE,
             height: BULLET_SIZE,
-            speed: -BULLET_SPEED // 向左移动
+            speed: -BULLET_SPEED // Move left
         };
 
         updateStore({
@@ -339,7 +340,7 @@ export function updateBossBullets(canvas) {
         });
     }
 
-    // 更新子弹位置并检查碰撞
+    // Update bullet positions and check collisions
     const updatedBullets = window.store.bossBullets
         .map(bullet => ({
             ...bullet,
@@ -347,7 +348,7 @@ export function updateBossBullets(canvas) {
         }))
         .filter(bullet => bullet.x + bullet.width > 0);
 
-    // 检查与玩家的碰撞
+    // Check collision with player
     const bulletHitPlayer = updatedBullets.some(bullet => {
         const bulletHitbox = {
             left: bullet.x,

@@ -43,6 +43,6 @@ module.exports = function (app) {
     })
   );
 
-  // 添加 mock 数据的路由中间件
+  // Add routing middleware for mock data
   app.use(createMockMiddleware());
-}; 
+};

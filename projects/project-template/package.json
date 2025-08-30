@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "vite --config vite.config.js",
-    "build": "VITE_CJS_IGNORE_WARNING=true vite build",
+    "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
     "test": "npx @web-bench/test-util"
   },
   "author": "luics",
@@ -11,6 +11,7 @@
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.7.9",
     "@web-bench/test-util": "workspace:*",
-    "vite": "^6.2.2"
+    "vite": "^6.2.2",
+    "cross-env": "~7.0.3"
   }
 }

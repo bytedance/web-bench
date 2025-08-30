@@ -94,17 +94,17 @@ const reactRoot = document.createElement('div')
 document.body.appendChild(reactRoot)
 createRoot(reactRoot).render(React.createElement(ReactComponent))
 
-// 创建一个 div 元素来显示文件内容
+// Create a div element to display file content
 const filesDiv = document.createElement('div')
 filesDiv.textContent = JSON.stringify(files, null, 0)
 document.body.appendChild(filesDiv)
 
-// 显示 markdown 内容
+// Display markdown content
 const mdDiv = document.createElement('div')
 mdDiv.innerHTML = md
 document.body.appendChild(mdDiv)
 
-// 新增：显示 frontmatter 作者信息
+// New: Display frontmatter author information
 const authorDiv = document.createElement('div')
 authorDiv.textContent = `Author: ${frontmatter.author}`
 document.body.appendChild(authorDiv)

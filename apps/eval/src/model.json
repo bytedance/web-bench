@@ -252,6 +252,18 @@
       "apiKey": "{{DOUBAO_256K_API_KEY}}"
     },
     {
+      "title": "doubao-seed-1.6",
+      "provider": "doubao",
+      "model": "{{DOUBAO_SEED_1_6_ENDPOINT}}",
+      "apiKey": "{{DOUBAO_API_KEY}}"
+    },
+    {
+      "title": "doubao-seed-1.6-thinking",
+      "provider": "doubao",
+      "model": "{{DOUBAO_SEED_1_6_THINKING_ENDPOINT}}",
+      "apiKey": "{{DOUBAO_API_KEY}}"
+    },
+    {
       "title": "aliyun/qwen-max",
       "provider": "aliyun",
       "model": "qwen-max",

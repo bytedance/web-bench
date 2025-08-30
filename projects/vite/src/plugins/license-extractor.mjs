@@ -15,17 +15,17 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 
-// 修改：清理路径的辅助函数增加处理空字符
+// Modification: Helper function to clean paths added handling for null characters
 function cleanModulePath(modulePath) {
-  // 移除空字符和查询参数
+  // Remove null characters and query parameters
   return modulePath
-    .replace(/\0/g, '') // 移除空字符 \0 或 \x00
-    .split('?')[0];     // 移除查询参数
+    .replace(/\0/g, '') // Remove null characters \0 or \x00
+    .split('?')[0];     // Remove query parameters
 }
 
-// 修改为异步函数
+// Modify to async function
 async function findPackageJson(modulePath) {
-  // 确保使用清理后的路径
+  // Ensure cleaned path is used
   let dir = path.dirname(cleanModulePath(modulePath));
   const root = path.parse(dir).root;
   
@@ -45,14 +45,14 @@ async function findPackageJson(modulePath) {
 
 async function getLicenseInfo(modulePath) {
   try {
-    // 清理路径
+    // Clean path
     const cleanPath = cleanModulePath(modulePath);
     
-    // 从模块路径获取 package.json 路径
+    // Get package.json path from module path
     const pkgPath = await findPackageJson(cleanPath);
 
     if (!pkgPath) {
-      // 使用清理后的路径进行匹配
+      // Use cleaned path for matching
       const matches = cleanPath.match(/node_modules\/(@[^/]+\/[^/]+|[^/]+)/);
       if (matches) {
         const packageName = matches[1];
@@ -113,7 +113,7 @@ export default function licenseExtractor() {
     name: 'license-extractor',
     
     moduleParsed(moduleInfo) {
-      // 只处理真实的 node_modules 模块
+      // Only process real node_modules modules
       if (moduleInfo.id.includes('node_modules') && !moduleInfo.id.startsWith('\0')) {
         deps.add(moduleInfo.id);
       }
@@ -127,7 +127,7 @@ export default function licenseExtractor() {
 
       const licenses = await Promise.all(Array.from(deps).map(getLicenseInfo));
 
-      // 去重（可能有多个文件来自同一个包）
+      // Deduplicate (multiple files may come from the same package)
       const uniqueLicenses = Array.from(
         new Map(licenses.map(l => [l.name, l])).values()
       );
@@ -141,7 +141,7 @@ export default function licenseExtractor() {
         }
       }
 
-      // 确保输出目录存在
+      // Ensure output directory exists
       try {
         await fs.mkdir('dist', { recursive: true });
       } catch (e) {

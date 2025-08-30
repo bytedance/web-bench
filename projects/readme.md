@@ -53,8 +53,6 @@ tasks.jsonl          # tasks for evaluation
 ```bash
 # Get codes
 
-// TODO: 这里 开源之后要写这里如何 clone
-
 cd web-bench-eval || exit
 rush update
 

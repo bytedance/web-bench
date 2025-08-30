@@ -21,34 +21,60 @@ HumanEval and MBPP have approached saturation. APPS and EvalPlus are approaching
 
 <img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
+## 🚀 Quick Start
 
-## 🚀 Installation
+Refer to the [Docker setup guide](https://docs.docker.com/engine/install/) for instructions on installing Docker on your machine
 
-1. [Install Node.js 22+](https://nodejs.org/en/download)
-2. Init
-```bash
-git clone https://github.com/bytedance/Web-Bench.git
-cd Web-Bench
-npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0 playwright@1.49.1
-cd projects/angular &&  npx playwright install
-rush update
-rush build
+1. Create a new empty folder, add **two files** in this folder:
+
+```
+./config.json5
+./docker-compose.yml
 ```
 
-If you wish to use Docker, refer to [Docker Guide](https://github.com/bytedance/web-bench/wiki/Docker).
+2. For `config.json5`, copy the json below and edit by [Config Parameters](https://github.com/bytedance/web-bench/wiki/Config-Parameters):
 
-## **📘** Usage
+```json5
+{
+  models: [
+    'openai/gpt-4o',
+    // You can add more models here
+    // "claude-sonnet-4-20250514"
+  ],
+  // Eval one project only
+  // "projects": ["@web-bench/react"]
+}
+```
 
-Complete [Configuration](https://github.com/bytedance/web-bench/wiki/Config) and run:
+3. For `docker-compose.yml`, copy the yaml below and **set environment**
+
+```yaml
+services:
+  web-bench:
+    image: maoyiweiebay777/web-bench:latest
+    volumes:
+      - ./config.json5:/app/apps/eval/src/config.json5
+      - ./report:/app/apps/eval/report
+    environment:
+      # Add enviorment variables according to apps/src/model.json
+      - OPENROUTER_API_KEY=your_api_key
+      # Add more model's key
+      # - ANTHROPIC_API_KEY=your_api_key
+```
+
+4. Run docker-compose:
 
 ```bash
-rush eval
+docker compose up
 ```
+
+5. Evaluation Report will be generated under `./report/`
+
+If you wish to evaluate from source code, refer to [Install from source](https://github.com/bytedance/web-bench/wiki/Installation).
 
 ## **🛠️** Contribution
 
-* [Project Contribution](https://github.com/bytedance/web-bench/wiki/Project-Contribution)
-
+- [Project Contribution](https://github.com/bytedance/web-bench/wiki/Project-Contribution)
 
 ## **📚** Citation
 
@@ -63,4 +89,12 @@ rush eval
 
 ## **📄** License
 
-[Apache 2.0](./LICENSE.md) 
+[Apache 2.0](./LICENSE.md)
+
+## **🌟** Contact us
+
+- Lark: Scan the QR code below with [Register Feishu](https://www.feishu.cn/en/) to join our Web Bench user group.
+
+<img width="300" alt="pass@1" src="./docs/assets/lark-group-qr-code.png" />
+
+- [Discord](https://discord.com/channels/1384111402653978645/1384111403098443838)

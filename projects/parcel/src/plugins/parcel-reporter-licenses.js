@@ -59,7 +59,7 @@ module.exports = new Reporter({
           'package.json'
         );
 
-        // 将 Promise 收集起来
+        // Collect Promises
         promises.push((async () => {
           try {
             const pkgJson = JSON.parse(await readFile(pkgJsonPath, 'utf8'));
@@ -103,7 +103,7 @@ module.exports = new Reporter({
       });
     }
 
-    // 等待所有许可证处理完成
+    // Wait for all license processing to complete
     await Promise.all(promises);
 
     const licenseText = Array.from(licenses.values())

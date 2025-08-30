@@ -25,7 +25,7 @@ const unlink = promisify(fs.unlink);
 
 module.exports = new Reporter({
   async report({ event, options }) {
-    // 只在生产构建完成后执行
+    // Only execute after production build is complete
     if (event.type !== 'buildSuccess' || options.mode !== 'production') {
       return;
     }
@@ -33,7 +33,7 @@ module.exports = new Reporter({
     const { bundleGraph } = event;
     const bundles = bundleGraph.getBundles();
     
-    // 创建 sourcemaps 目录
+    // Create sourcemaps directory
     const projectRoot = options.projectRoot;
     const sourcemapsDir = path.join(projectRoot, 'sourcemaps');
     
@@ -41,21 +41,21 @@ module.exports = new Reporter({
       await mkdir(sourcemapsDir, { recursive: true });
     } catch (err) {
       if (err.code !== 'EEXIST') {
-        console.error('创建 sourcemaps 目录失败:', err);
+        console.error('Failed to create sourcemaps directory:', err);
         throw err;
       }
     }
 
-    // 处理每个包含源映射的包
+    // Process each bundle containing source maps
     for (const bundle of bundles) {
       const filePath = bundle.filePath;
       const mapPath = `${filePath}.map`;
       
-      // 检查是否存在源映射文件
+      // Check if source map file exists
       try {
         await fs.promises.access(mapPath, fs.constants.F_OK);
       } catch (err) {
-        // 没有源映射文件，跳过
+        // No source map file, skip
         continue;
       }
 
@@ -65,42 +65,42 @@ module.exports = new Reporter({
       const targetMapDir = path.join(sourcemapsDir, path.dirname(relativePath));
       const targetMapPath = path.join(sourcemapsDir, relativePath) + '.map';
 
-      // 确保目标目录存在
+      // Ensure target directory exists
       await mkdir(targetMapDir, { recursive: true });
       
-      // 复制源映射文件到新位置
+      // Copy source map file to new location
       await copyFile(mapPath, targetMapPath);
       
-      // 删除原始源映射文件
+      // Delete original source map file
       await unlink(mapPath);
       
-      // 更新 JS/CSS 文件中的 sourceMappingURL 注释
+      // Update sourceMappingURL comments in JS/CSS files
       if (bundle.type === 'js' || bundle.type === 'css') {
         let content = await readFile(filePath, 'utf8');
         
-        // 根据文件类型移除现有的 sourceMappingURL 注释（如果有）
+        // Remove existing sourceMappingURL comment based on file type
         if (bundle.type === 'js') {
           content = content.replace(/\/\/# sourceMappingURL=.*$/m, '');
         } else if (bundle.type === 'css') {
           content = content.replace(/\/\*# sourceMappingURL=.*\*\/$/m, '');
         }
         
-        // 添加新的 sourceMappingURL 注释
+        // Add new sourceMappingURL comment
         const sourcemapRelativePath = relativePath + '.map';
         const sourcemapUrl = `https://internal.com/sourcemaps/${sourcemapRelativePath.replace(/\\/g, '/')}`;
         
-        // 根据文件类型添加适当的注释
+        // According to file type add appropriate comment
         if (bundle.type === 'js') {
           content += `\n//# sourceMappingURL=${sourcemapUrl}\n`;
         } else if (bundle.type === 'css') {
           content += `\n/*# sourceMappingURL=${sourcemapUrl} */\n`;
         }
         
-        // 写回文件
+        // Write back to file
         await writeFile(filePath, content);
       }
     }
     
-    console.log('源映射文件已移动到 sourcemaps 目录，并更新了引用链接。');
+    console.log('Source map files have been moved to sourcemaps directory and reference links have been updated.');
   }
-}); 
+});

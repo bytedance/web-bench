@@ -25,7 +25,7 @@ class LicenseExtractorPlugin {
       const modules = stats.compilation.modules;
       const licenses = new Map();
 
-      // 遍历所有模块
+      // Iterate through all modules
       modules.forEach(module => {
         if (module.resource && module.resource.includes('node_modules')) {
           const packagePath = this.findPackageJson(module.resource);
@@ -40,19 +40,19 @@ class LicenseExtractorPlugin {
                   (typeof packageJson.author === 'string' ? packageJson.author : packageJson.author.name)
                   : 'Unknown'
               };
-              // 使用 包名@版本号 作为唯一标识
+              // Use package@version as unique identifier
               const packageKey = `${packageJson.name}@${packageJson.version}`;
               licenses.set(packageKey, packageInfo);
             } catch (error) {
-              console.warn(`无法读取包信息: ${packagePath}`);
+              console.warn(`Failed to read package information: ${packagePath}`);
             }
           }
         }
       });
 
-      // 生成许可证文本
+      // Generate license text
       let licenseText = '# Third Party Licenses\n\n';
-      // 按照包名排序，确保输出结果稳定
+      // Sort by package name to ensure stable output
       const sortedEntries = Array.from(licenses.entries()).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
       
       sortedEntries.forEach(([packageKey, pkg]) => {
@@ -61,7 +61,7 @@ class LicenseExtractorPlugin {
         licenseText += `- Author: ${pkg.author}\n\n`;
       });
 
-      // 写入文件
+      // Write to file
       const outputPath = path.join(compiler.options.output.path, this.filename);
       fs.mkdirSync(compiler.options.output.path, { recursive: true });
       fs.writeFileSync(outputPath, licenseText);
@@ -83,4 +83,4 @@ class LicenseExtractorPlugin {
   }
 }
 
-module.exports = LicenseExtractorPlugin; 
+module.exports = LicenseExtractorPlugin;

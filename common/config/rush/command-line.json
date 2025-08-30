@@ -262,6 +262,13 @@
       "summary": "⭐️ Run summary",
       "safeForSimultaneousRushProcesses": true,
       "shellCommand": "cd libraries/summary && rushx start"
+    },
+    {
+      "name": "new-project",
+      "commandKind": "global",
+      "summary": "Create a new project from a template.",
+      "description": "This command creates a new project in the 'projects' directory based on the 'project-template'.",
+      "shellCommand": "node common/scripts/new-project.js"
     }
   ],
 

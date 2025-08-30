@@ -69,6 +69,8 @@ export class DefaultTaskRunner implements ITaskRunner {
       let inputTokens = 0
       let outputTokens = 0
 
+      let trajectory;
+
       const description = this.task.description
 
       logger.info(
@@ -138,6 +140,7 @@ export class DefaultTaskRunner implements ITaskRunner {
         response = agentRes?.files || ''
         inputTokens = agentRes.inputTokens || 0
         outputTokens = agentRes.outputTokens || 0
+        trajectory = agentRes.trajectory
         logger.silentLog(`Request - response`, JSON.stringify(response))
 
         logger.debug(`The file is writing...`)
@@ -260,6 +263,7 @@ export class DefaultTaskRunner implements ITaskRunner {
         response,
         inputTokens,
         outputTokens,
+        trajectory,
       }
 
       // Execution time, request time + test time, whether successful (request / test), reason for failure

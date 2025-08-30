@@ -30,6 +30,7 @@
     "@web-bench/test-util": "workspace:*",
     "@vitejs/plugin-react": "^4.3.3",
     "vite": "^6.2.2",
-    "rimraf": "~6.0.1"
+    "rimraf": "~6.0.1",
+    "cross-env": "~7.0.3"
   }
 }

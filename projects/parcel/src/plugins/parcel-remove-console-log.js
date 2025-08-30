@@ -27,13 +27,13 @@ module.exports = new Transformer({
 
     let code = await asset.getCode();
     
-    // 解析代码生成 AST
+    // Parse code to generate AST
     const ast = parser.parse(code, {
       sourceType: 'module',
-      plugins: ['jsx', 'typescript'] // 支持 JSX 和 TypeScript
+      plugins: ['jsx', 'typescript'] // Support JSX and TypeScript
     });
 
-    // 遍历 AST 查找并移除 console.log
+    // Traverse AST to find and remove console.log
     traverse(ast, {
       CallExpression(path) {
         if (
@@ -46,7 +46,7 @@ module.exports = new Transformer({
       }
     });
 
-    // 生成代码
+    // Generate code
     const output = generate(ast, {}, code);
     asset.setCode(output.code);
     

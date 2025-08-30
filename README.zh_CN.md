@@ -21,35 +21,60 @@ HumanEval 和 MBPP 已趋于饱和，APPS 和 EvalPlus 也正在接近饱和状�
 
 <img width="500" alt="SOTAs" src="./docs/assets/sotas.png" />
 
-## 🚀 安装
+## 🚀 快速上手
 
+参考 [Docker 安装指南](https://docs.docker.com/engine/install/) 在您的机器上安装 Docker。
 
-1. [安装 Node.js 22+](https://nodejs.org/en/download)
-2. 初始化
+1. 创建一个新的空文件夹，在该文件夹中添加 **两个文件**：
 
-```bash
-git clone https://github.com/bytedance/Web-Bench.git
-cd Web-Bench
-npm i -g pnpm@9.12.0 @microsoft/rush@5.140.0 playwright@1.49.1
-cd projects/angular &&  npx playwright install
-rush update
-rush build
+```
+./config.json5
+./docker-compose.yml
 ```
 
-如果想使用 Docker 环境，参考 [Docker 指南](https://github.com/bytedance/web-bench/wiki/Docker).
+2. 对于 `config.json5`，复制下面的 json 内容并根据 [配置参数](https://github.com/bytedance/web-bench/wiki/Config-Parameters) 进行编辑：
 
-## **📘** 使用
+```json5
+{
+  models: [
+    'openai/gpt-4o',
+    // 你可以在这里添加更多模型
+    // "claude-sonnet-4-20250514"
+  ],
+  // 只评测一个项目
+  // "projects": ["@web-bench/react"]
+}
+```
 
-完成[配置](https://github.com/bytedance/web-bench/wiki/Config)后执行： 
+3. 对于 `docker-compose.yml`，复制下面的 yaml 内容并 **设置环境**：
+
+```yaml
+services:
+  web-bench:
+    image: maoyiweiebay777/web-bench:latest
+    volumes:
+      - ./config.json5:/app/apps/eval/src/config.json5
+      - ./report:/app/apps/eval/report
+    environment:
+      # 根据 apps/src/model.json 添加环境变量
+      - OPENROUTER_API_KEY=your_api_key
+      # 添加更多模型的密钥
+      # - ANTHROPIC_API_KEY=your_api_key
+```
+
+4. 运行 docker-compose：
 
 ```bash
-rush eval
+docker compose up
 ```
+
+5. 评测报告将生成在 `./report/` 目录下。
+
+如果你希望从源代码进行评测，请参阅[从源代码安装](https://github.com/bytedance/web-bench/wiki/Installation)。
 
 ## **🛠️** 贡献
 
-* [项目贡献指南](https://github.com/bytedance/web-bench/wiki/Project-Contribution)
-
+- [项目贡献指南](https://github.com/bytedance/web-bench/wiki/Project-Contribution)
 
 ## **📚** 引文
 
@@ -62,7 +87,14 @@ rush eval
 }
 ```
 
-
 ## **📄** 许可证
 
 [Apache 2.0](./LICENSE.md)
+
+## **🌟** 联系我们
+
+- 飞书：扫描二维码 [注册飞书](https://www.feishu.cn/) 加入 Web Bench 用户群.
+
+<img width="300" alt="pass@1" src="./docs/assets/lark-group-qr-code.png" />
+
+- [Discord](https://discord.com/channels/1384111402653978645/1384111403098443838)
