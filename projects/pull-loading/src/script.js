@@ -1,3 +1,10 @@
+/*
+distanceY 表示手指拖动的距离（Y轴或X轴，取决于方向）。
+在动画函数 anim(y, transitionDuration) 中，实际位移会被 DAMPING 阻尼系数缩小：
+y = y / DAMPING;
+这样，拖动越远，实际内容移动的距离越小，产生“越拉越难拉动”的感觉，类似弹簧阻力。
+当松手时，如果拖动距离超过阈值（DISTINCE），会触发“释放切换到下一屏”；否则回弹到初始位置
+*/
 
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', function () {

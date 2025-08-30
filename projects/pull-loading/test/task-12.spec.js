@@ -34,27 +34,12 @@ test.describe('Scroll Device', () => {
     const htmlOffset = await getOffset(page,'body');
 
     // Using ‘page.mouse’ to trace a 100x100 square.
-
-    // await page.mouse.move(0, 0);
-    // await page.mouse.down();
-    // await page.mouse.move(0, 100);
-    // await page.mouse.move(100, 100);
-    // await page.mouse.move(100, 0);
-    // await page.mouse.move(0, 0);
-    // await page.mouse.up();
-    
     
     // scroll to bottom
     await page.mouse.wheel(0, 500)
 
     console.log('htmlOffset'+htmlOffset)
-    // const noticeTxt = page.locator('#noticeTxt');
-    // const noticeTxtOffset = await getOffsetByLocator(noticeTxt)
-    // expect(noticeTxtOffset.width).toBeGreaterThan(5)
-    // for (let i = 0; i < 5; i++)
-    // await pan(met, { x : 0 ,y : 0 , deltaX :0 , deltaY: 100 ,debug:true});
-    // Ensure the map has been moved.
-    // await expect(met).toHaveScreenshot();
+
     const noticeTxtOffset = await getOffset(page,'#noticeTxt')
     
     console.log('noticeTxtOffset'+noticeTxtOffset)

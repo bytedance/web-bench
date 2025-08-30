@@ -27,13 +27,14 @@ test.beforeEach(async ({ page }) => {
 
 test.use({ ...devices['Pixel 7'] })
 
-// 新增：测试多次滑动后的状态
-test(`multiple pan gestures accumulate transform`, async ({ page }) => {
+  // 阻尼运动于原始状态，继续拖动，查看详情
+
+// 新增：测试横向滑动不会触发loading
+test(`horizontal pan does not trigger loading`, async ({ page }) => {
   await page.goto('index.html');
   const met = await page.locator('#content');
-  await pan(met, 0, -200, 5);
-  await pan(met, 0, -200, 5);
+  await pan(met, 400, 0, 5); // 横向滑动
 
   const transform = await met.evaluate(el => getComputedStyle(el).transform)
-  expect(transform).not.toBe('none')
+  expect(transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)').toBeTruthy()
 });

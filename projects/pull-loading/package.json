@@ -6,7 +6,7 @@
     "build": "VITE_CJS_IGNORE_WARNING=true vite build",
     "test": "npx @web-bench/test-util"
   },
-  "author": "luics",
+  "author": "warrior",
   "devDependencies": {
     "@playwright/test": "^1.53.0",
     "@types/node": "^22.7.9",
