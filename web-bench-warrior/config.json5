@@ -1,0 +1,8 @@
+{
+  models: [
+    'deepseek-chat'
+  ],
+  // Eval one project only
+   "projects": ["@web-bench/pull-loading"]
+}
+

@@ -33,8 +33,6 @@ test(`short pan gesture does not trigger loading`, async ({ page }) => {
   const met = await page.locator('#content');
   await pan(met, 0, -1, 5); // 短距离滑动
 
-
-
   const transform = await met.evaluate(el => getComputedStyle(el).transform);
 
   // 解析matrix，判断Y轴偏移是否接近0

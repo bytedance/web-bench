@@ -1,0 +1,9 @@
+services:
+  web-bench:
+    image: maoyiweiebay777/web-bench:latest
+    volumes:
+      - ./config.json5:/app/apps/eval/src/config.json5
+      - ./report:/app/apps/eval/report
+    environment:
+      - OPENROUTER_API_KEY=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
+      - DEEPSEEK_API_KEY=sk-438fcf6435da474ba04a8fa1918d625f
