@@ -1,15 +1,8 @@
-/*
-distanceY 表示手指拖动的距离（Y轴或X轴，取决于方向）。
-在动画函数 anim(y, transitionDuration) 中，实际位移会被 DAMPING 阻尼系数缩小：
-y = y / DAMPING;
-这样，拖动越远，实际内容移动的距离越小，产生“越拉越难拉动”的感觉，类似弹簧阻力。
-当松手时，如果拖动距离超过阈值（DISTINCE），会触发“释放切换到下一屏”；否则回弹到初始位置
-*/
 
-// 页面加载完成后执行
+
+// Executed after the page loads
 document.addEventListener('DOMContentLoaded', function () {
     console.log('页面已加载');
-    // 在这里添加你的 JS 代码
 
     initialzer();
 });
@@ -22,13 +15,12 @@ var disable = false;
 var self = this;
 var switchTxt = '继续拖动，查看详情';
 
-//初始化下拉刷新参数
+//Initialize pull-down refresh parameters
 var startY;
 var distanceY = 0;
-//是否已经促发了
 var hasEnded;
-var status = 0; //0：提示；1：释放提示；2：加载中
-var DAMPING = 2; //阻尼系数
+var status = 0;
+var DAMPING = 2; //Damping coefficient
 var DISTINCE = 50 * DAMPING;
 var direction;
 var isEndOption = false;
@@ -51,7 +43,6 @@ window.onresize = function () {
 };
 
 function initialzer() {
-    // 一些参数
 
     var navigatorBarHeight = 0;
     var wHeight = window.innerHeight;
@@ -60,7 +51,7 @@ function initialzer() {
     };
     var isHorizontal = direction == 'horizontal';
 
-    //检查是否到了页面底部，到达底部以后才启动下拉刷新
+    //Check if you have reached the bottom of the page and only start the pull-down refresh after reaching the bottom
     var screenHeight;
     var fn = function () {
         screenHeight = window.innerHeight;
@@ -83,7 +74,7 @@ var requestAnimFrame = (function () {
     return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame;
-})(); // 优化动画
+})(); // Optimize animation
 
 /*
     transform : default
@@ -118,7 +109,7 @@ var css3Support = function (name) {
     return o[name] ? o[name] : '';
 }
 
-//特性检测
+//Feature detection
 var style = document.createElement('div').style;
 var supportTransform3d = css3Support('supportTransform3d');
 var TransformProperty = css3Support('transform');
@@ -136,7 +127,6 @@ var getTranslate = function (x, y) {
 };
 function getPage(event, page) {
 
-    // 兼容性处理
     return event.changedTouches ? event.changedTouches[0][page] : event[page];
 }
 
@@ -183,14 +173,11 @@ var preventDefault = function (e) {
             return;
         }
     }
-    console.log("时间阻止")
     e.preventDefault();
 };
 
-//变化、动画
 var ticking = false;
 
-//变化、动画
 var anim = function (y, transitionDuration) {
     if (disable) {
         return;
@@ -200,21 +187,17 @@ var anim = function (y, transitionDuration) {
         y = 0;
     }
     if (transitionDuration) {
-        // 修改前：$el.css(transitionProperty, TransformProperty + ' ' + transitionDuration + 'ms ease-out');
         $el.style[transitionProperty] = TransformProperty + ' ' + transitionDuration + 'ms ease-out';
         setTimeout(function () {
             if (disable) {
                 return;
             }
-            // 修改前：$el.css(transitionProperty, 'none');
             $el.style[transitionProperty] = 'none';
         }, transitionDuration);
     }
     if (isHorizontal) {
-        // 修改前：$el.css(TransformProperty, 'translateX(' + y + 'px)' + ' ' + (supportTransform3d ? 'translateZ(0)' : ''));
         $el.style[TransformProperty] = 'translateX(' + y + 'px)' + ' ' + (supportTransform3d ? 'translateZ(0)' : '');
     } else {
-        // 修改前：$el.css(TransformProperty, 'translateY(' + y + 'px)' + ' ' + (supportTransform3d ? 'translateZ(0)' : ''));
         $el.style[TransformProperty] = 'translateY(' + y + 'px)' + ' ' + (supportTransform3d ? 'translateZ(0)' : '');
     }
 };
@@ -270,7 +253,7 @@ $el.addEventListener('touchmove', function (e) {
         }
         // console.log('distanceY:'+distanceY);
 
-        // 按照requestAnimationFrame频率,超过丢弃
+        // According to the requestAnimationFrame frequency, if it exceeds the frequency, it will be discarded.
         if (requestAnimFrame) {
             if (!ticking) {
                 ticking = true;
@@ -320,14 +303,12 @@ $el.addEventListener('touchend', function(e) {
             // self.disable();
             document.removeEventListener('touchmove', preventDefault, false);
             // loading.show($loadingTarget);
-            // $noticeTxt.text('正在切换到下一屏');
             anim(-DISTINCE, 200);
             status = 2;
             setTimeout(function() {
                 // loading.hide();
                 anim(0);
                 reset();
-                // 屏幕左右滑动触发中
                 if(App.sliderChangeFlg){
                     App.pulling = false;
                     self.enable();

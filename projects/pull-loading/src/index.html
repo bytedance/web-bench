@@ -39,10 +39,10 @@
     <script>
 
         function getElementBottomInDocument(element) {
-        // 获取元素相对于视口的边界矩形
+        // Get the bounding rectangle of an element relative to the viewport
         const rect = element.getBoundingClientRect();
         
-        // 计算底边在文档中的位置：视口底部位置 + 已滚动的距离
+        // Calculate the bottom edge's position in the document: viewport bottom position + scrolled distance
         const bottomInDocument = rect.bottom + window.scrollY;
         
         return bottomInDocument;
