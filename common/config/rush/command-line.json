@@ -193,7 +193,7 @@
       "name": "src:test",
       "allowWarningsInSuccessfulBuild": true,
       "ignoreMissingScript": true,
-      "enableParallelism": true,
+      "enableParallelism": false,
       "summary": "⭐️️ Run tests for src"
     },
     {
