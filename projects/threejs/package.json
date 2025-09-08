@@ -4,7 +4,8 @@
   "scripts": {
     "start": "TEST_ENV=dev vite --port 3005",
     "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "eval": {
     "stable": true

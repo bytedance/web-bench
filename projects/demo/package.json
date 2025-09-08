@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "build": "",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "author": "luics",
   "eval": {

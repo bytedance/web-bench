@@ -6,7 +6,8 @@
     "dev": "node scripts/dev.js",
     "build": "",
     "db": "node scripts/init-db.js",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "author": "maoyiwei.ebay",
   "dependencies": {

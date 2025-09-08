@@ -4,7 +4,8 @@
   "scripts": {
     "start": "vite src --port 3005 --config vite.config.ts",
     "init": "cd $EVAL_PROJECT_ROOT && rimraf tasks",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "eval": {
     "screenshot": false,

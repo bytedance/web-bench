@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "build": "",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "author": "luics",
   "devDependencies": {
@@ -17,4 +18,3 @@
     "@web-bench/test-util": "workspace:*"
   }
 }
-
