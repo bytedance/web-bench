@@ -14,6 +14,7 @@
 
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test')
+const path = require('path')
 
 /**
  * Read environment variables from file.
@@ -22,6 +23,8 @@ const { defineConfig, devices } = require('@playwright/test')
 // require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 const PROJECT_DIR = process.env.EVAL_PROJECT_ROOT || 'src'
 const PORT = process.env.EVAL_PROJECT_PORT || 3211
+
+const ASSETS_DIR = path.resolve(__dirname, './assets')
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -53,7 +56,7 @@ module.exports = defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: `npx serve ${PROJECT_DIR} -p ${PORT}`,
+    command: `cp -r ${ASSETS_DIR} ${PROJECT_DIR} && npx serve ${PROJECT_DIR} -p ${PORT}`,
     url: `http://127.0.0.1:${PORT}`,
     reuseExistingServer: process.env.IS_EVAL_PRODUCTION ? false : true,
   },
