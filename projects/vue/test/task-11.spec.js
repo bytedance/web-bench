@@ -17,7 +17,8 @@ const { test, expect } = require('@playwright/test')
 test.beforeEach(async ({ page }) => {
   await page.goto('/')
 
-  page.setDefaultTimeout(500)
+  // CI will stuck for 500 ms, since the bad performance of vue reactive proxy compared with React
+  page.setDefaultTimeout(1000)
 })
 
 test('Check Blog Length', async ({ page }) => {
