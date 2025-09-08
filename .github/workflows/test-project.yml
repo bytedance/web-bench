@@ -7,7 +7,7 @@ on:
     branches: ['main']
 
 jobs:
-  build-and-push:
+  test-project-src:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
