@@ -16,6 +16,6 @@
     "@types/node": "^22.7.9",
     "serve": "^14.2.4",
     "@web-bench/test-util": "workspace:*",
-    "vite": "^6.2.2"
+    "vite": "^7.1.5"
   }
 }

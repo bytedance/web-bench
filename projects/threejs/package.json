@@ -21,7 +21,7 @@
     "@types/node": "^22.7.9",
     "typescript": "^5.6.3",
     "vite-plugin-html": "^3.2.2",
-    "vite": "^6.2.2",
+    "vite": "^7.1.5",
     "cross-env": "~7.0.3"
   },
   "browserslist": {

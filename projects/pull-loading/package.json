@@ -12,6 +12,6 @@
     "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "@web-bench/test-util": "workspace:*",
-    "vite": "^6.2.2"
+    "vite": "^7.1.5"
   }
 }

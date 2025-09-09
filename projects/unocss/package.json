@@ -15,7 +15,7 @@
     "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "@web-bench/test-util": "workspace:*",
-    "vite": "^6.2.2",
+    "vite": "^7.1.5",
     "unocss": "~66.1.0-beta.6",
     "cross-env": "~7.0.3"
   }
