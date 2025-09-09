@@ -23,7 +23,7 @@ jobs:
         run: node common/scripts/install-run-rush.js install
 
       - name: Rush build
-        run: node common/scripts/install-run-rush.js build
+        run: node common/scripts/install-run-rush.js build -t tag:evaluator
 
       - name: Install Playwright Browsers
         run: pushd projects/angular && npx playwright install --with-deps --only-shell chromium && popd

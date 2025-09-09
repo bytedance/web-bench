@@ -589,39 +589,48 @@
     },
     {
       "packageName": "@web-bench/test-util",
-      "projectFolder": "libraries/test-util"
+      "projectFolder": "libraries/test-util",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/summary",
-      "projectFolder": "libraries/summary"
+      "projectFolder": "libraries/summary",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/shop-test-util",
-      "projectFolder": "libraries/shop-test-util"
+      "projectFolder": "libraries/shop-test-util",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/evaluator",
       "projectFolder": "tools/evaluator",
-      "versionPolicyName": "publishPolicy"
+      "versionPolicyName": "publishPolicy",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/bench-agent",
       "projectFolder": "tools/bench-agent",
-      "versionPolicyName": "publishPolicy"
+      "versionPolicyName": "publishPolicy",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/http-agent",
-      "projectFolder": "tools/http-agent"
+      "projectFolder": "tools/http-agent",
+      "versionPolicyName": "publishPolicy",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/evaluator-types",
       "projectFolder": "tools/types",
-      "versionPolicyName": "publishPolicy"
+      "versionPolicyName": "publishPolicy",
+      "tags": ["evaluator"]
     },
     {
       "packageName": "@web-bench/eval",
       "projectFolder": "apps/eval",
-      "versionPolicyName": "publishPolicy"
+      "versionPolicyName": "publishPolicy",
+      "tags": ["evaluator"]
     }
   ]
 }

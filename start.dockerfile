@@ -40,7 +40,6 @@ RUN npx playwright install --with-deps --only-shell chromium
 # Update dependencies
 RUN rush update
 
-RUN rush build
-
+RUN rush build -t tag:evaluator
 
 CMD ["rush", "eval"]
