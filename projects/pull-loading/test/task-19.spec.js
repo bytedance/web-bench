@@ -58,7 +58,7 @@ test(`pan gesture shows loading text init`, async ({ page }) => {
   await expect(noticeTxt).toHaveText(/继续拖动，查看详情/i);
 });
 
-  // 阻尼运动小于100(DISTINCE)，上拉切换到下一屏， 释放，恢复原始状态
+// If the damping motion is less than 100 (DISTINCE), pull up to switch to the next screen, release to restore to the original state
 test(`pan gesture shows loading text less than DISTINCE`, async ({ page }) => {
   await page.goto('index.html');
     await page.evaluate(() => {
@@ -71,10 +71,4 @@ test(`pan gesture shows loading text less than DISTINCE`, async ({ page }) => {
   await page.waitForTimeout(100);
   await expect(noticeTxt).toHaveText(/上拉切换到下一屏|继续拖动，查看详情/i);
 
-  /// 因为pull之后会回到原味，所以，只能捕捉到最后状态，也就是‘继续拖动，查看详情’状态
-  //todo 想个办法捕捉中间流程。
-
-//     await expect.poll(async () => {
-//     return await noticeTxt.textContent();
-//   }, { timeout: 1000 }).toContain(/上拉切换到下一屏|继续拖动，查看详情/i);
 });

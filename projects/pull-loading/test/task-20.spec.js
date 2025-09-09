@@ -27,15 +27,15 @@ test.beforeEach(async ({ page }) => {
 
 test.use({ ...devices['Pixel 7'] })
 
-  // 阻尼运动于原始状态，继续拖动，查看详情
+  // The damping motion is in the original state. Continue dragging to see the details.
 
-// 新增：测试横向滑动不会触发loading
+// New: Test that horizontal sliding does not trigger loading
 test(`horizontal pan does not trigger loading`, async ({ page }) => {
   await page.goto('index.html');
   const met = await page.locator('#content');
-  await pan(met, 400, 0, 5); // 横向滑动
+  await pan(met, 400, 0, 5); // Slide horizontally
 
-//不触发loading
+  //not trigger loading
   await expect(page.locator('#loading')).toHaveCount(0);
 
 });

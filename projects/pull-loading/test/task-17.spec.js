@@ -27,15 +27,15 @@ test.beforeEach(async ({ page }) => {
 
 test.use({ ...devices['Pixel 7'] })
 
-// 新增：测试短距离滑动不会触发loading
+// New: Test that short-distance sliding will not trigger loading
 test(`short pan gesture does not trigger loading`, async ({ page }) => {
   await page.goto('index.html');
   const met = await page.locator('#content');
-  await pan(met, 0, -1, 5); // 短距离滑动
+  await pan(met, 0, -1, 5); // short swipe
 
   const transform = await met.evaluate(el => getComputedStyle(el).transform);
 
-  // 解析matrix，判断Y轴偏移是否接近0
+  // Parse the matrix to determine whether the Y-axis offset is close to 0
   let y = 0;
   const match = transform.match(/matrix\([^\)]+\)/);
   if (match) {
@@ -44,17 +44,8 @@ test(`short pan gesture does not trigger loading`, async ({ page }) => {
     y = parseFloat(parts[5]);
   }
 
-  // 期望transform为none或初始状态
-  expect(Math.abs(y)).toBeLessThan(1); // 允许极小误差
-
-  // 阻尼运动小于50，上拉切换到下一屏， 释放，恢复原始状态
-
-  // 阻尼运动大于50，释放切换到下一屏，触发loading，调用callback
-
-  // 阻尼运动于原始状态，继续拖动，查看详情
-
-
+  // Expects transform to be none or the initial state
+  expect(Math.abs(y)).toBeLessThan(1); 
 
 }
-//   expect(transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)').toBeTruthy()
 );
