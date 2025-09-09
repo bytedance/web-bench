@@ -8,7 +8,8 @@
     "start": "vite src --config vite.config.mts --port 3005",
     "dev": "vite src --config vite.config.mts",
     "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "author": "maoyiwei.ebay",
   "dependencies": {
@@ -19,7 +20,7 @@
   },
   "devDependencies": {
     "@web-bench/test-util": "workspace:*",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "typescript": "^5.6.3",
     "@tsconfig/svelte": "^5.0.4",

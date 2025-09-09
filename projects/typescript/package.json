@@ -4,7 +4,8 @@
   "scripts": {
     "start": "vite src --port 3005 --config vite.config.ts",
     "init": "cd $EVAL_PROJECT_ROOT && rimraf tasks",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "eval": {
     "screenshot": false,
@@ -19,7 +20,7 @@
   },
   "devDependencies": {
     "promise-fs": "^2.1.1",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "@types/promise-fs": "^2.1.5",
     "execa": "^9.5.2",
     "typescript": "^5.6.3",
@@ -28,8 +29,8 @@
     "fs-extra": "^11.2.0",
     "@types/fs-extra": "^11.0.4",
     "@web-bench/test-util": "workspace:*",
-    "@vitejs/plugin-react": "^4.3.3",
-    "vite": "^6.2.2",
+    "@vitejs/plugin-react": "^5.0.2",
+    "vite": "^7.1.5",
     "rimraf": "~6.0.1",
     "cross-env": "~7.0.3"
   }

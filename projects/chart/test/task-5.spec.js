@@ -27,6 +27,7 @@ test.beforeEach(async ({ page }) => {
 
 test('LineChart | uncheck #dataLabels', async ({ page }) => {
   await page.locator('#dataLabels').uncheck()
+  await page.waitForTimeout(500)
   await expect(page.locator('.chart .dataLabels')).not.toBeAttached()
 })
 
@@ -45,6 +46,7 @@ test('LineChart | dataLabels', async ({ page }) => {
 })
 
 test('LineChart | dataLabels color', async ({ page }) => {
+  await page.waitForTimeout(1000)
   for await (const [i, dataset] of Object.entries(data.datasets)) {
     const line = page.locator(`.chart .dataset-${i}`)
     const lineStyle = await getComputedStyleByLocator(line)

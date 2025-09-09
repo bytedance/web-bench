@@ -4,7 +4,8 @@
   "scripts": {
     "start": "TEST_ENV=dev vite --port 3005",
     "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "eval": {
     "stable": true
@@ -16,11 +17,11 @@
   },
   "devDependencies": {
     "@web-bench/test-util": "workspace:*",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "typescript": "^5.6.3",
     "vite-plugin-html": "^3.2.2",
-    "vite": "^6.2.2",
+    "vite": "^7.1.5",
     "cross-env": "~7.0.3"
   },
   "browserslist": {

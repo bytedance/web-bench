@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "node ./scripts/dev.js",
     "build": "node ./scripts/build.js",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "eval": {
     "stable": true
@@ -25,23 +26,11 @@
   },
   "devDependencies": {
     "@web-bench/test-util": "workspace:*",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "@angular-devkit/build-angular": "^19.0.6",
     "@angular/cli": "^19.0.6",
     "@angular/compiler-cli": "^19.0.0",
     "typescript": "~5.6.2"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }

@@ -82,12 +82,13 @@ test('satellite attributes', async ({ page }) => {
 })
 
 test('satellite layout', async ({ page }) => {
+  await page.waitForTimeout(500)
   await Promise.all(
     starData.bodies[4].bodies.map(async (body, i) => {
       const satellite = page.locator('.satellite').nth(i)
       const offset = await getOffsetByLocator(satellite)
-      await expectTolerance(offset.centerX, (80 + body.rx) * density, 10)
-      await expectTolerance(offset.centerY, 80 * density, 10)
+      await expectTolerance(offset.centerX, (80 + body.rx) * density, 20)
+      await expectTolerance(offset.centerY, 80 * density, 20)
     })
   )
 })

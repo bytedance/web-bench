@@ -22,6 +22,8 @@ test.beforeEach(async ({ page }) => {
 test('Check Close Button place in the right of modal', async ({ page }) => {
   await page.getByText('Add Blog').click()
 
+  await expect(page.getByText('Create Blog')).toBeVisible()
+
   const c1 = await getOffset(page, '.close-btn')
   const c2 = await getOffset(page, ':text("Create Blog")')
 

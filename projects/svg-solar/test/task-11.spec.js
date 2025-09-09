@@ -62,6 +62,7 @@ test('detailPanel | planet | hover', async ({ page }) => {
   await page.mouse.move(offset.centerX, offset.centerY)
   await page.locator('.jupiter').click()
 
+  await page.waitForTimeout(500)
   const offset1 = await getOffsetByLocator(page.locator('.europa'))
   await page.mouse.move(offset1.centerX, offset1.centerY)
 

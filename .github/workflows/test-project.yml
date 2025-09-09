@@ -9,6 +9,8 @@ on:
 jobs:
   test-project-src:
     runs-on: ubuntu-latest
+    env:
+      CI: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -21,10 +23,10 @@ jobs:
         run: node common/scripts/install-run-rush.js install
 
       - name: Rush build
-        run: node common/scripts/install-run-rush.js build
+        run: node common/scripts/install-run-rush.js build -t tag:evaluator
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps --only-shell chromium
+        run: pushd projects/angular && npx playwright install --with-deps --only-shell chromium && popd
 
       - name: Run tests
         run: node common/scripts/install-run-rush.js src:test --verbose

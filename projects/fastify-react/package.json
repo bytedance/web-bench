@@ -6,7 +6,8 @@
     "dev": "node scripts/dev.js",
     "build": "cross-env VITE_CJS_IGNORE_WARNING=true vite build",
     "db": "node scripts/init-db.js",
-    "test": "npx @web-bench/test-util"
+    "test": "npx @web-bench/test-util",
+    "src:test": "npm test -- -a"
   },
   "author": "maoyiwei.ebay",
   "dependencies": {
@@ -27,12 +28,12 @@
   "devDependencies": {
     "@web-bench/test-util": "workspace:*",
     "@web-bench/shop-test-util": "workspace:*",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "tsx": "~4.19.3",
     "@types/node": "^22.7.9",
     "typescript": "^5.6.3",
-    "@vitejs/plugin-react": "^4.3.3",
-    "vite": "^6.2.2",
+    "@vitejs/plugin-react": "^5.0.2",
+    "vite": "^7.1.5",
     "cross-env": "~7.0.3"
   },
   "eval": {

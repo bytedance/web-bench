@@ -11,7 +11,7 @@
   },
   "author": "luics",
   "devDependencies": {
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "serve": "^14.2.4",
     "@web-bench/test-util": "workspace:*"

@@ -44,6 +44,7 @@ test('satellite revolution params', async ({ page }) => {
 
 test('satellite revolution pause', async ({ page }) => {
   const satellite = page.locator('.satellite').nth(2)
+  await page.waitForTimeout(500)
   const offset = await getOffsetByLocator(satellite)
   await page.mouse.move(offset.centerX, offset.centerY)
 

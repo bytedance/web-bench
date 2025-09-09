@@ -19,7 +19,7 @@ function htmlScriptInject(): PluginOption {
     name: 'html-script-inject',
     transformIndexHtml: {
       order: 'pre',
-      transform(html: string) {
+      handler(html: string) {
         const index = html.lastIndexOf('<script')
         const injectCode = `
           <script type="module">
