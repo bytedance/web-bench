@@ -20,7 +20,7 @@
   "devDependencies": {
     "@web-bench/test-util": "workspace:*",
     "@web-bench/shop-test-util": "workspace:*",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.53.1",
     "@types/node": "^22.7.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

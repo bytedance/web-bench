@@ -27,7 +27,11 @@ import { BlogService } from '../../services/blog.service'
       <div>Hello Game</div>
       
       <div class="turn-indicator">
-        {{ isBlackTurn ? "Black's Turn" : "White's Turn" }}
+        {{ isBlackTurn ? "Black's Turn" : "White's Turn"}}
+      </div>
+
+      <div>
+        {{ winner ? winner + " Wins!" : "" }}
       </div>
 
       <div class="board">
