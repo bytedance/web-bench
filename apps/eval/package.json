@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/follow-redirects": "^1.14.4",
     "@types/node": "^22.7.9",
-    "@types/node-fetch": "^2.6.11",
+    "@types/node-fetch": "^2.6.13",
     "@types/archiver": "^6.0.3",
     "prettier": "^3.3.3",
     "@types/minimist": "^1.2.5",

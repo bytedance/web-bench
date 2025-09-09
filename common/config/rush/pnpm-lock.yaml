@@ -60,8 +60,8 @@ importers:
         specifier: ^22.7.9
         version: 22.15.32
       '@types/node-fetch':
-        specifier: ^2.6.11
-        version: 2.6.12
+        specifier: ^2.6.13
+        version: 2.6.13
       '@types/promise-fs':
         specifier: ^2.1.5
         version: 2.1.5
@@ -1629,11 +1629,11 @@ importers:
   ../../tools/bench-agent:
     dependencies:
       axios:
-        specifier: 1.7.9
-        version: 1.7.9
+        specifier: 1.11.0
+        version: 1.11.0
       axios-retry:
         specifier: 4.5.0
-        version: 4.5.0(axios@1.7.9)
+        version: 4.5.0(axios@1.11.0)
       follow-redirects:
         specifier: ^1.15.5
         version: 1.15.9(debug@4.4.1)
@@ -1666,8 +1666,8 @@ importers:
         specifier: ^22.7.9
         version: 22.15.32
       '@types/node-fetch':
-        specifier: ^2.6.11
-        version: 2.6.12
+        specifier: ^2.6.13
+        version: 2.6.13
       '@web-bench/evaluator-types':
         specifier: workspace:*
         version: link:../types
@@ -8000,11 +8000,11 @@ packages:
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
     dev: false
 
-  /@types/node-fetch@2.6.12:
-    resolution: {integrity: sha512-8nneRWKCg3rMtF69nLQJnOYUcbafYeFSjqkw3jCRLsqkWFlHaoQrr5mXmofFGOx3DKn7UfmBMyov8ySvLRVldA==}
+  /@types/node-fetch@2.6.13:
+    resolution: {integrity: sha512-QGpRVpzSaUs30JBSGPjOg4Uveu384erbHBoT1zeONvyCfwQxIkUshLAOqN/k9EjGviPRmWTTe6aH2qySWKTVSw==}
     dependencies:
       '@types/node': 22.15.32
-      form-data: 4.0.3
+      form-data: 4.0.4
     dev: true
 
   /@types/node-forge@1.3.11:
@@ -9377,20 +9377,20 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: false
 
-  /axios-retry@4.5.0(axios@1.7.9):
+  /axios-retry@4.5.0(axios@1.11.0):
     resolution: {integrity: sha512-aR99oXhpEDGo0UuAlYcn2iGRds30k366Zfa05XWScR9QaQD4JYiP3/1Qt1u7YlefUOK+cn0CcwoL1oefavQUlQ==}
     peerDependencies:
       axios: 0.x || 1.x
     dependencies:
-      axios: 1.7.9
+      axios: 1.11.0
       is-retry-allowed: 2.2.0
     dev: false
 
-  /axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  /axios@1.11.0:
+    resolution: {integrity: sha512-1Lx3WLFQWm3ooKDYZD1eXmoGO9fxYQjrycfHFC8P0sCfQVXyROp0p9PFWBehewBOdCwHc+f/b8I0fMto5eSfwA==}
     dependencies:
       follow-redirects: 1.15.9(debug@4.4.1)
-      form-data: 4.0.3
+      form-data: 4.0.4
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
@@ -12086,8 +12086,8 @@ packages:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
-  /form-data@4.0.3:
-    resolution: {integrity: sha512-qsITQPfmvMOSAdeyZ+12I1c+CKSstAFAwu+97zrnWAbIr5u8wfsExUzCesVLC8NgHuRUqNN4Zy6UPWUTRGslcA==}
+  /form-data@4.0.4:
+    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
     engines: {node: '>= 6'}
     dependencies:
       asynckit: 0.4.0
