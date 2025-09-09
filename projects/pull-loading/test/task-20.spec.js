@@ -35,6 +35,7 @@ test(`horizontal pan does not trigger loading`, async ({ page }) => {
   const met = await page.locator('#content');
   await pan(met, 400, 0, 5); // 横向滑动
 
-  const transform = await met.evaluate(el => getComputedStyle(el).transform)
-  expect(transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)').toBeTruthy()
+    // 检查是否触发了loading
+  expect(await page.locator('.loading').isVisible()).toBeFalsy()  
+
 });
