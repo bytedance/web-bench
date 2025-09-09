@@ -4,8 +4,7 @@
   "scripts": {
     "start": "vite --config vite.config.js",
     "build": "VITE_CJS_IGNORE_WARNING=true vite build",
-    "test": "npx @web-bench/test-util",
-    "src:test": "npm test -- -a"
+    "test": "npx @web-bench/test-util"
   },
   "author": "warrior",
   "devDependencies": {
