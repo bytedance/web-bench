@@ -24,12 +24,12 @@ test.beforeEach(async ({ page }) => {
 test('modules should be properly loaded', async ({ page }) => {
   const modulesLoaded = await page.evaluate(() => {
     return {
-      storeInitialized: typeof window.store === 'object' 
+      storeInitialized: typeof window.store === 'object'
         && window.store.hasOwnProperty('score')
         && window.store.hasOwnProperty('bird'),
-      
-      constantsApplied: window.store.bird.x === 30, 
-      
+
+      constantsApplied: window.store.bird.x === 30,
+
       canvasInitialized: document.querySelector('canvas') instanceof HTMLCanvasElement,
     };
   });
@@ -42,17 +42,21 @@ test('modules should be properly loaded', async ({ page }) => {
 
 test('render module should handle all drawing operations', async ({ page }) => {
   await page.waitForSelector('canvas');
-  
-  const renderOperations = await page.evaluate(() => {
+
+  const renderOperations = await page.evaluate(async () => {
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    
+
     const imageData1 = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
-    
+
     window.store.score = 10;
-    
+
+    await new Promise(resolve => {
+      requestAnimationFrame(resolve);
+    });
+
     const imageData2 = ctx.getImageData(0, 0, canvas.clientWidth, canvas.clientHeight);
-    
+
     return {
       hasChanged: imageData1.data.some((pixel, index) => pixel !== imageData2.data[index])
     };
@@ -63,21 +67,21 @@ test('render module should handle all drawing operations', async ({ page }) => {
 
 test('events module should handle user interactions', async ({ page }) => {
   await page.waitForSelector('canvas');
-  
+
   await page.keyboard.press('Enter');
-  
+
   const keyboardEventResult = await page.evaluate(() => {
     return window.store.isAnimating;
   });
-  
+
   expect(keyboardEventResult).toBe(true);
-  
+
   await page.click('canvas');
-  
+
   const clickEventResult = await page.evaluate(() => {
     return window.store.bird.velocity < 0;
   });
-  
+
   expect(clickEventResult).toBe(true);
 });
 
@@ -85,14 +89,14 @@ test('events module should handle user interactions', async ({ page }) => {
 test('constants should be properly imported and used', async ({ page }) => {
   const constantsTest = await page.evaluate(() => {
     const jumpResult = window.store.bird.velocity;
-    
+
     const event = new KeyboardEvent('keydown', { key: 'Enter' });
     window.dispatchEvent(event);
-    
+
     const afterJumpVelocity = window.store.bird.velocity;
-    
+
     return {
-      hasExpectedJumpVelocity: afterJumpVelocity === -6, 
+      hasExpectedJumpVelocity: afterJumpVelocity === -6,
     };
   });
 
@@ -105,10 +109,10 @@ test('game assets should load correctly', async ({ page }) => {
       setTimeout(() => {
         const canvas = document.querySelector('canvas');
         const ctx = canvas.getContext('2d');
-        
+
         const computedStyle = window.getComputedStyle(canvas);
         const hasBackground = computedStyle.backgroundImage.includes('bg.png');
-        
+
         resolve({
           hasBackground,
           canvasInitialized: !!ctx,

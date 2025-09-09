@@ -7,7 +7,7 @@
   "scripts": {
     "build": "",
     "test": "npx @web-bench/test-util",
-    "test1": "npx playwright test"
+    "src:test": "npm test -- -a"
   },
   "author": "luics",
   "devDependencies": {
