@@ -5,7 +5,7 @@
     "prestart": "node -e \"const fs=require('fs');const path=require('path');const assetsPath=path.join('src','assets');fs.existsSync(assetsPath)&&fs.rmSync(assetsPath,{recursive:true});fs.symlinkSync(path.join('..','assets'),assetsPath,'junction')\"",
     "start": "npm run prestart && vite src --port 3005 --config vite.config.js",
     "test": "npx @web-bench/test-util",
-    "src:test": "npm test -- -a"
+    "src:test": "npm run prestart && npm test -- -a"
   },
   "author": "caolinjian",
   "eval": {
