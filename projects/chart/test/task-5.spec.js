@@ -27,6 +27,7 @@ test.beforeEach(async ({ page }) => {
 
 test('LineChart | uncheck #dataLabels', async ({ page }) => {
   await page.locator('#dataLabels').uncheck()
+  await page.waitForTimeout(500)
   await expect(page.locator('.chart .dataLabels')).not.toBeAttached()
 })
 

@@ -38,9 +38,11 @@ test('LineChart | check #axes', async ({ page }) => {
 
 test('LineChart | check/uncheck #axes', async ({ page }) => {
   await page.locator('#axes').check()
+  await page.waitForTimeout(500)
   const rect1 = await getOffsetByLocator(page.locator('.chart .datasets'))
 
   await page.locator('#axes').uncheck()
+  await page.waitForTimeout(500)
   const rect2 = await getOffsetByLocator(page.locator('.chart .datasets'))
 
   await expect(rect1.width).toBeLessThan(rect2.width)

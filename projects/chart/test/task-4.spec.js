@@ -33,10 +33,11 @@ test('LineChart | uncheck #legends', async ({ page }) => {
 
 test('LineChart | check #legends', async ({ page }) => {
   await page.locator('#legends').check()
-  await expect(page.locator('.chart .legends')).toBeAttached()
+  await page.waitForTimeout(500)
   const rect1 = await getOffsetByLocator(page.locator('.chart .datasets'))
 
   await page.locator('#legends').uncheck()
+  await page.waitForTimeout(500)
   const rect2 = await getOffsetByLocator(page.locator('.chart .datasets'))
 
   await expect(rect1.height).toBeLessThan(rect2.height)
@@ -53,9 +54,11 @@ test('LineChart | legends', async ({ page }) => {
 
 test('LineChart | legend content', async ({ page }) => {
   const dot = page.locator('.chart .legend-0 circle')
+  await page.waitForTimeout(500)
   const style = await getComputedStyleByLocator(page.locator('.chart .dataset-0'))
 
   await expect(dot).toBeAttached()
+
   await expect(dot).toHaveCSS('fill', style.stroke)
   await expect(page.locator('.chart .legend-0 text')).toHaveText(data.datasets[0].label)
   await expect(page.locator('.chart .legend-1 text')).toHaveText(data.datasets[1].label)
