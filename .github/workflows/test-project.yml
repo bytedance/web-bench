@@ -9,6 +9,8 @@ on:
 jobs:
   test-project-src:
     runs-on: ubuntu-latest
+    env:
+      CI: true
     steps:
       - name: Checkout
         uses: actions/checkout@v3
