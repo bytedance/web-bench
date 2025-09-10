@@ -27,7 +27,7 @@ test.beforeEach(async ({ page }) => {
 
 test.use({ ...devices['Pixel 7'] })
 
-// 新增：测试多次滑动后的状态
+// New: Test the status after multiple sliding
 test(`multiple pan gestures accumulate transform`, async ({ page }) => {
   await page.goto('index.html');
   const met = await page.locator('#content');

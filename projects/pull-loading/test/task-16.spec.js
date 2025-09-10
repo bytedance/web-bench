@@ -25,14 +25,12 @@ test.use({ ...devices['Pixel 7'] })
 test(`pan gesture to move the loading ui`, async ({ page }) => {
   await page.goto('index.html');
   const met = await page.locator('#content');
-  await pan(met, 0, -400, 5);  // 触发滑动
+  await pan(met, 0, -400, 5);  
 
-  // 检查transform属性是否发生变化
+  // Check if the transform property has changed
   const transform = await met.evaluate(el => getComputedStyle(el).transform)
   expect(transform).not.toBe('none')
 
-  // 检查是否有特定的class或属性变化（如有）
-  // expect(await met.getAttribute('class')).toContain('loading-active')
 });
 
 
