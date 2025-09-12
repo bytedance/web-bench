@@ -1,21 +1,21 @@
-# Agent Server 文档
+# Agent Server Documentation
 
-## 1. Agent Server 是什么？
+## 1. What is Agent Server?
 
-![Agent Server 架构图](../docs/assets/agent-server-arch.jpg)
+![Agent Server Architecture](../docs/assets/agent-server-arch.jpg)
 
-Agent Server 是一个基于 FastAPI 的 HTTP 服务，它提供了一个统一的接口 `/agent` 来执行 AI Agent 任务。这个服务支持：
+Agent Server is a FastAPI-based HTTP service that provides a unified `/agent` endpoint for executing AI Agent tasks. This service supports:
 
-- 接收包含代码文件和任务描述的请求
-- 在隔离的工作空间中执行任务
-- 返回执行结果、文件变更和思维轨迹
-- 可通过扩展快速支持新的 Agent 类型
+- Receiving requests containing code files and task descriptions
+- Executing tasks in isolated workspaces
+- Returning execution results, file changes, and thought trajectories
+- Rapidly supporting new Agent types through extensions
 
-### 接口定义
+### API Definition
 
 #### POST /agent
 
-**请求格式：**
+**Request Format:**
 
 ```json
 {
@@ -24,12 +24,12 @@ Agent Server 是一个基于 FastAPI 的 HTTP 服务，它提供了一个统一�
     "src/main.py": "print('Hello World')",
     "README.md": "# My Project\n\nThis is a sample project."
   },
-  "task": "请帮我优化这段代码，添加错误处理并改进代码结构",
+  "task": "Please help me optimize this code, add error handling, and improve the code structure",
   "error": null
 }
 ```
 
-**响应格式：**
+**Response Format:**
 
 ```json
 {
@@ -38,8 +38,8 @@ Agent Server 是一个基于 FastAPI 的 HTTP 服务，它提供了一个统一�
     "src/main.py": "def main():\n    try:\n        print('Hello World')\n    except Exception as e:\n        print(f'Error: {e}')\n\nif __name__ == '__main__':\n    main()",
     "README.md": "# My Project\n\nThis is an improved version with better error handling."
   },
-  "trajectory": "[Agent思考过程...]",
-  "stdout": "代码执行成功\n",
+  "trajectory": "[Agent thinking process...]",
+  "stdout": "Code executed successfully\n",
   "stderr": "",
   "exit_code": 0,
   "error": null,
@@ -48,24 +48,24 @@ Agent Server 是一个基于 FastAPI 的 HTTP 服务，它提供了一个统一�
 }
 ```
 
-**字段说明：**
+**Field Descriptions:**
 
-- `type`: 请求类型，通常为 "normal"
-- `files`: 文件映射，键为文件路径，值为文件内容
-- `task`: 任务描述，告诉 Agent 需要做什么
-- `error`: 可选的错误上下文信息
+- `type`: Request type, usually "normal"
+- `files`: File mapping, where keys are file paths and values are file contents
+- `task`: Task description telling the Agent what needs to be done
+- `error`: Optional error context information
 
-## 2. 如何运行 Agent Server
+## 2. How to Run Agent Server
 
 ```
 uv sync
-<!-- 运行你选择的 Agent Server -->
+<!-- Run your chosen Agent Server -->
 uv run python -m qwen-code.main
 ```
 
-## 3. Eval 如何接入 Agent Server
+## 3. How Eval Connects to Agent Server
 
-要在 evaluation 系统中使用 Agent Server，需要在 `config.json5` 中进行如下配置：
+To use Agent Server in the evaluation system, configure it in `config.json5`:
 
 ```json
 {
@@ -75,52 +75,52 @@ uv run python -m qwen-code.main
 }
 ```
 
-配置说明：
+Configuration Notes:
 
-- `agentMode`: 必须设置为 "http" 以使用 HTTP 模式的 Agent
-- `agentEndPoint`: Agent Server 的地址，默认为 `http://localhost:8000/agent`
+- `agentMode`: Must be set to "http" to use HTTP mode Agent
+- `agentEndPoint`: Agent Server address, defaults to `http://localhost:8000/agent`
 
-## 4. 如何新增 Agent Server（以 Trae Agent 为例）
+## 4. How to Add New Agent Server (Using Trae Agent as Example)
 
-### 步骤 1：编写 Agent-Server 运行逻辑
+### Step 1: Write Agent-Server Runtime Logic
 
-创建一个新的目录，例如 `trae-agent/`，然后创建 `main.py`：
+Create a new directory, for example `trae-agent/`, then create `main.py`:
 
-**代码文件：** `/agents/trae-agent/main.py`
+**Code File:** `/agents/trae-agent/main.py`
 
-运行逻辑如下图所示：
+Runtime logic flowchart:
 
 ```mermaid
 flowchart TD
-    Start([开始]) --> CheckConfig{检查配置文件
+    Start([Start]) --> CheckConfig{Check configuration file
     trae_config.yaml}
 
-    CheckConfig -->|不存在| ErrorConfig[❌ 报错退出]
-    CheckConfig -->|存在| CheckSource{检查 .source/ 目录}
+    CheckConfig -->|Does not exist| ErrorConfig[❌ Exit with error]
+    CheckConfig -->|Exists| CheckSource{Check .source/ directory}
 
-    CheckSource -->|不存在| RunInstall[执行 install.sh 安装源码]
-    CheckSource -->|已存在| SkipInstall[跳过安装]
+    CheckSource -->|Does not exist| RunInstall[Run install.sh to install source code]
+    CheckSource -->|Already exists| SkipInstall[Skip installation]
 
-    RunInstall --> CopyConfig[复制配置文件到 .source/]
+    RunInstall --> CopyConfig[Copy configuration file to .source/]
     SkipInstall --> CopyConfig
 
-    CopyConfig --> StartServer[启动 FastAPI Agent Server]
+    CopyConfig --> StartServer[Start FastAPI Agent Server]
 
-    StartServer --> WaitRequest{等待 HTTP 请求}
+    StartServer --> WaitRequest{Wait for HTTP requests}
 
-    WaitRequest -->|POST /agent| ProcessRequest[处理 Agent 请求]
+    WaitRequest -->|POST /agent| ProcessRequest[Process Agent request]
 
-    ProcessRequest --> ParseCommand[parseCommand 方法
-    生成 CLI 命令]
+    ProcessRequest --> ParseCommand[parseCommand method
+    Generate CLI commands]
 
-    ParseCommand --> ExecuteCmd[执行 CLI 命令]
+    ParseCommand --> ExecuteCmd[Execute CLI commands]
 
-    ExecuteCmd --> CollectFiles[收集工作空间文件]
+    ExecuteCmd --> CollectFiles[Collect workspace files]
 
-    CollectFiles --> GetTrajectory[getTrajectory 方法
-    读取思维轨迹]
+    CollectFiles --> GetTrajectory[getTrajectory method
+    Read thought trajectory]
 
-    GetTrajectory --> ReturnResponse[返回 AgentResponse]
+    GetTrajectory --> ReturnResponse[Return AgentResponse]
 
     ReturnResponse --> WaitRequest
 
@@ -130,17 +130,17 @@ flowchart TD
     style ReturnResponse fill:#DDA0DD
 ```
 
-### 步骤 2：运行 Agent Server
+### Step 2: Run Agent Server
 
 ```
 uv sync
 uv run python -m trae.main
 ```
 
-服务将在 `http://localhost:8000` 启动，可以通过 `/agent` 接口接收请求。
+The service will start at `http://localhost:8000` and can receive requests through the `/agent` endpoint.
 
-## 其他 Agent 示例
+## Other Agent Examples
 
 ### Qwen Code Agent
 
-位于 `qwen-code/` 目录，使用 Qwen 模型执行代码生成任务。
+Located in the `qwen-code/` directory, uses Qwen model for code generation tasks.
