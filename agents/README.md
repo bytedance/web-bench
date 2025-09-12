@@ -2,7 +2,7 @@
 
 ## 1. Agent Server 是什么？
 
-![Agent Server 架构图](../docs/assets/agent-server-arch.png)
+![Agent Server 架构图](../docs/assets/agent-server-arch.jpg)
 
 Agent Server 是一个基于 FastAPI 的 HTTP 服务，它提供了一个统一的接口 `/agent` 来执行 AI Agent 任务。这个服务支持：
 
