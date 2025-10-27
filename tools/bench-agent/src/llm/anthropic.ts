@@ -21,13 +21,13 @@ export class AnthropicLLM extends BaseLLM {
   option = {
     model: 'claude-3-5-sonnet-20240620',
 
-    contextLength: 50_000,
+    contextLength: 1_000_000,
 
     extendThinking: false,
 
     temperature: 1,
 
-    maxTokens: 8192,
+    maxTokens: 100 * 1024,
 
     apiBase: 'https://api.anthropic.com/v1/',
   }
@@ -105,7 +105,7 @@ export class AnthropicLLM extends BaseLLM {
       top_k: options.topK,
       top_p: options.topP,
       temperature: options.temperature || this.option.temperature,
-      max_tokens: options.maxTokens ?? 2048,
+      max_tokens: options.maxTokens ?? 100 * 1024,
       model: options.model === 'claude-2' ? 'claude-2.1' : options.model,
       stop_sequences: options.stop?.filter((x) => x.trim() !== ''),
       stream: options.stream ?? true,

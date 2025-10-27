@@ -61,8 +61,8 @@ export class OpenAILLM extends BaseLLM {
 
   public useLegacyCompletionsEndpoint: boolean | undefined = undefined
   option: LLMOption = {
-    contextLength: 10_000,
-    maxTokens: 1024 * 8,
+    contextLength: 1_000_000,
+    maxTokens: 1024 * 100,
     temperature: 0.4,
     apiBase: 'https://openrouter.ai/api/v1/',
   }

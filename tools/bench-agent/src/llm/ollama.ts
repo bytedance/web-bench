@@ -25,8 +25,8 @@ export class Ollama extends BaseLLM {
   provider = 'ollama'
 
   option: LLMOption = {
-    contextLength: 10_000,
-    maxTokens: 1024 * 4,
+    contextLength: 10_000_000,
+    maxTokens: 1024 * 100,
     apiBase: 'http://localhost:11434/api/chat',
   }
 
@@ -55,7 +55,6 @@ export class Ollama extends BaseLLM {
       option: option,
     })
 
- 
     const request = {
       method: 'POST',
       headers: {
