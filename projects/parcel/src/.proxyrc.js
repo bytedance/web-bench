@@ -19,10 +19,10 @@ const fs = require('fs');
 const createMockMiddleware = () => {
   const mockPath = path.join(__dirname, 'mock.json');
   const mockData = JSON.parse(fs.readFileSync(mockPath, 'utf-8'));
-  
+
   return (req, res, next) => {
     const key = `${req.method.toLowerCase()} ${req.url ?? ''}`;
-    
+
     if (mockData[key]) {
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify(mockData[key]));
@@ -37,6 +37,7 @@ module.exports = function (app) {
     '/postman',
     createProxyMiddleware({
       target: 'https://postman-echo.com/',
+      changeOrigin: true,
       pathRewrite: {
         '^/postman': ''
       }
