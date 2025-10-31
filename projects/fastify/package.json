@@ -24,7 +24,7 @@
   "devDependencies": {
     "@web-bench/test-util": "workspace:*",
     "@web-bench/shop-test-util": "workspace:*",
-    "@playwright/test": "^1.53.1",
+    "@playwright/test": "^1.56.1",
     "tsx": "~4.19.3",
     "@types/node": "^22.7.9",
     "typescript": "^5.6.3"
