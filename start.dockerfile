@@ -32,7 +32,7 @@ RUN npm install -g npm@11.3.0 && \
 # Clean up possible old files before rush update
 RUN rm -rf common/temp/*
 
-RUN npm i playwright@1.53.1 -g
+RUN npm i playwright@1.56.1 -g
 
 # install chromium only
 RUN npx playwright install --with-deps --only-shell chromium
