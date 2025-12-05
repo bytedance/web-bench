@@ -97,4 +97,4 @@ If you wish to evaluate from source code, refer to [Install from source](https:/
 
 <img width="300" alt="pass@1" src="./docs/assets/lark-group-qr-code.png" />
 
-- [Discord](https://discord.com/channels/1384111402653978645/1384111403098443838)
+- [Discord](https://discord.gg/Mhs4yEyD)
