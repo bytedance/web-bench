@@ -84,7 +84,7 @@ importers:
   ../../libraries/shop-test-util:
     dependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@web-bench/test-util':
         specifier: workspace:*
@@ -99,7 +99,7 @@ importers:
   ../../libraries/test-util:
     dependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
 
   ../../projects/angular:
@@ -148,7 +148,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.14(@angular/compiler@19.2.14)(typescript@5.6.3)
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -163,7 +163,7 @@ importers:
   ../../projects/bom:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -178,7 +178,7 @@ importers:
   ../../projects/calculator:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -193,7 +193,7 @@ importers:
   ../../projects/calculator-files:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -208,7 +208,7 @@ importers:
   ../../projects/canvas:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -226,7 +226,7 @@ importers:
   ../../projects/chart:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -250,7 +250,7 @@ importers:
   ../../projects/color:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -265,7 +265,7 @@ importers:
   ../../projects/demo:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -280,7 +280,7 @@ importers:
   ../../projects/dom:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -295,7 +295,7 @@ importers:
   ../../projects/dom1:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -310,7 +310,7 @@ importers:
   ../../projects/draw:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -331,7 +331,7 @@ importers:
   ../../projects/esmodule:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -346,7 +346,7 @@ importers:
   ../../projects/expression-editor:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -383,7 +383,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -435,7 +435,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -496,7 +496,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -526,7 +526,7 @@ importers:
   ../../projects/flex:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -541,7 +541,7 @@ importers:
   ../../projects/float:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -556,7 +556,7 @@ importers:
   ../../projects/form:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -571,7 +571,7 @@ importers:
   ../../projects/grid:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -614,7 +614,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -641,7 +641,7 @@ importers:
   ../../projects/less:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -684,7 +684,7 @@ importers:
         version: 11.1.0
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -736,7 +736,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -779,7 +779,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -819,7 +819,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -859,7 +859,7 @@ importers:
         version: 3.5.17(typescript@5.6.3)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -877,7 +877,7 @@ importers:
   ../../projects/parcel:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -920,7 +920,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -953,7 +953,7 @@ importers:
   ../../projects/project-template:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -971,7 +971,7 @@ importers:
   ../../projects/pull-loading:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1002,7 +1002,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -1039,7 +1039,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -1085,7 +1085,7 @@ importers:
         version: 5.0.1
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -1112,7 +1112,7 @@ importers:
   ../../projects/sass:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1133,7 +1133,7 @@ importers:
   ../../projects/selector:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1167,7 +1167,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1210,7 +1210,7 @@ importers:
         version: 6.1.19(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -1231,7 +1231,7 @@ importers:
   ../../projects/stylus:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1252,7 +1252,7 @@ importers:
   ../../projects/survey:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1280,7 +1280,7 @@ importers:
         version: 4.2.2(svelte@5.34.7)(typescript@5.6.3)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@tsconfig/svelte':
         specifier: ^5.0.4
@@ -1301,7 +1301,7 @@ importers:
   ../../projects/svg:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1322,7 +1322,7 @@ importers:
   ../../projects/svg-chart:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1343,7 +1343,7 @@ importers:
   ../../projects/svg-solar:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1364,7 +1364,7 @@ importers:
   ../../projects/table:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1379,7 +1379,7 @@ importers:
   ../../projects/tailwind:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1401,7 +1401,7 @@ importers:
         version: 0.170.0
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@web-bench/test-util':
         specifier: workspace:*
@@ -1435,7 +1435,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/fs-extra':
         specifier: ^11.0.4
@@ -1480,7 +1480,7 @@ importers:
   ../../projects/unocss:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1501,7 +1501,7 @@ importers:
   ../../projects/vite:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1529,7 +1529,7 @@ importers:
         version: 3.5.17(typescript@5.6.3)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1556,7 +1556,7 @@ importers:
   ../../projects/webpack:
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@types/node':
         specifier: ^22.7.9
@@ -1602,7 +1602,7 @@ importers:
         version: 5.0.5(@types/react@18.3.23)(immer@10.1.1)(react@18.3.1)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.56.1
+        specifier: 1.57.0
         version: 1.57.0
       '@vitejs/plugin-react':
         specifier: ^5.0.2
@@ -11686,6 +11686,7 @@ packages:
 
   /err-code@2.0.3:
     resolution: {integrity: sha512-2bmlRpNKBxT/CRmPOlyISQpNj+qSeYvcym/uT0Jx2bMOlKLtSy1ZmLuVxSEKKyor/N5yhvp/ZiG1oE3DEYMSFA==}
+    requiresBuild: true
 
   /errno@0.1.8:
     resolution: {integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==}
@@ -17376,6 +17377,7 @@ packages:
   /retry@0.12.0:
     resolution: {integrity: sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==}
     engines: {node: '>= 4'}
+    requiresBuild: true
 
   /retry@0.13.1:
     resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
